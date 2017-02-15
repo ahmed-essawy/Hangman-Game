@@ -21,7 +21,7 @@ namespace Client
 
             int ControlNum = 30;
             Label[] lbl_array = new Label[ControlNum];
-            for (int i = 0, locx = 10, locy = 30; i < ControlNum; i++, locx += 30)
+            for (int i = 0, locx = 10, locy = 15; i < ControlNum; i++, locx += 30)
             {
                 lbl_array[i] = new Label();
                 lbl_array[i].Name = "lblName" + i;
