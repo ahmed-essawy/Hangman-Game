@@ -61,8 +61,20 @@
     <Compile Include="My_TextBox.designer.cs">
       <DependentUpon>My_TextBox.cs</DependentUpon>
     </Compile>
+    <Compile Include="Play.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Play.Designer.cs">
+      <DependentUpon>Play.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="rules.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="rules.Designer.cs">
+      <DependentUpon>rules.cs</DependentUpon>
+    </Compile>
     <Compile Include="Separated_ListBox.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -78,6 +90,9 @@
     <EmbeddedResource Include="My_TextBox.resx">
       <DependentUpon>My_TextBox.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Play.resx">
+      <DependentUpon>Play.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -87,6 +102,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="rules.resx">
+      <DependentUpon>rules.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Separated_ListBox.resx">
       <DependentUpon>Separated_ListBox.cs</DependentUpon>
     </EmbeddedResource>
