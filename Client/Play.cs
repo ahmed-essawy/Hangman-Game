@@ -53,7 +53,7 @@ namespace Client
 
         private void button_rules_Click(object sender, EventArgs e)
         {
-            rules rule = new rules();
+            Rules rule = new Rules();
             DialogResult d = rule.ShowDialog();
 
             if (d == DialogResult.OK)
