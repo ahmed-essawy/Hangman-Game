@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 namespace Client
 {
-    public partial class rules : Form
+    public partial class Rules : Form
     {
         string cat;
 
@@ -42,7 +42,7 @@ namespace Client
             }
         }
 
-        public rules()
+        public Rules()
         {
             InitializeComponent();
         }

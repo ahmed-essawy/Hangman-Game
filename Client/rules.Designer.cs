@@ -1,6 +1,6 @@
 ﻿namespace Client
 {
-    partial class rules
+    partial class Rules
     {
         /// <summary>
         /// Required designer variable.
