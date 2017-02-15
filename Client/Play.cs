@@ -48,7 +48,7 @@ namespace Client
 
         private void Play_Load(object sender, EventArgs e)
         {
-            panel_Alpha.Location = new Point(panel_labels.Location.X, panel_labels.Size.Height + 30);
+           
         }
 
         private void button_rules_Click(object sender, EventArgs e)
