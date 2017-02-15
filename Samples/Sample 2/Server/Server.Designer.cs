@@ -1,6 +1,6 @@
-﻿namespace GameSocket
+﻿namespace Server_NS
 {
-    partial class frm_Server
+    partial class Server
     {
         /// <summary>
         /// Required designer variable.

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace GameSocket
+namespace Server_NS
 {
     static class Program
     {
@@ -15,7 +15,7 @@ namespace GameSocket
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new frm_Server());
+            Application.Run(new Server());
         }
     }
 }
