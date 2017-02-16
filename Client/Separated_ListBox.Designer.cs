@@ -41,7 +41,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(279, 37);
+            this.label4.Location = new System.Drawing.Point(274, 5);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(45, 13);
             this.label4.TabIndex = 19;
@@ -50,27 +50,27 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(176, 38);
+            this.label3.Location = new System.Drawing.Point(171, 6);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(80, 13);
+            this.label3.Size = new System.Drawing.Size(79, 13);
             this.label3.TabIndex = 18;
             this.label3.Text = "Difficulty_Level";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(105, 37);
+            this.label2.Location = new System.Drawing.Point(100, 5);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(52, 13);
+            this.label2.Size = new System.Drawing.Size(49, 13);
             this.label2.TabIndex = 17;
             this.label2.Text = "Category";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(24, 35);
+            this.label1.Location = new System.Drawing.Point(19, 3);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(39, 13);
+            this.label1.Size = new System.Drawing.Size(40, 13);
             this.label1.TabIndex = 16;
             this.label1.Text = "Rooms";
             // 
@@ -82,7 +82,7 @@
             "2/2",
             "2/2",
             "1/2"});
-            this.Persons.Location = new System.Drawing.Point(261, 54);
+            this.Persons.Location = new System.Drawing.Point(256, 22);
             this.Persons.Name = "Persons";
             this.Persons.Size = new System.Drawing.Size(80, 186);
             this.Persons.TabIndex = 12;
@@ -96,7 +96,7 @@
             "hard",
             "easy",
             "medium"});
-            this.Difficulty_Level.Location = new System.Drawing.Point(176, 54);
+            this.Difficulty_Level.Location = new System.Drawing.Point(171, 22);
             this.Difficulty_Level.Name = "Difficulty_Level";
             this.Difficulty_Level.Size = new System.Drawing.Size(80, 186);
             this.Difficulty_Level.TabIndex = 9;
@@ -110,7 +110,7 @@
             "cat2",
             "cat3",
             "cat4"});
-            this.Category.Location = new System.Drawing.Point(92, 54);
+            this.Category.Location = new System.Drawing.Point(87, 22);
             this.Category.Name = "Category";
             this.Category.Size = new System.Drawing.Size(80, 186);
             this.Category.TabIndex = 10;
@@ -124,7 +124,7 @@
             "Room 2",
             "Room 3",
             "Room 4"});
-            this.Rooms.Location = new System.Drawing.Point(9, 54);
+            this.Rooms.Location = new System.Drawing.Point(4, 22);
             this.Rooms.Name = "Rooms";
             this.Rooms.Size = new System.Drawing.Size(80, 186);
             this.Rooms.TabIndex = 11;
@@ -143,7 +143,7 @@
             this.Controls.Add(this.Category);
             this.Controls.Add(this.Rooms);
             this.Name = "Separated_ListBox";
-            this.Size = new System.Drawing.Size(362, 291);
+            this.Size = new System.Drawing.Size(340, 212);
             this.ResumeLayout(false);
             this.PerformLayout();
 
