@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Sockets;
 using System.Windows.Forms;
 
 namespace Client
@@ -15,7 +16,10 @@ namespace Client
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Main());
+            Login login = new Login();
+            DialogResult result = login.ShowDialog();
+            if (result == DialogResult.OK)
+                Application.Run(new Main(login.nStream, login.Username));
         }
     }
 }

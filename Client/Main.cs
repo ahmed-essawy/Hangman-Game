@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Net.Sockets;
 using System.Text;
 using System.Windows.Forms;
 
@@ -11,14 +12,15 @@ namespace Client
 {
     public partial class Main : Form
     {
-        public Main()
+        private string Username;
+        private NetworkStream nStream;
+
+        public Main(NetworkStream nStream, String Username)
         {
             InitializeComponent();
-            Hide();
-            Login login = new Login();
-            DialogResult result = login.ShowDialog();
-            if (result != DialogResult.OK)
-                Close();
+            this.nStream = nStream;
+            this.Username = Username;
+            MessageBox.Show(Username);
         }
     }
 }

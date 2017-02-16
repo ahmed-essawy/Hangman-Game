@@ -7,7 +7,8 @@ namespace Client
 {
     public partial class Login : Form
     {
-        NetworkStream nstream;
+        private NetworkStream nstream;
+
         public Login()
         {
             CheckForIllegalCrossThreadCalls = false;
@@ -24,7 +25,7 @@ namespace Client
             Close();
         }
 
-        private void Login_btn_Click(object sender, EventArgs e)
+        private void Login_Click(object sender, EventArgs e)
         {
             TcpClient client = new TcpClient();
             try
@@ -43,12 +44,11 @@ namespace Client
                                         MessageBoxButtons.RetryCancel);
                 if (ConfirmResult == DialogResult.Retry)
                 {
-                    Login_btn_Click(sender, e);
+                    Login_Click(sender, e);
                 }
                 else
                 {
                     DialogResult = DialogResult.Cancel;
-                    Close();
                 }
             }
         }

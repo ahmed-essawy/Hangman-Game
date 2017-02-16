@@ -13,19 +13,17 @@ namespace Server
     {
         private Dictionary<int, Clients> clients;
         private static Dictionary<int, string> ClientsData;
+        private Thread thread1, thread2, thread3;
 
         public Controller()
         {
             CheckForIllegalCrossThreadCalls = false;
             InitializeComponent();
+            List_Connected.Items.Clear();
+            List_Disonnected.Items.Clear();
+            List_ClientMsgs.Items.Clear();
             clients = new Dictionary<int, Clients>();
             ClientsData = new Dictionary<int, string>();
-            Thread thread1 = new Thread(ClientCreator);
-            Thread thread2 = new Thread(DataReader);
-            Thread thread3 = new Thread(Check_disconnected);
-            thread1.Start();
-            thread2.Start();
-            thread3.Start();
         }
 
         private void ClientCreator()
@@ -62,7 +60,7 @@ namespace Server
             {
                 foreach (int index in clients.Keys.ToList())
                 {
-                    if (!clients[index].isConnected())
+                    if (index != null && !clients[index].isConnected())
                     {
                         List_Disonnected.Items.Add(index);
                         List_Connected.Items.RemoveAt(List_Connected.FindStringExact(index.ToString()));
@@ -84,13 +82,51 @@ namespace Server
             }
         }
 
-        private void send_button_Click(object sender, EventArgs e)
+        private void Button_Send_Click(object sender, EventArgs e)
         {
             foreach (string item in List_Connected.SelectedItems)
             {
                 int index = int.Parse(item);
                 clients[index].bWriter = textBox1.Text;
             }
+        }
+
+        private void Button_Terminate_Click(object sender, EventArgs e)
+        {
+            /*foreach (string item in List_Connected.SelectedItems)
+            {
+                int index = int.Parse(item);
+                List_Disonnected.Items.Add(index);
+                List_Connected.Items.RemoveAt(List_Connected.FindStringExact(index.ToString()));
+                clients[index] = null;
+                clients.Remove(index);
+            }*/
+        }
+
+        private void Button_Exit_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        private void Button_Start_Click(object sender, EventArgs e)
+        {
+            thread1 = new Thread(ClientCreator);
+            thread2 = new Thread(DataReader);
+            thread3 = new Thread(Check_disconnected);
+            thread1.Start();
+            thread2.Start();
+            thread3.Start();
+            Button_Start.Enabled = false;
+            Button_Stop.Enabled = true;
+        }
+
+        private void Button_Stop_Click(object sender, EventArgs e)
+        {
+            thread1.Abort();
+            thread2.Abort();
+            thread3.Abort();
+            Button_Start.Enabled = true;
+            Button_Stop.Enabled = false;
         }
     }
 
@@ -146,10 +182,7 @@ namespace Server
         {
             bool connected = true;
             if (socket.Poll(1000, SelectMode.SelectRead) && socket.Available == 0)
-            {
-                Disconnect();
                 connected = false;
-            }
             return connected;
         }
 
@@ -161,11 +194,6 @@ namespace Server
             nStream.Close();
             socket.Shutdown(SocketShutdown.Both);
             socket.Close();
-        }
-
-        ~Clients()
-        {
-            Disconnect();
         }
     }
 }

@@ -80,6 +80,7 @@
             this.Name = "Main";
             this.Text = "Form1";
             this.ResumeLayout(false);
+
         }
 
         #endregion

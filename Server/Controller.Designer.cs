@@ -39,6 +39,10 @@
             this.Button_Terminate = new System.Windows.Forms.Button();
             this.Button_S1 = new System.Windows.Forms.Button();
             this.Button_Exit = new System.Windows.Forms.Button();
+            this.Button_Start = new System.Windows.Forms.Button();
+            this.Button_Stop = new System.Windows.Forms.Button();
+            this.Button_S2 = new System.Windows.Forms.Button();
+            this.Button_S3 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // List_Connected
@@ -79,7 +83,7 @@
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(12, 372);
+            this.textBox1.Location = new System.Drawing.Point(15, 376);
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(291, 35);
@@ -87,13 +91,13 @@
             // 
             // Button_Send
             // 
-            this.Button_Send.Location = new System.Drawing.Point(309, 372);
+            this.Button_Send.Location = new System.Drawing.Point(312, 376);
             this.Button_Send.Name = "Button_Send";
             this.Button_Send.Size = new System.Drawing.Size(104, 35);
             this.Button_Send.TabIndex = 3;
             this.Button_Send.Text = "Send";
             this.Button_Send.UseVisualStyleBackColor = true;
-            this.Button_Send.Click += new System.EventHandler(this.send_button_Click);
+            this.Button_Send.Click += new System.EventHandler(this.Button_Send_Click);
             // 
             // List_ClientMsgs
             // 
@@ -115,37 +119,82 @@
             // 
             // Button_Terminate
             // 
-            this.Button_Terminate.Location = new System.Drawing.Point(12, 424);
+            this.Button_Terminate.Location = new System.Drawing.Point(452, 25);
             this.Button_Terminate.Name = "Button_Terminate";
-            this.Button_Terminate.Size = new System.Drawing.Size(130, 35);
+            this.Button_Terminate.Size = new System.Drawing.Size(130, 50);
             this.Button_Terminate.TabIndex = 3;
             this.Button_Terminate.Text = "Terminate";
             this.Button_Terminate.UseVisualStyleBackColor = true;
+            this.Button_Terminate.Click += new System.EventHandler(this.Button_Terminate_Click);
             // 
             // Button_S1
             // 
-            this.Button_S1.Location = new System.Drawing.Point(148, 424);
+            this.Button_S1.Location = new System.Drawing.Point(452, 81);
             this.Button_S1.Name = "Button_S1";
-            this.Button_S1.Size = new System.Drawing.Size(130, 35);
+            this.Button_S1.Size = new System.Drawing.Size(130, 50);
             this.Button_S1.TabIndex = 3;
             this.Button_S1.Text = "-------";
             this.Button_S1.UseVisualStyleBackColor = true;
             // 
             // Button_Exit
             // 
-            this.Button_Exit.Location = new System.Drawing.Point(283, 424);
+            this.Button_Exit.Location = new System.Drawing.Point(452, 361);
             this.Button_Exit.Name = "Button_Exit";
-            this.Button_Exit.Size = new System.Drawing.Size(130, 35);
+            this.Button_Exit.Size = new System.Drawing.Size(130, 50);
             this.Button_Exit.TabIndex = 3;
             this.Button_Exit.Text = "Exit";
             this.Button_Exit.UseVisualStyleBackColor = true;
+            this.Button_Exit.Click += new System.EventHandler(this.Button_Exit_Click);
+            // 
+            // Button_Start
+            // 
+            this.Button_Start.Location = new System.Drawing.Point(452, 249);
+            this.Button_Start.Name = "Button_Start";
+            this.Button_Start.Size = new System.Drawing.Size(130, 50);
+            this.Button_Start.TabIndex = 4;
+            this.Button_Start.Text = "Start";
+            this.Button_Start.UseVisualStyleBackColor = true;
+            this.Button_Start.Click += new System.EventHandler(this.Button_Start_Click);
+            // 
+            // Button_Stop
+            // 
+            this.Button_Stop.Enabled = false;
+            this.Button_Stop.Location = new System.Drawing.Point(452, 305);
+            this.Button_Stop.Name = "Button_Stop";
+            this.Button_Stop.Size = new System.Drawing.Size(130, 50);
+            this.Button_Stop.TabIndex = 4;
+            this.Button_Stop.Text = "Stop";
+            this.Button_Stop.UseVisualStyleBackColor = true;
+            this.Button_Stop.Click += new System.EventHandler(this.Button_Stop_Click);
+            // 
+            // Button_S2
+            // 
+            this.Button_S2.Location = new System.Drawing.Point(452, 137);
+            this.Button_S2.Name = "Button_S2";
+            this.Button_S2.Size = new System.Drawing.Size(130, 50);
+            this.Button_S2.TabIndex = 3;
+            this.Button_S2.Text = "-------";
+            this.Button_S2.UseVisualStyleBackColor = true;
+            // 
+            // Button_S3
+            // 
+            this.Button_S3.Location = new System.Drawing.Point(452, 193);
+            this.Button_S3.Name = "Button_S3";
+            this.Button_S3.Size = new System.Drawing.Size(130, 50);
+            this.Button_S3.TabIndex = 3;
+            this.Button_S3.Text = "-------";
+            this.Button_S3.UseVisualStyleBackColor = true;
             // 
             // Controller
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(425, 472);
+            this.ClientSize = new System.Drawing.Size(615, 427);
+            this.Controls.Add(this.Button_Stop);
+            this.Controls.Add(this.Button_Start);
             this.Controls.Add(this.Button_Exit);
+            this.Controls.Add(this.Button_S3);
+            this.Controls.Add(this.Button_S2);
             this.Controls.Add(this.Button_S1);
             this.Controls.Add(this.Button_Terminate);
             this.Controls.Add(this.Button_Send);
@@ -176,5 +225,9 @@
         private System.Windows.Forms.Button Button_Terminate;
         private System.Windows.Forms.Button Button_S1;
         private System.Windows.Forms.Button Button_Exit;
+        private System.Windows.Forms.Button Button_Start;
+        private System.Windows.Forms.Button Button_Stop;
+        private System.Windows.Forms.Button Button_S2;
+        private System.Windows.Forms.Button Button_S3;
     }
 }
