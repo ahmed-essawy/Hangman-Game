@@ -106,9 +106,9 @@ namespace Server
         private Thread thread1, thread2;
         private int endpoint;
         private string name;
-        public string bWriter { set => bwriter.Write(value); }
-        public int Endpoint { get => endpoint; }
-        public string Name { get => name; }
+        public string bWriter { set { bwriter.Write(value); } }
+        public int Endpoint { get { return endpoint; } }
+        public string Name { get { return name; } }
 
         public Clients(TcpListener listener)
         {

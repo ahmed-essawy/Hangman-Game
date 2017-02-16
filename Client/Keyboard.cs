@@ -12,16 +12,8 @@ namespace Client
     public delegate char EventHandler();
         public partial class Keyboard : UserControl
     {
-        public event EventHandler buttons_click;
-        //public  void buttons(object sender,EventArgs e)
-        //{
-        //    if (buttons_click!=null)
-        //    {
-        //        Button bt = (Button)sender;
-        //        buttons_click(bt.Text,e);
-        //        bt.Enabled = false;
-        //    }
-        //}
+       // public event EventHandler buttons_click;
+     
 
         public Keyboard()
         {
@@ -33,6 +25,7 @@ namespace Client
             bt.Enabled = false;
             MessageBox.Show(bt.Text);
         }
+     
       
     }
 }

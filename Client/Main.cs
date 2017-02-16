@@ -11,14 +11,14 @@ namespace Client
 {
     public partial class Main : Form
     {
-        
-
         public Main()
         {
             InitializeComponent();
+            Hide();
+            Login login = new Login();
+            DialogResult result = login.ShowDialog();
+            if (result != DialogResult.OK)
+                Close();
         }
-
-       
-
     }
 }
