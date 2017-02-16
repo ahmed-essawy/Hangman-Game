@@ -34,10 +34,13 @@ namespace Server
             listener.Start();
             while (true)
             {
-                Clients temp_client = new Clients(listener);
-                while (temp_client.Endpoint == 0) ;
-                clients.Add(temp_client.Endpoint, temp_client);
-                List_Connected.Items.Add(temp_client.Name);
+                Socket socket = listener.AcceptSocket();
+                if (socket.Connected)
+                {
+                    Clients temp_client = new Clients(socket);
+                    clients.Add(temp_client.Endpoint, temp_client);
+                    List_Connected.Items.Add(temp_client.Name);
+                }
             }
         }
 
@@ -98,39 +101,27 @@ namespace Server
 
     public class Clients
     {
-        private TcpListener listener;
         private Socket socket;
         private NetworkStream nStream;
         private BinaryReader breader;
         private BinaryWriter bwriter;
-        private Thread thread1, thread2;
+        private Thread thread;
         private int endpoint;
         private string name;
         public string bWriter { set { bwriter.Write(value); } }
         public int Endpoint { get { return endpoint; } }
         public string Name { get { return name; } }
 
-        public Clients(TcpListener listener)
+        public Clients(Socket socket)
         {
-            name = String.Empty;
-            this.listener = listener;
-            thread1 = new Thread(new ThreadStart(ConListener));
-            thread2 = new Thread(new ThreadStart(DataRead));
-            thread1.Start();
-        }
-
-        private void ConListener()
-        {
-            socket = listener.AcceptSocket();
-            if (socket.Connected)
-            {
-                endpoint = int.Parse(socket.RemoteEndPoint.ToString().Split(':')[1]);
-                name += endpoint;
-                thread2.Start();
-                nStream = new NetworkStream(socket);
-                breader = new BinaryReader(nStream);
-                bwriter = new BinaryWriter(nStream);
-            }
+            this.socket = socket;
+            endpoint = int.Parse(socket.RemoteEndPoint.ToString().Split(':')[1]);
+            name += endpoint;
+            nStream = new NetworkStream(socket);
+            breader = new BinaryReader(nStream);
+            bwriter = new BinaryWriter(nStream);
+            thread = new Thread(new ThreadStart(DataRead));
+            thread.Start();
         }
 
         private void DataRead()
