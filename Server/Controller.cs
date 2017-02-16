@@ -66,6 +66,7 @@ namespace Server
                     {
                         List_Disonnected.Items.Add(index);
                         List_Connected.Items.RemoveAt(List_Connected.FindStringExact(index.ToString()));
+                        clients[index] = null;
                         clients.Remove(index);
                     }
                 }
@@ -108,7 +109,7 @@ namespace Server
         private Thread thread;
         private int endpoint;
         private string name;
-        public string bWriter { set { bwriter.Write(value); } }
+        public string bWriter { set { try { bwriter.Write(value); } catch (Exception) { Disconnect(); } } }
         public int Endpoint { get { return endpoint; } }
         public string Name { get { return name; } }
 
@@ -128,31 +129,43 @@ namespace Server
         {
             while (true)
             {
-                ReaderInfo data = new ReaderInfo
+                try
                 {
-                    port = endpoint,
-                    reader = breader.ReadString()
-                };
-                Controller.Strings = data;
+                    ReaderInfo data = new ReaderInfo
+                    {
+                        port = endpoint,
+                        reader = breader.ReadString()
+                    };
+                    Controller.Strings = data;
+                }
+                catch (Exception) { Disconnect(); }
             }
         }
 
         public bool isConnected()
         {
             bool connected = true;
-            //MessageBox.Show(name + " " + socket.Poll(1000, SelectMode.SelectRead));
             if (socket.Poll(1000, SelectMode.SelectRead) && socket.Available == 0)
+            {
+                Disconnect();
                 connected = false;
+            }
             return connected;
         }
 
-        ~Clients()
+        private void Disconnect()
         {
+            thread.Abort();
             breader.Close();
             bwriter.Close();
             nStream.Close();
             socket.Shutdown(SocketShutdown.Both);
             socket.Close();
+        }
+
+        ~Clients()
+        {
+            Disconnect();
         }
     }
 }
