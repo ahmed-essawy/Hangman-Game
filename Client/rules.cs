@@ -50,6 +50,8 @@ namespace Client
         {
             Cat = comboBox_cat.SelectedItem.ToString();
             Level =int.Parse( comboBox_level.SelectedItem.ToString());
+            Play game = new Play();
+            game.Show();
         }
     }
 }
