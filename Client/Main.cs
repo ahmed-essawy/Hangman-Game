@@ -49,8 +49,9 @@ namespace Client
             DiffList.SelectedIndex = index;
             PersonList.SelectedIndex = index;
             string person = PersonList.SelectedItem.ToString();
-            if (person == "2/2") { Watch.Enabled = true; Play.Enabled = false; }
-            else { Watch.Enabled = false; Play.Enabled = true; }
+            Watch.Enabled = true;
+            if (person == "2/2") {Play.Enabled = false; }
+            else { Play.Enabled = true; }
         }
 
         private void New_Click(object sender, EventArgs e)
