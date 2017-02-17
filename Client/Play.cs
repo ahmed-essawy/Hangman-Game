@@ -11,35 +11,68 @@ namespace Client
 {
     public partial class Play : Form
     {
+        string word;
+        int len;
+        Label[] labels;
         public Play()
         {
             InitializeComponent();
         }
-
-        private void panel_labels_Paint(object sender, PaintEventArgs e)
+        public Play(string word)
         {
-            int ControlNum = 30;
-            Label[] lbl_array = new Label[ControlNum];
-            for (int i = 0, locx = 10, locy = 15; i < ControlNum; i++, locx += 30)
+            InitializeComponent();
+            word = "Ahmed Mohamedsss11255555598888sssssssssssssssssssssssssss";
+            len = word.Length;
+            labels = new Label[len];
+        }
+        public Play(bool watched)
+        {
+            if (watched == true)
             {
-                lbl_array[i] = new Label();
-                lbl_array[i].Name = "lblName" + i;
-                lbl_array[i].Size = new Size(10, 10);
-                if (locx < this.Width - 50)
+                this.Enabled = false;
+            }
+        }
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            int x = 30;
+            int y = 50;
+            for (int i = 0; i < len; i++)
+            {
+                labels[i] = new Label();
+                labels[i].Size = new Size(20, 16);
+                if (x < this.Width - 50)
                 {
-                    lbl_array[i].Location = new Point(locx, locy);
+                    labels[i].Location = new Point(x, y);
+                    x += 50;
                 }
                 else
                 {
-                    locy += 50;
-                    if (locx / 30 != 1)
-                    {
-                        locx = 10;
-                        lbl_array[i].Location = new Point(locx, locy);
-                    }
+                    y += 50;
+                    x = 10;
+                    labels[i].Location = new Point(x, y);
                 }
-                lbl_array[i].Text = "-";
-                panel_labels.Controls.Add(lbl_array[i]);
+                labels[i].Text = "_";
+                if (word[i].ToString() == " ")
+                {
+                    labels[i].Text = " ";
+                }
+                this.Controls.Add(labels[i]);
+            }
+        }
+        private void button1_Click(object sender, EventArgs e)
+        {
+            string str1 = word.ToUpper();
+            if ((str1).Contains(((Button)sender).Text))
+            {
+                for (int i = 0; i < len; i++)
+                {
+                    if (str1[i].ToString() == (((Button)sender).Text))
+                    {
+                        labels[i].Text = ((Button)sender).Text.ToString();
+                    }
+                    Invalidate();
+                    ((Button)sender).Enabled = false;
+                }
             }
         }
     }
