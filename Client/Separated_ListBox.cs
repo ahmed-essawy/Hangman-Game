@@ -25,14 +25,15 @@ namespace Client
            
         }
 
-        public void show_info()
+        public string show_info()
         {
             string room, cat, level, person;
             room = Rooms.SelectedItem.ToString();
             cat = Category.SelectedItem.ToString();
             level = Difficulty_Level.SelectedItem.ToString();
             person = Persons.SelectedItem.ToString();
-            MessageBox.Show("Room: " + room + "    Category: " + cat + "    Level: " + level + "    Persons in room: " + person);
+            return person;
+           // MessageBox.Show("Room: " + room + "    Category: " + cat + "    Level: " + level + "    Persons in room: " + person);
         }
     }
 }
