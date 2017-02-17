@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.List_Connected = new System.Windows.Forms.ListBox();
+            this.List_Connected_endpoint = new System.Windows.Forms.ListBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.List_Disonnected = new System.Windows.Forms.ListBox();
+            this.List_Disonnected_endpoint = new System.Windows.Forms.ListBox();
             this.label2 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.Button_Send = new System.Windows.Forms.Button();
@@ -43,39 +43,43 @@
             this.Button_Stop = new System.Windows.Forms.Button();
             this.Button_S2 = new System.Windows.Forms.Button();
             this.Button_S3 = new System.Windows.Forms.Button();
+            this.List_Connected_name = new System.Windows.Forms.ListBox();
+            this.List_Disonnected_name = new System.Windows.Forms.ListBox();
             this.SuspendLayout();
             // 
-            // List_Connected
+            // List_Connected_endpoint
             // 
-            this.List_Connected.FormattingEnabled = true;
-            this.List_Connected.Location = new System.Drawing.Point(12, 25);
-            this.List_Connected.Name = "List_Connected";
-            this.List_Connected.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
-            this.List_Connected.Size = new System.Drawing.Size(110, 329);
-            this.List_Connected.TabIndex = 0;
+            this.List_Connected_endpoint.FormattingEnabled = true;
+            this.List_Connected_endpoint.Location = new System.Drawing.Point(12, 25);
+            this.List_Connected_endpoint.Name = "List_Connected_endpoint";
+            this.List_Connected_endpoint.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
+            this.List_Connected_endpoint.Size = new System.Drawing.Size(110, 173);
+            this.List_Connected_endpoint.TabIndex = 0;
+            this.List_Connected_endpoint.SelectedIndexChanged += new System.EventHandler(this.List_Connected_SelectedIndexChanged);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 9);
+            this.label1.Location = new System.Drawing.Point(79, 9);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(93, 13);
             this.label1.TabIndex = 1;
             this.label1.Text = "Connected Clients";
             // 
-            // List_Disonnected
+            // List_Disonnected_endpoint
             // 
-            this.List_Disonnected.Enabled = false;
-            this.List_Disonnected.FormattingEnabled = true;
-            this.List_Disonnected.Location = new System.Drawing.Point(128, 25);
-            this.List_Disonnected.Name = "List_Disonnected";
-            this.List_Disonnected.Size = new System.Drawing.Size(110, 329);
-            this.List_Disonnected.TabIndex = 0;
+            this.List_Disonnected_endpoint.Enabled = false;
+            this.List_Disonnected_endpoint.FormattingEnabled = true;
+            this.List_Disonnected_endpoint.Location = new System.Drawing.Point(12, 220);
+            this.List_Disonnected_endpoint.Name = "List_Disonnected_endpoint";
+            this.List_Disonnected_endpoint.Size = new System.Drawing.Size(110, 134);
+            this.List_Disonnected_endpoint.TabIndex = 0;
+            this.List_Disonnected_endpoint.SelectedIndexChanged += new System.EventHandler(this.List_Disonnected_SelectedIndexChanged);
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(128, 9);
+            this.label2.Location = new System.Drawing.Point(79, 204);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(107, 13);
             this.label2.TabIndex = 1;
@@ -185,6 +189,26 @@
             this.Button_S3.Text = "-------";
             this.Button_S3.UseVisualStyleBackColor = true;
             // 
+            // List_Connected_name
+            // 
+            this.List_Connected_name.FormattingEnabled = true;
+            this.List_Connected_name.Location = new System.Drawing.Point(128, 25);
+            this.List_Connected_name.Name = "List_Connected_name";
+            this.List_Connected_name.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
+            this.List_Connected_name.Size = new System.Drawing.Size(110, 173);
+            this.List_Connected_name.TabIndex = 0;
+            this.List_Connected_name.SelectedIndexChanged += new System.EventHandler(this.List_Connected_SelectedIndexChanged);
+            // 
+            // List_Disonnected_name
+            // 
+            this.List_Disonnected_name.Enabled = false;
+            this.List_Disonnected_name.FormattingEnabled = true;
+            this.List_Disonnected_name.Location = new System.Drawing.Point(128, 220);
+            this.List_Disonnected_name.Name = "List_Disonnected_name";
+            this.List_Disonnected_name.Size = new System.Drawing.Size(110, 134);
+            this.List_Disonnected_name.TabIndex = 0;
+            this.List_Disonnected_name.SelectedIndexChanged += new System.EventHandler(this.List_Disonnected_SelectedIndexChanged);
+            // 
             // Controller
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -203,8 +227,10 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.List_ClientMsgs);
-            this.Controls.Add(this.List_Disonnected);
-            this.Controls.Add(this.List_Connected);
+            this.Controls.Add(this.List_Disonnected_name);
+            this.Controls.Add(this.List_Disonnected_endpoint);
+            this.Controls.Add(this.List_Connected_name);
+            this.Controls.Add(this.List_Connected_endpoint);
             this.Name = "Controller";
             this.Text = "Server";
             this.ResumeLayout(false);
@@ -214,9 +240,9 @@
 
         #endregion
 
-        private System.Windows.Forms.ListBox List_Connected;
+        private System.Windows.Forms.ListBox List_Connected_endpoint;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ListBox List_Disonnected;
+        private System.Windows.Forms.ListBox List_Disonnected_endpoint;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Button Button_Send;
@@ -229,5 +255,7 @@
         private System.Windows.Forms.Button Button_Stop;
         private System.Windows.Forms.Button Button_S2;
         private System.Windows.Forms.Button Button_S3;
+        private System.Windows.Forms.ListBox List_Connected_name;
+        private System.Windows.Forms.ListBox List_Disonnected_name;
     }
 }
