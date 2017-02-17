@@ -82,61 +82,44 @@ namespace Client
 
         private void DataReader()
         {
-            try
+            while (true)
             {
-                while (true)
+                string[] response = breader.ReadString().Split(';');
+                string type = response[0];
+                switch (type)
                 {
-                    string[] response = breader.ReadString().Split(';');
-                    string type = response[0];
-                    switch (type)
-                    {
-                        case "Category":
-                            cats += response[1] + ";";
-                            break;
+                    case "Category":
+                        cats += response[1] + ";";
+                        break;
 
-                        case "Room":
-                            ListBox_Rooms.Items.Add("Room");
-                            ListBox_ID.Items.Add(response[1]);
-                            ListBox_Categories.Items.Add(response[2]);
-                            ListBox_Levels.Items.Add(response[3]);
-                            ListBox_Players.Items.Add(response[4] + "/2");
-                            break;
+                    case "Room":
+                        ListBox_Rooms.Items.Add("Room");
+                        ListBox_ID.Items.Add(response[1]);
+                        ListBox_Categories.Items.Add(response[2]);
+                        ListBox_Levels.Items.Add(response[3]);
+                        ListBox_Players.Items.Add(response[4] + "/2");
+                        break;
 
-                        case "New Player":
-                            DialogResult result = MessageBox.Show(response[3] + " wants to join your room", "Join Confirmation",
-                                 MessageBoxButtons.OKCancel);
-                            if (result == DialogResult.OK)
-                            {
-                                bwriter.Write("Join Room Reply;" + response[1] + ";" + response[2]);
-                                Play game = new Play(response[4], breader, bwriter);
-                                game.ShowDialog();
-                            }
-                            break;
+                    case "New Player":
+                        DialogResult result = MessageBox.Show(response[3] + " wants to join your room", "Join Confirmation",
+                             MessageBoxButtons.OKCancel);
+                        if (result == DialogResult.OK)
+                        {
+                            bwriter.Write("Join Room Reply;" + response[1] + ";" + response[2]);
+                            Play game = new Play(response[4], breader, bwriter);
+                            game.ShowDialog();
+                        }
+                        break;
 
-                        case "Room Word":
-                            temp_str_room_word = response[1];
-                            break;
+                    case "Room Word":
+                        temp_str_room_word = response[1];
+                        break;
 
-                        default:
-                            MessageBox.Show(response.ToString());
-                            break;
-                    }
+                    default:
+                        MessageBox.Show(response.ToString());
+                        break;
                 }
             }
-            catch(Exception e)
-            {
-               DialogResult result= MessageBox.Show("Error 521: Web server is down");
-                if(result == DialogResult.OK)
-                {
-                    breader.Close();
-                    bwriter.Close();
-                    nStream.Close();
-                    Application.Exit();
-                    thread.Abort();
-                }
-            }
-
         }
-
     }
 }
