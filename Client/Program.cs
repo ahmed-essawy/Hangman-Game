@@ -20,6 +20,8 @@ namespace Client
             DialogResult result = login.ShowDialog();
             if (result == DialogResult.OK)
                 Application.Run(new Main(login.nStream, login.Username));
+            
+           
         }
     }
 }
