@@ -15,8 +15,9 @@ namespace Server
         private static Dictionary<int, string> ClientsData;
         private Thread thread1, thread2, thread3;
         private Dictionary<int, string> players;
-        private List<Room> rooms;
+        private Dictionary<int, Room> rooms;
         private List<string> cats;
+        private int rooms_count = 0;
 
         public Controller()
         {
@@ -25,15 +26,17 @@ namespace Server
             clients = new Dictionary<int, Clients>();
             ClientsData = new Dictionary<int, string>();
             players = new Dictionary<int, string>();
-            rooms = new List<Room>();
+            rooms = new Dictionary<int, Room>();
             cats = new List<string>();
             // Bring data from database
-            cats.AddRange(new[] { "Sports", "Mobies", "Actors" });
-            Room r1 = new Room(1, "Sports", 1);
-            Room r2 = new Room(3, "Movies", 2);
+            cats.AddRange(new[] { "Sports", "Movies", "Actors" });
+            Room r1 = new Room(1, "Sports", 1, "Test");
+            Room r2 = new Room(3, "Movies", 2, "Test");
             r2.AddPlayer(50);
-            Room r3 = new Room(5, "Sports", 3);
-            rooms.AddRange(new[] { r1, r2, r3 });
+            Room r3 = new Room(5, "Sports", 3, "Test");
+            rooms.Add(rooms_count++, r1);
+            rooms.Add(rooms_count++, r2);
+            rooms.Add(rooms_count++, r3);
         }
 
         private void ClientCreator()
@@ -53,9 +56,9 @@ namespace Server
                     {
                         temp_client.bWriter = "Category;" + item;
                     }
-                    foreach (Room item in rooms)
+                    foreach (int index in rooms.Keys.ToList())
                     {
-                        temp_client.bWriter = "Room;" + item.Category + ";" + item.Level + ";" + item.Check_Count();
+                        temp_client.bWriter = "Room;" + index + ";" + rooms[index].Category + ";" + rooms[index].Level + ";" + rooms[index].Check_Count();
                     }
                     //players.Add(temp_client.Endpoint, temp_client.Name);
                 }
@@ -73,20 +76,40 @@ namespace Server
                     switch (type)
                     {
                         case "Message":
+                            MessageBox.Show(response[1]);
                             break;
 
                         case "New Room":
                             int creator = int.Parse(response[1]);
                             string newroomcat = response[2];
                             int newroomlvl = int.Parse(response[3]);
-                            rooms.Add(new Room(creator, newroomcat, newroomlvl));
+                            string newroomword = "Test";
+                            clients[creator].bWriter = "Room Word;" + newroomword;
+                            Room temp_room = new Room(creator, newroomcat, newroomlvl, newroomword);
+                            rooms.Add(rooms_count++, temp_room);
                             type += " (" + newroomcat + ", lvl" + newroomlvl + ")";
+                            foreach (int index in clients.Keys.ToList())
+                            {
+                                clients[index].bWriter = "Room;" + (rooms_count - 1) + ";" + temp_room.Category + ";" + temp_room.Level + ";" + temp_room.Check_Count();
+                            }
                             break;
 
-                        case "Join Room":
+                        case "Join Room Confirm":
+                            int joinroomconfirm = int.Parse(response[1]);
+                            int player2confirm = int.Parse(response[2]);
+                            int ownerconfirm = rooms[joinroomconfirm].Owner;
+                            clients[ownerconfirm].bWriter = "New Player;" + joinroomconfirm + ";" + player2confirm + ";" + clients[player2confirm].Name + ";" + rooms[joinroomconfirm].Word;
+                            break;
+
+                        case "Join Room Reply":
                             int joinroom = int.Parse(response[1]);
                             int player2 = int.Parse(response[2]);
                             rooms[joinroom].AddPlayer(player2);
+                            /*foreach (int index in clients.Keys.ToList())
+                            {
+                                clients[index].bWriter = "Room;" + temp_room.Owner + ";" + temp_room.Category + ";" + temp_room.Level + ";" + temp_room.Check_Count();
+                            }*/
+                            clients[rooms[joinroom].Player1].bWriter = "Play Form Enable;true";
                             type += " (" + clients[player2].Name + " joined room to play)";
                             break;
 
@@ -274,24 +297,29 @@ namespace Server
 
     public class Room
     {
-        private int Player1, Player2, Owner, Winner, level;
-        private string category;
+        private int player1, player2, owner, Winner, level;
+        private string category, word;
         private List<int> Watchers;
 
-        public Room(int Owner, string Category, int Level)
+        public Room(int Owner, string Category, int Level, string Word)
         {
-            this.Player1 = Owner;
+            this.owner = Owner;
+            this.player1 = Owner;
             this.category = Category;
             this.level = Level;
+            this.word = Word;
         }
 
+        public int Owner { get { return owner; } }
+        public int Player1 { get { return player1; } }
         public string Category { get { return category; } }
         public int Level { get { return level; } }
+        public string Word { get { return word; } }
 
         public void AddPlayer(int Player2)
         {
             if (Check_Count() < 2)
-                this.Player2 = Player2;
+                this.player2 = Player2;
         }
 
         public void AddWatcher(int Watcher)
@@ -307,9 +335,9 @@ namespace Server
         public int Check_Count()
         {
             int count = 0;
-            if (Player1 != 0)
+            if (player1 != 0)
                 ++count;
-            if (Player2 != 0)
+            if (player2 != 0)
                 ++count;
             return count;
         }

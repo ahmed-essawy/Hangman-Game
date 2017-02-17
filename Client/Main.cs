@@ -21,6 +21,7 @@ namespace Client
         private BinaryWriter bwriter;
         private Thread thread;
         private string cats;
+        private string temp_str_room_word = null;
 
         public Main(NetworkStream nStream, String Username)
         {
@@ -35,20 +36,20 @@ namespace Client
             thread.Start();
             Play.Enabled = false;
             Watch.Enabled = false;
-            ListBox_Categories.Enabled = false;
-            ListBox_Levels.Enabled = false;
-            ListBox_Players.Enabled = false;
         }
 
         private void Watch_Click(object sender, EventArgs e)
         {
-            Play game = new Play();
-            game.Show();
+            Play game = new Play("Watch", breader, bwriter);
+            thread.Abort();
+            game.ShowDialog();
+            thread.Start();
         }
 
         private void ListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             int index = ((ListBox)sender).SelectedIndex;
+            ListBox_ID.SelectedIndex = index;
             ListBox_Rooms.SelectedIndex = index;
             ListBox_Categories.SelectedIndex = index;
             ListBox_Levels.SelectedIndex = index;
@@ -62,27 +63,21 @@ namespace Client
 
         private void New_Click(object sender, EventArgs e)
         {
-            cats = cats.Substring(0, cats.Length - 1);
+            cats = cats.Substring(0, cats.Length - 1); // Remove last ;
             Rules NewRules = new Rules(cats);
             NewRules.ShowDialog();
-            string Category = string.Empty;
-            int Level = 0;
             if (NewRules.DialogResult == DialogResult.OK)
             {
                 bwriter.Write("New Room;" + endpoint + ";" + NewRules.Category + ";" + NewRules.Level);
-                ListBox_Rooms.Items.Add("New Room");
-                ListBox_Categories.Items.Add(NewRules.Category);
-                ListBox_Levels.Items.Add(NewRules.Level);
-                ListBox_Players.Items.Add("1/2");
-                Play game = new Play();
-                game.Show();
+                while (temp_str_room_word == null) ;
+                Play game = new Play(temp_str_room_word, breader, bwriter);
+                game.ShowDialog();
             }
         }
 
         private void Play_Click(object sender, EventArgs e)
         {
-            Play game = new Play();
-            game.Show();
+            bwriter.Write("Join Room Confirm;" + ListBox_ID.SelectedItem.ToString() + ";" + endpoint);
         }
 
         private void DataReader()
@@ -99,13 +94,29 @@ namespace Client
 
                     case "Room":
                         ListBox_Rooms.Items.Add("Room");
-                        ListBox_Categories.Items.Add(response[1]);
-                        ListBox_Levels.Items.Add(response[2]);
-                        ListBox_Players.Items.Add(response[3] + "/2");
+                        ListBox_ID.Items.Add(response[1]);
+                        ListBox_Categories.Items.Add(response[2]);
+                        ListBox_Levels.Items.Add(response[3]);
+                        ListBox_Players.Items.Add(response[4] + "/2");
+                        break;
 
+                    case "New Player":
+                        DialogResult result = MessageBox.Show(response[3] + " wants to join your room", "Join Confirmation",
+                             MessageBoxButtons.OKCancel);
+                        if (result == DialogResult.OK)
+                        {
+                            bwriter.Write("Join Room Reply;" + response[1] + ";" + response[2]);
+                            Play game = new Play(response[4], breader, bwriter);
+                            game.ShowDialog();
+                        }
+                        break;
+
+                    case "Room Word":
+                        temp_str_room_word = response[1];
                         break;
 
                     default:
+                        MessageBox.Show(response.ToString());
                         break;
                 }
             }
