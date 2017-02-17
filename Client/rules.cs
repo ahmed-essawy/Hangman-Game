@@ -11,47 +11,34 @@ namespace Client
 {
     public partial class Rules : Form
     {
-        string cat;
+        private string[] cats;
+        private string category;
+        private int level;
 
-        int level;
-       
-
-        public string Cat
-        {
-            get
-            {
-                return cat;
-            }
-
-            set
-            {
-                cat = value;
-            }
-        }
-
-        public int Level
-        {
-            get
-            {
-                return level;
-            }
-
-            set
-            {
-                level = value;
-            }
-        }
-
-        public Rules()
+        public Rules(String categories)
         {
             InitializeComponent();
+            cats = categories.Split(';');
+            foreach (string item in cats)
+            {
+                comboBox_cat.Items.Add(item);
+            }
+            for (int i = 1; i <= 3; i++)
+            {
+                comboBox_level.Items.Add(i);
+            }
+            comboBox_cat.SelectedIndex = 0;
+            comboBox_level.SelectedIndex = 0;
         }
-        private void button_start_Click(object sender, EventArgs e)
+
+        public string Category { get { return category; } }
+        public int Level { get { return level; } }
+
+        private void Button_Create_Click(object sender, EventArgs e)
         {
-            Cat = comboBox_cat.SelectedItem.ToString();
-            Level =int.Parse( comboBox_level.SelectedItem.ToString());
-            Play game = new Play();
-            game.Show();
+            category = comboBox_cat.SelectedItem.ToString();
+            level = int.Parse(comboBox_level.SelectedItem.ToString());
+            DialogResult = DialogResult.OK;
         }
     }
 }

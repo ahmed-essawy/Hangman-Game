@@ -16,6 +16,7 @@ namespace Server
         private Thread thread1, thread2, thread3;
         private Dictionary<int, string> players;
         private List<Room> rooms;
+        private List<string> cats;
 
         public Controller()
         {
@@ -24,7 +25,15 @@ namespace Server
             clients = new Dictionary<int, Clients>();
             ClientsData = new Dictionary<int, string>();
             players = new Dictionary<int, string>();
-            List<Room> rooms = new List<Room>();
+            rooms = new List<Room>();
+            cats = new List<string>();
+            // Bring data from database
+            cats.AddRange(new[] { "Sports", "Mobies", "Actors" });
+            Room r1 = new Room(1, "Sports", 1);
+            Room r2 = new Room(3, "Movies", 2);
+            r2.AddPlayer(50);
+            Room r3 = new Room(5, "Sports", 3);
+            rooms.AddRange(new[] { r1, r2, r3 });
         }
 
         private void ClientCreator()
@@ -40,6 +49,14 @@ namespace Server
                     clients.Add(temp_client.Endpoint, temp_client);
                     List_Connected_endpoint.Items.Add(temp_client.Endpoint);
                     List_Connected_name.Items.Add(temp_client.Name);
+                    foreach (string item in cats)
+                    {
+                        temp_client.bWriter = "Category;" + item;
+                    }
+                    foreach (Room item in rooms)
+                    {
+                        temp_client.bWriter = "Room;" + item.Category + ";" + item.Level + ";" + item.Check_Count();
+                    }
                     //players.Add(temp_client.Endpoint, temp_client.Name);
                 }
             }
@@ -55,32 +72,36 @@ namespace Server
                     string type = response[0];
                     switch (type)
                     {
-                        case "msg":
+                        case "Message":
                             break;
 
-                        case "newroom":
-                            int newroom = int.Parse(response[1]);
+                        case "New Room":
+                            int creator = int.Parse(response[1]);
                             string newroomcat = response[2];
                             int newroomlvl = int.Parse(response[3]);
-                            rooms.Add(new Room(newroom, newroomcat, newroomlvl));
+                            rooms.Add(new Room(creator, newroomcat, newroomlvl));
+                            type += " (" + newroomcat + ", lvl" + newroomlvl + ")";
                             break;
 
-                        case "joinroom":
+                        case "Join Room":
                             int joinroom = int.Parse(response[1]);
                             int player2 = int.Parse(response[2]);
                             rooms[joinroom].AddPlayer(player2);
+                            type += " (" + clients[player2].Name + " joined room to play)";
                             break;
 
-                        case "watchroom":
+                        case "Watch Room":
                             int watchroom = int.Parse(response[1]);
                             int watcher = int.Parse(response[2]);
                             rooms[watchroom].AddWatcher(watcher);
+                            type += " (" + clients[watcher].Name + " joined room to watch)";
                             break;
 
-                        case "winnerroom":
+                        case "Win Game":
                             int winnerroom = int.Parse(response[1]);
                             int winner = int.Parse(response[2]);
                             rooms[winnerroom].AddWatcher(winner);
+                            type += " (" + clients[winner].Name + " win game)";
                             break;
 
                         default:
@@ -124,9 +145,8 @@ namespace Server
 
         private void Button_Send_Click(object sender, EventArgs e)
         {
-            foreach (string item in List_Connected_endpoint.SelectedItems)
+            foreach (int index in List_Connected_endpoint.SelectedItems)
             {
-                int index = int.Parse(item);
                 clients[index].bWriter = textBox1.Text;
             }
         }
@@ -265,9 +285,13 @@ namespace Server
             this.level = Level;
         }
 
+        public string Category { get { return category; } }
+        public int Level { get { return level; } }
+
         public void AddPlayer(int Player2)
         {
-            this.Player2 = Player2;
+            if (Check_Count() < 2)
+                this.Player2 = Player2;
         }
 
         public void AddWatcher(int Watcher)
@@ -278,6 +302,16 @@ namespace Server
         public void AddWinner(int Winner)
         {
             this.Winner = Winner;
+        }
+
+        public int Check_Count()
+        {
+            int count = 0;
+            if (Player1 != 0)
+                ++count;
+            if (Player2 != 0)
+                ++count;
+            return count;
         }
     }
 

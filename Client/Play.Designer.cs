@@ -62,7 +62,6 @@
             this.button_rules.TabIndex = 3;
             this.button_rules.Text = "Rules";
             this.button_rules.UseVisualStyleBackColor = true;
-            this.button_rules.Click += new System.EventHandler(this.button_rules_Click);
             // 
             // keyboard1
             // 
@@ -83,7 +82,6 @@
             this.Controls.Add(this.panel_labels);
             this.Name = "Play";
             this.Text = "Play";
-            this.Load += new System.EventHandler(this.Play_Load);
             this.ResumeLayout(false);
 
         }

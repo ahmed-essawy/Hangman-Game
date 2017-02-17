@@ -18,7 +18,6 @@ namespace Client
 
         private void panel_labels_Paint(object sender, PaintEventArgs e)
         {
-
             int ControlNum = 30;
             Label[] lbl_array = new Label[ControlNum];
             for (int i = 0, locx = 10, locy = 15; i < ControlNum; i++, locx += 30)
@@ -41,23 +40,6 @@ namespace Client
                 }
                 lbl_array[i].Text = "-";
                 panel_labels.Controls.Add(lbl_array[i]);
-
-
-            }
-        }
-
-        private void Play_Load(object sender, EventArgs e)
-        {
-           
-        }
-
-        private void button_rules_Click(object sender, EventArgs e)
-        {
-            Rules rule = new Rules();
-            DialogResult d = rule.ShowDialog();
-
-            if (d == DialogResult.OK)
-            {
             }
         }
     }

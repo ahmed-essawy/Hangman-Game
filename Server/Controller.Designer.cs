@@ -50,7 +50,7 @@
             // List_Connected_endpoint
             // 
             this.List_Connected_endpoint.FormattingEnabled = true;
-            this.List_Connected_endpoint.Location = new System.Drawing.Point(12, 25);
+            this.List_Connected_endpoint.Location = new System.Drawing.Point(26, 36);
             this.List_Connected_endpoint.Name = "List_Connected_endpoint";
             this.List_Connected_endpoint.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
             this.List_Connected_endpoint.Size = new System.Drawing.Size(110, 173);
@@ -60,7 +60,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(79, 9);
+            this.label1.Location = new System.Drawing.Point(93, 20);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(93, 13);
             this.label1.TabIndex = 1;
@@ -70,7 +70,7 @@
             // 
             this.List_Disonnected_endpoint.Enabled = false;
             this.List_Disonnected_endpoint.FormattingEnabled = true;
-            this.List_Disonnected_endpoint.Location = new System.Drawing.Point(12, 220);
+            this.List_Disonnected_endpoint.Location = new System.Drawing.Point(26, 231);
             this.List_Disonnected_endpoint.Name = "List_Disonnected_endpoint";
             this.List_Disonnected_endpoint.Size = new System.Drawing.Size(110, 134);
             this.List_Disonnected_endpoint.TabIndex = 0;
@@ -79,7 +79,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(79, 204);
+            this.label2.Location = new System.Drawing.Point(84, 215);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(107, 13);
             this.label2.TabIndex = 1;
@@ -87,15 +87,15 @@
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(15, 376);
+            this.textBox1.Location = new System.Drawing.Point(29, 387);
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(291, 35);
+            this.textBox1.Size = new System.Drawing.Size(372, 35);
             this.textBox1.TabIndex = 2;
             // 
             // Button_Send
             // 
-            this.Button_Send.Location = new System.Drawing.Point(312, 376);
+            this.Button_Send.Location = new System.Drawing.Point(407, 387);
             this.Button_Send.Name = "Button_Send";
             this.Button_Send.Size = new System.Drawing.Size(104, 35);
             this.Button_Send.TabIndex = 3;
@@ -106,16 +106,16 @@
             // List_ClientMsgs
             // 
             this.List_ClientMsgs.FormattingEnabled = true;
-            this.List_ClientMsgs.Location = new System.Drawing.Point(244, 25);
+            this.List_ClientMsgs.Location = new System.Drawing.Point(258, 36);
             this.List_ClientMsgs.Name = "List_ClientMsgs";
             this.List_ClientMsgs.SelectionMode = System.Windows.Forms.SelectionMode.None;
-            this.List_ClientMsgs.Size = new System.Drawing.Size(169, 329);
+            this.List_ClientMsgs.Size = new System.Drawing.Size(253, 329);
             this.List_ClientMsgs.TabIndex = 0;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(244, 9);
+            this.label3.Location = new System.Drawing.Point(258, 20);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(89, 13);
             this.label3.TabIndex = 1;
@@ -123,7 +123,7 @@
             // 
             // Button_Terminate
             // 
-            this.Button_Terminate.Location = new System.Drawing.Point(452, 25);
+            this.Button_Terminate.Location = new System.Drawing.Point(535, 36);
             this.Button_Terminate.Name = "Button_Terminate";
             this.Button_Terminate.Size = new System.Drawing.Size(130, 50);
             this.Button_Terminate.TabIndex = 3;
@@ -133,7 +133,7 @@
             // 
             // Button_S1
             // 
-            this.Button_S1.Location = new System.Drawing.Point(452, 81);
+            this.Button_S1.Location = new System.Drawing.Point(535, 92);
             this.Button_S1.Name = "Button_S1";
             this.Button_S1.Size = new System.Drawing.Size(130, 50);
             this.Button_S1.TabIndex = 3;
@@ -142,7 +142,7 @@
             // 
             // Button_Exit
             // 
-            this.Button_Exit.Location = new System.Drawing.Point(452, 361);
+            this.Button_Exit.Location = new System.Drawing.Point(535, 372);
             this.Button_Exit.Name = "Button_Exit";
             this.Button_Exit.Size = new System.Drawing.Size(130, 50);
             this.Button_Exit.TabIndex = 3;
@@ -152,7 +152,7 @@
             // 
             // Button_Start
             // 
-            this.Button_Start.Location = new System.Drawing.Point(452, 249);
+            this.Button_Start.Location = new System.Drawing.Point(535, 260);
             this.Button_Start.Name = "Button_Start";
             this.Button_Start.Size = new System.Drawing.Size(130, 50);
             this.Button_Start.TabIndex = 4;
@@ -163,7 +163,7 @@
             // Button_Stop
             // 
             this.Button_Stop.Enabled = false;
-            this.Button_Stop.Location = new System.Drawing.Point(452, 305);
+            this.Button_Stop.Location = new System.Drawing.Point(535, 316);
             this.Button_Stop.Name = "Button_Stop";
             this.Button_Stop.Size = new System.Drawing.Size(130, 50);
             this.Button_Stop.TabIndex = 4;
@@ -173,7 +173,7 @@
             // 
             // Button_S2
             // 
-            this.Button_S2.Location = new System.Drawing.Point(452, 137);
+            this.Button_S2.Location = new System.Drawing.Point(535, 148);
             this.Button_S2.Name = "Button_S2";
             this.Button_S2.Size = new System.Drawing.Size(130, 50);
             this.Button_S2.TabIndex = 3;
@@ -182,7 +182,7 @@
             // 
             // Button_S3
             // 
-            this.Button_S3.Location = new System.Drawing.Point(452, 193);
+            this.Button_S3.Location = new System.Drawing.Point(535, 204);
             this.Button_S3.Name = "Button_S3";
             this.Button_S3.Size = new System.Drawing.Size(130, 50);
             this.Button_S3.TabIndex = 3;
@@ -192,7 +192,7 @@
             // List_Connected_name
             // 
             this.List_Connected_name.FormattingEnabled = true;
-            this.List_Connected_name.Location = new System.Drawing.Point(128, 25);
+            this.List_Connected_name.Location = new System.Drawing.Point(142, 36);
             this.List_Connected_name.Name = "List_Connected_name";
             this.List_Connected_name.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
             this.List_Connected_name.Size = new System.Drawing.Size(110, 173);
@@ -203,7 +203,7 @@
             // 
             this.List_Disonnected_name.Enabled = false;
             this.List_Disonnected_name.FormattingEnabled = true;
-            this.List_Disonnected_name.Location = new System.Drawing.Point(128, 220);
+            this.List_Disonnected_name.Location = new System.Drawing.Point(142, 231);
             this.List_Disonnected_name.Name = "List_Disonnected_name";
             this.List_Disonnected_name.Size = new System.Drawing.Size(110, 134);
             this.List_Disonnected_name.TabIndex = 0;
@@ -213,7 +213,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(615, 427);
+            this.ClientSize = new System.Drawing.Size(695, 452);
             this.Controls.Add(this.Button_Stop);
             this.Controls.Add(this.Button_Start);
             this.Controls.Add(this.Button_Exit);

@@ -7,6 +7,7 @@ using System.IO;
 using System.Linq;
 using System.Net.Sockets;
 using System.Text;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace Client
@@ -18,6 +19,8 @@ namespace Client
         private NetworkStream nStream;
         private BinaryReader breader;
         private BinaryWriter bwriter;
+        private Thread thread;
+        private string cats;
 
         public Main(NetworkStream nStream, String Username)
         {
@@ -28,11 +31,13 @@ namespace Client
             breader = new BinaryReader(nStream);
             bwriter.Write(Username);
             endpoint = int.Parse(breader.ReadString());
+            thread = new Thread(DataReader);
+            thread.Start();
             Play.Enabled = false;
             Watch.Enabled = false;
-            CategList.Enabled = false;
-            DiffList.Enabled = false;
-            PersonList.Enabled = false;
+            ListBox_Categories.Enabled = false;
+            ListBox_Levels.Enabled = false;
+            ListBox_Players.Enabled = false;
         }
 
         private void Watch_Click(object sender, EventArgs e)
@@ -41,37 +46,69 @@ namespace Client
             game.Show();
         }
 
-        private void RoomList_SelectedIndexChanged(object sender, EventArgs e)
+        private void ListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             int index = ((ListBox)sender).SelectedIndex;
-            RoomList.SelectedIndex = index;
-            CategList.SelectedIndex = index;
-            DiffList.SelectedIndex = index;
-            PersonList.SelectedIndex = index;
-            string person = PersonList.SelectedItem.ToString();
+            ListBox_Rooms.SelectedIndex = index;
+            ListBox_Categories.SelectedIndex = index;
+            ListBox_Levels.SelectedIndex = index;
+            ListBox_Players.SelectedIndex = index;
             Watch.Enabled = true;
-            if (person == "2/2") {Play.Enabled = false; }
-            else { Play.Enabled = true; }
+            if (ListBox_Players.SelectedItem.ToString() == "2/2")
+                Play.Enabled = false;
+            else
+                Play.Enabled = true;
         }
 
         private void New_Click(object sender, EventArgs e)
         {
-            Rules NewRules = new Rules();
+            cats = cats.Substring(0, cats.Length - 1);
+            Rules NewRules = new Rules(cats);
             NewRules.ShowDialog();
             string Category = string.Empty;
-            int Level = 0, x = 1000;
+            int Level = 0;
             if (NewRules.DialogResult == DialogResult.OK)
             {
-                Category = NewRules.Cat;
-                Level = NewRules.Level;
+                bwriter.Write("New Room;" + endpoint + ";" + NewRules.Category + ";" + NewRules.Level);
+                ListBox_Rooms.Items.Add("New Room");
+                ListBox_Categories.Items.Add(NewRules.Category);
+                ListBox_Levels.Items.Add(NewRules.Level);
+                ListBox_Players.Items.Add("1/2");
+                Play game = new Play();
+                game.Show();
             }
-            string send = "newroom;" + x + ";" + Category + ";" + Level.ToString();
         }
 
         private void Play_Click(object sender, EventArgs e)
         {
             Play game = new Play();
             game.Show();
+        }
+
+        private void DataReader()
+        {
+            while (true)
+            {
+                string[] response = breader.ReadString().Split(';');
+                string type = response[0];
+                switch (type)
+                {
+                    case "Category":
+                        cats += response[1] + ";";
+                        break;
+
+                    case "Room":
+                        ListBox_Rooms.Items.Add("Room");
+                        ListBox_Categories.Items.Add(response[1]);
+                        ListBox_Levels.Items.Add(response[2]);
+                        ListBox_Players.Items.Add(response[3] + "/2");
+
+                        break;
+
+                    default:
+                        break;
+                }
+            }
         }
     }
 }

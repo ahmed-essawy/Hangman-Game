@@ -36,19 +36,18 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.PersonList = new System.Windows.Forms.ListBox();
-            this.DiffList = new System.Windows.Forms.ListBox();
-            this.CategList = new System.Windows.Forms.ListBox();
-            this.RoomList = new System.Windows.Forms.ListBox();
+            this.ListBox_Players = new System.Windows.Forms.ListBox();
+            this.ListBox_Levels = new System.Windows.Forms.ListBox();
+            this.ListBox_Categories = new System.Windows.Forms.ListBox();
+            this.ListBox_Rooms = new System.Windows.Forms.ListBox();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // Play
             // 
-            this.Play.Location = new System.Drawing.Point(491, 129);
-            this.Play.Margin = new System.Windows.Forms.Padding(4);
+            this.Play.Location = new System.Drawing.Point(315, 50);
             this.Play.Name = "Play";
-            this.Play.Size = new System.Drawing.Size(100, 28);
+            this.Play.Size = new System.Drawing.Size(130, 35);
             this.Play.TabIndex = 1;
             this.Play.Text = "Play";
             this.Play.UseVisualStyleBackColor = true;
@@ -56,10 +55,9 @@
             // 
             // Watch
             // 
-            this.Watch.Location = new System.Drawing.Point(491, 171);
-            this.Watch.Margin = new System.Windows.Forms.Padding(4);
+            this.Watch.Location = new System.Drawing.Point(315, 91);
             this.Watch.Name = "Watch";
-            this.Watch.Size = new System.Drawing.Size(100, 28);
+            this.Watch.Size = new System.Drawing.Size(130, 35);
             this.Watch.TabIndex = 2;
             this.Watch.Text = "Watch";
             this.Watch.UseVisualStyleBackColor = true;
@@ -67,10 +65,9 @@
             // 
             // New
             // 
-            this.New.Location = new System.Drawing.Point(489, 215);
-            this.New.Margin = new System.Windows.Forms.Padding(4);
+            this.New.Location = new System.Drawing.Point(315, 132);
             this.New.Name = "New";
-            this.New.Size = new System.Drawing.Size(100, 28);
+            this.New.Size = new System.Drawing.Size(130, 35);
             this.New.TabIndex = 3;
             this.New.Text = "New";
             this.New.UseVisualStyleBackColor = true;
@@ -82,119 +79,103 @@
             this.panel1.Controls.Add(this.label3);
             this.panel1.Controls.Add(this.label2);
             this.panel1.Controls.Add(this.label1);
-            this.panel1.Controls.Add(this.PersonList);
-            this.panel1.Controls.Add(this.DiffList);
-            this.panel1.Controls.Add(this.CategList);
-            this.panel1.Controls.Add(this.RoomList);
-            this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Controls.Add(this.ListBox_Players);
+            this.panel1.Controls.Add(this.ListBox_Levels);
+            this.panel1.Controls.Add(this.ListBox_Categories);
+            this.panel1.Controls.Add(this.ListBox_Rooms);
+            this.panel1.Location = new System.Drawing.Point(11, 11);
+            this.panel1.Margin = new System.Windows.Forms.Padding(2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(471, 362);
+            this.panel1.Size = new System.Drawing.Size(293, 181);
             this.panel1.TabIndex = 4;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(356, 51);
+            this.label4.Location = new System.Drawing.Point(216, 4);
+            this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(60, 17);
+            this.label4.Size = new System.Drawing.Size(41, 13);
             this.label4.TabIndex = 7;
-            this.label4.Text = "Persons";
+            this.label4.Text = "Players";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(223, 51);
+            this.label3.Location = new System.Drawing.Point(143, 4);
+            this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(103, 17);
+            this.label3.Size = new System.Drawing.Size(38, 13);
             this.label3.TabIndex = 6;
-            this.label3.Text = "Difficulty_Level";
+            this.label3.Text = "Levels";
             this.label3.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(124, 51);
+            this.label2.Location = new System.Drawing.Point(76, 4);
+            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(65, 17);
+            this.label2.Size = new System.Drawing.Size(57, 13);
             this.label2.TabIndex = 5;
-            this.label2.Text = "Category";
+            this.label2.Text = "Categories";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(41, 51);
+            this.label1.Location = new System.Drawing.Point(4, 4);
+            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(52, 17);
+            this.label1.Size = new System.Drawing.Size(40, 13);
             this.label1.TabIndex = 4;
             this.label1.Text = "Rooms";
             // 
-            // PersonList
+            // ListBox_Players
             // 
-            this.PersonList.FormattingEnabled = true;
-            this.PersonList.ItemHeight = 16;
-            this.PersonList.Items.AddRange(new object[] {
-            "1/2",
-            "2/2",
-            "2/2",
-            "1/2"});
-            this.PersonList.Location = new System.Drawing.Point(338, 87);
-            this.PersonList.Name = "PersonList";
-            this.PersonList.Size = new System.Drawing.Size(94, 196);
-            this.PersonList.TabIndex = 3;
+            this.ListBox_Players.FormattingEnabled = true;
+            this.ListBox_Players.Location = new System.Drawing.Point(219, 19);
+            this.ListBox_Players.Margin = new System.Windows.Forms.Padding(2);
+            this.ListBox_Players.Name = "ListBox_Players";
+            this.ListBox_Players.Size = new System.Drawing.Size(72, 160);
+            this.ListBox_Players.TabIndex = 3;
             // 
-            // DiffList
+            // ListBox_Levels
             // 
-            this.DiffList.FormattingEnabled = true;
-            this.DiffList.ItemHeight = 16;
-            this.DiffList.Items.AddRange(new object[] {
-            "medium",
-            "hard",
-            "easy",
-            "medium"});
-            this.DiffList.Location = new System.Drawing.Point(226, 87);
-            this.DiffList.Name = "DiffList";
-            this.DiffList.Size = new System.Drawing.Size(91, 196);
-            this.DiffList.TabIndex = 2;
+            this.ListBox_Levels.FormattingEnabled = true;
+            this.ListBox_Levels.Location = new System.Drawing.Point(146, 19);
+            this.ListBox_Levels.Margin = new System.Windows.Forms.Padding(2);
+            this.ListBox_Levels.Name = "ListBox_Levels";
+            this.ListBox_Levels.Size = new System.Drawing.Size(69, 160);
+            this.ListBox_Levels.TabIndex = 2;
             // 
-            // CategList
+            // ListBox_Categories
             // 
-            this.CategList.FormattingEnabled = true;
-            this.CategList.ItemHeight = 16;
-            this.CategList.Items.AddRange(new object[] {
-            "cat1",
-            "cat2",
-            "cat3",
-            "cat4"});
-            this.CategList.Location = new System.Drawing.Point(127, 87);
-            this.CategList.Name = "CategList";
-            this.CategList.Size = new System.Drawing.Size(83, 196);
-            this.CategList.TabIndex = 1;
+            this.ListBox_Categories.FormattingEnabled = true;
+            this.ListBox_Categories.Location = new System.Drawing.Point(79, 19);
+            this.ListBox_Categories.Margin = new System.Windows.Forms.Padding(2);
+            this.ListBox_Categories.Name = "ListBox_Categories";
+            this.ListBox_Categories.Size = new System.Drawing.Size(63, 160);
+            this.ListBox_Categories.TabIndex = 1;
             // 
-            // RoomList
+            // ListBox_Rooms
             // 
-            this.RoomList.FormattingEnabled = true;
-            this.RoomList.ItemHeight = 16;
-            this.RoomList.Items.AddRange(new object[] {
-            "Room 1",
-            "Room 2",
-            "Room 3",
-            "Room 4"});
-            this.RoomList.Location = new System.Drawing.Point(23, 87);
-            this.RoomList.Name = "RoomList";
-            this.RoomList.Size = new System.Drawing.Size(89, 196);
-            this.RoomList.TabIndex = 0;
-            this.RoomList.SelectedIndexChanged += new System.EventHandler(this.RoomList_SelectedIndexChanged);
+            this.ListBox_Rooms.FormattingEnabled = true;
+            this.ListBox_Rooms.Location = new System.Drawing.Point(7, 19);
+            this.ListBox_Rooms.Margin = new System.Windows.Forms.Padding(2);
+            this.ListBox_Rooms.Name = "ListBox_Rooms";
+            this.ListBox_Rooms.Size = new System.Drawing.Size(68, 160);
+            this.ListBox_Rooms.TabIndex = 0;
+            this.ListBox_Rooms.SelectedIndexChanged += new System.EventHandler(this.ListBox_SelectedIndexChanged);
             // 
             // Main
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(609, 354);
+            this.ClientSize = new System.Drawing.Size(457, 288);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.New);
             this.Controls.Add(this.Watch);
             this.Controls.Add(this.Play);
-            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Main";
             this.Text = "Form1";
             this.panel1.ResumeLayout(false);
@@ -208,10 +189,10 @@
         private System.Windows.Forms.Button Watch;
         private System.Windows.Forms.Button New;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.ListBox PersonList;
-        private System.Windows.Forms.ListBox DiffList;
-        private System.Windows.Forms.ListBox CategList;
-        private System.Windows.Forms.ListBox RoomList;
+        private System.Windows.Forms.ListBox ListBox_Players;
+        private System.Windows.Forms.ListBox ListBox_Levels;
+        private System.Windows.Forms.ListBox ListBox_Categories;
+        private System.Windows.Forms.ListBox ListBox_Rooms;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
