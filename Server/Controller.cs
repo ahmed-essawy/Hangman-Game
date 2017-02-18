@@ -83,20 +83,21 @@ namespace Server
                                 MessageBox.Show(response[1]);
                                 break;
 
-                        case "New Room":
-                            int creator = int.Parse(response[1]);
-                            string newroomcat = response[2];
-                            int newroomlvl = int.Parse(response[3]);
-                            string newroomword = "Test";
-                            clients[creator].bWriter = "Room Word;" + newroomword;
-                            Room temp_room = new Room(creator, newroomcat, newroomlvl, newroomword);
-                            rooms.Add(rooms_count++, temp_room);
-                            type += " (" + newroomcat + ", lvl" + newroomlvl + ")";
-                            foreach (int index in clients.Keys.ToList())
-                            {
-                                clients[index].bWriter = "Room;" + (rooms_count - 1) + ";" + temp_room.Category + ";" + temp_room.Level + ";" + temp_room.Check_Count();
-                            }
-                            break;
+                            case "New Room":
+                                int creator = int.Parse(response[1]);
+                                string newroomcat = response[2];
+                                int newroomlvl = int.Parse(response[3]);
+                                string newroomword = Get_Word(newroomcat, newroomlvl).ToString();
+                                clients[creator].bWriter = "Room Word;" + newroomword + ";" + rooms_count;
+                                Room temp_room = new Room(creator, newroomcat, newroomlvl, newroomword);
+                                rooms.Add(rooms_count, temp_room);
+                                type += " (" + newroomcat + ", lvl" + newroomlvl + ")";
+                                foreach (int index in clients.Keys.ToList())
+                                {
+                                    clients[index].bWriter = "Room;" + rooms_count + ";" + temp_room.Category + ";" + temp_room.Level + ";" + temp_room.Check_Count();
+                                }
+                                rooms_count++;
+                                break;
 
                             case "Join Room Confirm":
                                 int joinroomconfirm = int.Parse(response[1]);
@@ -257,22 +258,31 @@ namespace Server
             Button_Start.Enabled = true;
             Button_Stop.Enabled = false;
         }
+
         private string Get_Word(string newroomcat, int newroomlvl)
         {
-            SqlConnection con = new SqlConnection("Data Source =.; Initial Catalog = HangMan; Integrated Security = True");
-            SqlCommand com = new SqlCommand();
-            com.CommandType = CommandType.StoredProcedure;
-            com.CommandText = "Get_word";
-            SqlParameter[] par =
-              {
-                 new SqlParameter("@cat",newroomcat),
-                 new SqlParameter("@lvl",newroomlvl),
-               };
-            com.Parameters.AddRange(par);
-            com.Connection = con;
-            con.Open();
-            string affected = com.ExecuteScalar().ToString();
-            con.Close();
+            string affected = "Test";
+            try
+            {
+                SqlConnection con = new SqlConnection("Data Source =.; Initial Catalog = HangMan; Integrated Security = True");
+                SqlCommand com = new SqlCommand();
+                com.CommandType = CommandType.StoredProcedure;
+                com.CommandText = "Get_word";
+                SqlParameter[] par =
+                    {
+                    new SqlParameter("@cat",newroomcat),
+                    new SqlParameter("@lvl",newroomlvl)
+                };
+                com.Parameters.AddRange(par);
+                com.Connection = con;
+                con.Open();
+                affected = com.ExecuteScalar().ToString();
+                con.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
             return affected;
         }
     }

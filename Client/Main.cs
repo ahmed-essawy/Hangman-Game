@@ -107,64 +107,43 @@ namespace Client
                             ListBox_Players.Items.Add(response[4] + "/2");
                             break;
 
-<<<<<<< HEAD
-                    case "New Player":
-                        DialogResult result = MessageBox.Show(response[3] + " wants to join your room", "Join Confirmation",
-                             MessageBoxButtons.OKCancel);
-                        if (result == DialogResult.OK)
-                        {
-                            bwriter.Write("Join Room Reply;" + response[1] + ";" + response[2]);
-                        }
-                        break;
-
-                    case "Join Room Accepted":
-                        temp_str_room_word = response[1];
-                        temp_str_room_id = int.Parse(response[2]);
-                        break;
-
-                    case "Room Word":
-                        temp_str_room_word = response[1];
-                        temp_str_room_id = int.Parse(response[2]);
-                        break;
-
-                    case "Play Form Enable":
-                        game.Dimmed = bool.Parse(response[1]);
-                        break;
-
-                    case "Dim Button":
-                        MessageBox.Show(type);
-                        game.Dim_Button = response[1];
-                        break;
-
-                    default:
-                        MessageBox.Show(response[0]);
-                        break;
-=======
                         case "New Player":
                             DialogResult result = MessageBox.Show(response[3] + " wants to join your room", "Join Confirmation",
                                  MessageBoxButtons.OKCancel);
                             if (result == DialogResult.OK)
                             {
                                 bwriter.Write("Join Room Reply;" + response[1] + ";" + response[2]);
-                                Play game = new Play(response[4], breader, bwriter);
-                                game.ShowDialog();
                             }
+                            break;
+
+                        case "Join Room Accepted":
+                            temp_str_room_word = response[1];
+                            temp_str_room_id = int.Parse(response[2]);
                             break;
 
                         case "Room Word":
                             temp_str_room_word = response[1];
+                            temp_str_room_id = int.Parse(response[2]);
+                            break;
+
+                        case "Play Form Enable":
+                            game.Dimmed = bool.Parse(response[1]);
+                            break;
+
+                        case "Dim Button":
+                            MessageBox.Show(type);
+                            game.Dim_Button = response[1];
                             break;
 
                         default:
                             MessageBox.Show(response.ToString());
                             break;
                     }
->>>>>>> ac018b907060d5952910510747312dbc4c6c50c8
                 }
             }
             catch (EndOfStreamException)
             {
-                DialogResult result= MessageBox.Show("Error : Web Server is Down");
+                DialogResult result = MessageBox.Show("Error : Web Server is Down");
                 if (result == DialogResult.OK)
                 {
                     breader.Close();
@@ -174,5 +153,6 @@ namespace Client
                     thread.Abort();
                 }
             }
-        } }
+        }
+    }
 }

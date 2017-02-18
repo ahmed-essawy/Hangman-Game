@@ -35,29 +35,6 @@ namespace Client
             this.bWriter = bWriter;
             len = word.Length;
             labels = new Label[len];
-<<<<<<< HEAD
-=======
-            thread = new Thread(DataReader);
-            thread.Start();
-        }
-
-        private void DataReader()
-        {
-          
-                while (true)
-                {
-                    string[] response = bReader.ReadString().Split(';');
-                    string type = response[0];
-                    switch (type)
-                    {
-                        case "Play Form Enable":
-                            panel1.Enabled = bool.Parse(response[1]);
-                            break;
-                    }
-                }
-            
-  
->>>>>>> ac018b907060d5952910510747312dbc4c6c50c8
         }
 
         private void Form1_Load(object sender, EventArgs e)
