@@ -89,6 +89,8 @@ namespace Client
             {
                 panel1.Enabled = false;
                 bWriter.Write("Change Control;" + room_id + ";" + player_type);
+                for (int i = 0; i < 1000000000; i++) ;
+
             }
              ((Button)sender).Enabled = false;
             bWriter.Write("Button Pressed;" + room_id + ";" + player_type + ";" + button_text);

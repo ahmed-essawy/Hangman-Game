@@ -20,6 +20,8 @@ namespace Server
         private Dictionary<int, Room> rooms;
         private List<string> cats;
         private int rooms_count = 0;
+        private SqlConnection con;
+        private SqlCommand com;
 
         public Controller()
         {
@@ -30,8 +32,20 @@ namespace Server
             players = new Dictionary<int, string>();
             rooms = new Dictionary<int, Room>();
             cats = new List<string>();
+            con = new SqlConnection("Data Source =.; Initial Catalog = HangMan; Integrated Security = True");
+            com = new SqlCommand();
             // Bring data from database
-            cats.AddRange(new[] { "Sports", "Movies", "Actors" });
+            cats = Get_Categories();
+            foreach (string item in cats)
+            {
+                comboBox_Category.Items.Add(item);
+            }
+            for (int i = 1; i <= 3; i++)
+            {
+                comboBox_level.Items.Add(i);
+            }
+            comboBox_Category.SelectedIndex = 0;
+            comboBox_level.SelectedIndex = 0;
             Room r1 = new Room(1, "Sports", 1, "Test");
             Room r2 = new Room(3, "Movies", 2, "Test");
             r2.AddPlayer(50);
@@ -264,8 +278,6 @@ namespace Server
             string affected = "Test";
             try
             {
-                SqlConnection con = new SqlConnection("Data Source =.; Initial Catalog = HangMan; Integrated Security = True");
-                SqlCommand com = new SqlCommand();
                 com.CommandType = CommandType.StoredProcedure;
                 com.CommandText = "Get_word";
                 SqlParameter[] par =
@@ -284,6 +296,53 @@ namespace Server
                 MessageBox.Show(ex.Message);
             }
             return affected;
+        }
+
+        private void Insert_Click(object sender, EventArgs e)
+        {
+            string word = textBox_Word.Text;
+            string cat = comboBox_Category.Text;
+            int lvl = int.Parse(comboBox_level.Text);
+            Insert_word(cat, lvl, word);
+            textBox_Word.Text = string.Empty;
+            comboBox_Category.Text = string.Empty;
+            comboBox_level.Text = string.Empty;
+        }
+
+        private List<string> Get_Categories()
+        {
+            DataTable table = new DataTable();
+            com.CommandText = "select * from Categories";
+            com.Connection = con;
+            DataSet ds = new DataSet();
+            SqlDataAdapter adapt = new SqlDataAdapter();
+            DataTable dt = new DataTable();
+            List<string> cats = new List<string>();
+            adapt.SelectCommand = com;
+            adapt.Fill(ds);
+            dt = ds.Tables[0];
+            foreach (DataRow data in dt.Rows)
+            {
+                cats.Add(data[0].ToString());
+            }
+            return cats;
+        }
+        private void Insert_word(string cat,int lvl,string word)
+        {
+            com.CommandType = CommandType.StoredProcedure;
+            com.CommandText = "ADD_word";
+            SqlParameter[] par =
+                {
+                    new SqlParameter("@cat",cat),
+                    new SqlParameter("@lvl",lvl),
+                    new SqlParameter("@word",word)
+
+                };
+            com.Parameters.AddRange(par);
+            com.Connection = con;
+            con.Open();
+            com.ExecuteNonQuery();
+            con.Close();
         }
     }
 

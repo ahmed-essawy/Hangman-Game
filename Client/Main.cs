@@ -23,7 +23,7 @@ namespace Client
         private string cats;
         private Play game;
         private string temp_str_room_word = null;
-        private int temp_str_room_id;
+        private int temp_str_room_id=-1;
 
         public Main(NetworkStream nStream, String Username)
         {
@@ -69,9 +69,10 @@ namespace Client
             if (NewRules.DialogResult == DialogResult.OK)
             {
                 bwriter.Write("New Room;" + endpoint + ";" + NewRules.Category + ";" + NewRules.Level);
-                while (temp_str_room_word == null) ;
+                while (temp_str_room_word == null&&temp_str_room_id==-1) ;
                 game = new Play(temp_str_room_word, temp_str_room_id, endpoint, "Player 1", bwriter);
                 temp_str_room_word = null;
+                temp_str_room_id = -1;
                 game.ShowDialog();
             }
         }
@@ -131,12 +132,11 @@ namespace Client
                             break;
 
                         case "Dim Button":
-                            MessageBox.Show(type);
                             game.Dim_Button = response[1];
                             break;
 
                         default:
-                            MessageBox.Show(response.ToString());
+                            MessageBox.Show(response[0]);
                             break;
                     }
                 }
