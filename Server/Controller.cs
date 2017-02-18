@@ -6,6 +6,8 @@ using System.Net;
 using System.Net.Sockets;
 using System.Threading;
 using System.Windows.Forms;
+using System.Data;
+using System.Data.SqlClient;
 
 namespace Server
 {
@@ -83,7 +85,7 @@ namespace Server
                             int creator = int.Parse(response[1]);
                             string newroomcat = response[2];
                             int newroomlvl = int.Parse(response[3]);
-                            string newroomword = "Test";
+                             string newroomword = Get_Word(newroomcat,newroomlvl).ToString();
                             clients[creator].bWriter = "Room Word;" + newroomword;
                             Room temp_room = new Room(creator, newroomcat, newroomlvl, newroomword);
                             rooms.Add(rooms_count++, temp_room);
@@ -223,6 +225,24 @@ namespace Server
             thread3.Abort();
             Button_Start.Enabled = true;
             Button_Stop.Enabled = false;
+        }
+        private string Get_Word(string newroomcat, int newroomlvl)
+        {
+            SqlConnection con = new SqlConnection("Data Source =.; Initial Catalog = HangMan; Integrated Security = True");
+            SqlCommand com = new SqlCommand();
+            com.CommandType = CommandType.StoredProcedure;
+            com.CommandText = "Get_word";
+            SqlParameter[] par =
+              {
+                 new SqlParameter("@cat",newroomcat),
+                 new SqlParameter("@lvl",newroomlvl),
+               };
+            com.Parameters.AddRange(par);
+            com.Connection = con;
+            con.Open();
+            string affected = com.ExecuteScalar().ToString();
+            con.Close();
+            return affected;
         }
     }
 

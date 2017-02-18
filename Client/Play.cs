@@ -35,17 +35,20 @@ namespace Client
 
         private void DataReader()
         {
-            while (true)
-            {
-                string[] response = bReader.ReadString().Split(';');
-                string type = response[0];
-                switch (type)
+          
+                while (true)
                 {
-                    case "Play Form Enable":
-                        panel1.Enabled = bool.Parse(response[1]);
-                        break;
+                    string[] response = bReader.ReadString().Split(';');
+                    string type = response[0];
+                    switch (type)
+                    {
+                        case "Play Form Enable":
+                            panel1.Enabled = bool.Parse(response[1]);
+                            break;
+                    }
                 }
-            }
+            
+  
         }
 
         private void Form1_Load(object sender, EventArgs e)
