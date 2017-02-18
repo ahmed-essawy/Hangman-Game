@@ -75,7 +75,6 @@ namespace Server
                 {
                     foreach (int port in ClientsData.Keys.ToList())
                     {
-<<<<<<< HEAD
                         string[] response = ClientsData[port].Split(';');
                         string type = response[0];
                         switch (type)
@@ -84,21 +83,20 @@ namespace Server
                                 MessageBox.Show(response[1]);
                                 break;
 
-                            case "New Room":
-                                int creator = int.Parse(response[1]);
-                                string newroomcat = response[2];
-                                int newroomlvl = int.Parse(response[3]);
-                                string newroomword = "Test";
-                                clients[creator].bWriter = "Room Word;" + newroomword + ";" + rooms_count;
-                                Room temp_room = new Room(creator, newroomcat, newroomlvl, newroomword);
-                                rooms.Add(rooms_count, temp_room);
-                                type += " (" + newroomcat + ", lvl" + newroomlvl + ")";
-                                foreach (int index in clients.Keys.ToList())
-                                {
-                                    clients[index].bWriter = "Room;" + rooms_count + ";" + temp_room.Category + ";" + temp_room.Level + ";" + temp_room.Check_Count();
-                                }
-                                rooms_count++;
-                                break;
+                        case "New Room":
+                            int creator = int.Parse(response[1]);
+                            string newroomcat = response[2];
+                            int newroomlvl = int.Parse(response[3]);
+                            string newroomword = "Test";
+                            clients[creator].bWriter = "Room Word;" + newroomword;
+                            Room temp_room = new Room(creator, newroomcat, newroomlvl, newroomword);
+                            rooms.Add(rooms_count++, temp_room);
+                            type += " (" + newroomcat + ", lvl" + newroomlvl + ")";
+                            foreach (int index in clients.Keys.ToList())
+                            {
+                                clients[index].bWriter = "Room;" + (rooms_count - 1) + ";" + temp_room.Category + ";" + temp_room.Level + ";" + temp_room.Check_Count();
+                            }
+                            break;
 
                             case "Join Room Confirm":
                                 int joinroomconfirm = int.Parse(response[1]);
@@ -161,62 +159,6 @@ namespace Server
                         }
                         List_ClientMsgs.Items.Add(clients[port].Name + ": " + type);
                         ClientsData.Remove(port);
-=======
-                        case "Message":
-                            MessageBox.Show(response[1]);
-                            break;
-
-                        case "New Room":
-                            int creator = int.Parse(response[1]);
-                            string newroomcat = response[2];
-                            int newroomlvl = int.Parse(response[3]);
-                             string newroomword = Get_Word(newroomcat,newroomlvl).ToString();
-                            clients[creator].bWriter = "Room Word;" + newroomword;
-                            Room temp_room = new Room(creator, newroomcat, newroomlvl, newroomword);
-                            rooms.Add(rooms_count++, temp_room);
-                            type += " (" + newroomcat + ", lvl" + newroomlvl + ")";
-                            foreach (int index in clients.Keys.ToList())
-                            {
-                                clients[index].bWriter = "Room;" + (rooms_count - 1) + ";" + temp_room.Category + ";" + temp_room.Level + ";" + temp_room.Check_Count();
-                            }
-                            break;
-
-                        case "Join Room Confirm":
-                            int joinroomconfirm = int.Parse(response[1]);
-                            int player2confirm = int.Parse(response[2]);
-                            int ownerconfirm = rooms[joinroomconfirm].Owner;
-                            clients[ownerconfirm].bWriter = "New Player;" + joinroomconfirm + ";" + player2confirm + ";" + clients[player2confirm].Name + ";" + rooms[joinroomconfirm].Word;
-                            break;
-
-                        case "Join Room Reply":
-                            int joinroom = int.Parse(response[1]);
-                            int player2 = int.Parse(response[2]);
-                            rooms[joinroom].AddPlayer(player2);
-                            /*foreach (int index in clients.Keys.ToList())
-                            {
-                                clients[index].bWriter = "Room;" + temp_room.Owner + ";" + temp_room.Category + ";" + temp_room.Level + ";" + temp_room.Check_Count();
-                            }*/
-                            clients[rooms[joinroom].Player1].bWriter = "Play Form Enable;true";
-                            type += " (" + clients[player2].Name + " joined room to play)";
-                            break;
-
-                        case "Watch Room":
-                            int watchroom = int.Parse(response[1]);
-                            int watcher = int.Parse(response[2]);
-                            rooms[watchroom].AddWatcher(watcher);
-                            type += " (" + clients[watcher].Name + " joined room to watch)";
-                            break;
-
-                        case "Win Game":
-                            int winnerroom = int.Parse(response[1]);
-                            int winner = int.Parse(response[2]);
-                            rooms[winnerroom].AddWatcher(winner);
-                            type += " (" + clients[winner].Name + " win game)";
-                            break;
-
-                        default:
-                            break;
->>>>>>> ac018b907060d5952910510747312dbc4c6c50c8
                     }
                 }
             }
