@@ -16,36 +16,25 @@ namespace Client
         private string word;
         private int len;
         private Label[] labels;
-        private BinaryReader bReader;
         private BinaryWriter bWriter;
-        private Thread thread;
+        private int room_id;
+        private int player_id;
+        private string player_type;
+        private int count = 0;
 
-        public Play(string word, BinaryReader bReader, BinaryWriter bWriter, bool disabled = false)
+        public bool Dimmed { set { panel1.Enabled = value; } }
+        public string Dim_Button { set { MessageBox.Show(value); } }
+
+        public Play(string word, int Room_id, int Player_id, string Player_Type, BinaryWriter bWriter)
         {
             InitializeComponent();
-            this.bReader = bReader;
-            this.bWriter = bWriter;
-            panel1.Enabled = disabled;
             this.word = word;
+            this.room_id = Room_id;
+            this.player_id = Player_id;
+            this.player_type = Player_Type;
+            this.bWriter = bWriter;
             len = word.Length;
             labels = new Label[len];
-            thread = new Thread(DataReader);
-            thread.Start();
-        }
-
-        private void DataReader()
-        {
-            while (true)
-            {
-                string[] response = bReader.ReadString().Split(';');
-                string type = response[0];
-                switch (type)
-                {
-                    case "Play Form Enable":
-                        panel1.Enabled = bool.Parse(response[1]);
-                        break;
-                }
-            }
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -78,19 +67,31 @@ namespace Client
 
         private void button1_Click(object sender, EventArgs e)
         {
+            string button_text = ((Button)sender).Text;
             string str1 = word.ToUpper();
-            if ((str1).Contains(((Button)sender).Text))
+            if (str1.Contains(button_text))
             {
                 for (int i = 0; i < len; i++)
                 {
-                    if (str1[i].ToString() == (((Button)sender).Text))
+                    if (str1[i].ToString() == button_text)
                     {
-                        labels[i].Text = ((Button)sender).Text.ToString();
+                        labels[i].Text = button_text;
+                        ++count;
+                        if (count == len)
+                        {
+                            MessageBox.Show("End of game");
+                        }
                     }
                     Invalidate();
-                    ((Button)sender).Enabled = false;
                 }
             }
+            else
+            {
+                panel1.Enabled = false;
+                bWriter.Write("Change Control;" + room_id + ";" + player_type);
+            }
+             ((Button)sender).Enabled = false;
+            bWriter.Write("Button Pressed;" + room_id + ";" + player_type + ";" + button_text);
         }
     }
 }

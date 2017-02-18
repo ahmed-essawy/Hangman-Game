@@ -74,7 +74,7 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(38, 102);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(0, 16);
+            this.label1.Size = new System.Drawing.Size(0, 21);
             this.label1.TabIndex = 0;
             // 
             // button1
@@ -427,6 +427,7 @@
             this.panel1.Controls.Add(this.button27);
             this.panel1.Controls.Add(this.button13);
             this.panel1.Controls.Add(this.button14);
+            this.panel1.Enabled = false;
             this.panel1.Location = new System.Drawing.Point(12, 211);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(374, 98);
@@ -554,7 +555,7 @@
             // 
             // Play
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 19F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(427, 321);
             this.Controls.Add(this.panel1);

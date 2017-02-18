@@ -21,7 +21,9 @@ namespace Client
         private BinaryWriter bwriter;
         private Thread thread;
         private string cats;
+        private Play game;
         private string temp_str_room_word = null;
+        private int temp_str_room_id;
 
         public Main(NetworkStream nStream, String Username)
         {
@@ -40,10 +42,8 @@ namespace Client
 
         private void Watch_Click(object sender, EventArgs e)
         {
-            Play game = new Play("Watch", breader, bwriter);
-            thread.Abort();
+            game = new Play("Watch", 1, endpoint, "watcher", bwriter);
             game.ShowDialog();
-            thread.Start();
         }
 
         private void ListBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -70,7 +70,8 @@ namespace Client
             {
                 bwriter.Write("New Room;" + endpoint + ";" + NewRules.Category + ";" + NewRules.Level);
                 while (temp_str_room_word == null) ;
-                Play game = new Play(temp_str_room_word, breader, bwriter);
+                game = new Play(temp_str_room_word, temp_str_room_id, endpoint, "Player 1", bwriter);
+                temp_str_room_word = null;
                 game.ShowDialog();
             }
         }
@@ -78,6 +79,10 @@ namespace Client
         private void Play_Click(object sender, EventArgs e)
         {
             bwriter.Write("Join Room Confirm;" + ListBox_ID.SelectedItem.ToString() + ";" + endpoint);
+            while (temp_str_room_word == null) ;
+            game = new Play(temp_str_room_word, temp_str_room_id, endpoint, "Player 2", bwriter);
+            temp_str_room_word = null;
+            game.ShowDialog();
         }
 
         private void DataReader()
@@ -106,17 +111,30 @@ namespace Client
                         if (result == DialogResult.OK)
                         {
                             bwriter.Write("Join Room Reply;" + response[1] + ";" + response[2]);
-                            Play game = new Play(response[4], breader, bwriter);
-                            game.ShowDialog();
                         }
+                        break;
+
+                    case "Join Room Accepted":
+                        temp_str_room_word = response[1];
+                        temp_str_room_id = int.Parse(response[2]);
                         break;
 
                     case "Room Word":
                         temp_str_room_word = response[1];
+                        temp_str_room_id = int.Parse(response[2]);
+                        break;
+
+                    case "Play Form Enable":
+                        game.Dimmed = bool.Parse(response[1]);
+                        break;
+
+                    case "Dim Button":
+                        MessageBox.Show(type);
+                        game.Dim_Button = response[1];
                         break;
 
                     default:
-                        MessageBox.Show(response.ToString());
+                        MessageBox.Show(response[0]);
                         break;
                 }
             }
