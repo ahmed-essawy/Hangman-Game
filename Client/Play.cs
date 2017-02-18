@@ -23,7 +23,7 @@ namespace Client
         private int count = 0;
 
         public bool Dimmed { set { panel1.Enabled = value; } }
-        public string Dim_Button { set { MessageBox.Show(value); } }
+        public string Dim_Button { set { Pressed_Button(value); } }
 
         public Play(string word, int Room_id, int Player_id, string Player_Type, BinaryWriter bWriter)
         {
@@ -39,6 +39,11 @@ namespace Client
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            string s = "word";
+            foreach (var item in s)
+            {
+
+            }
             int x = 30;
             int y = 50;
             for (int i = 0; i < len; i++)
@@ -94,6 +99,18 @@ namespace Client
             }
              ((Button)sender).Enabled = false;
             bWriter.Write("Button Pressed;" + room_id + ";" + player_type + ";" + button_text);
+        }
+
+        private void Pressed_Button(string letter)
+        {
+            panel1.Controls.Find(letter, false)[0].Enabled = false;
+            for(int i=0;i<len;i++)
+            {
+             if(word[i].ToString()==letter)
+                {
+                    labels[i].Text = letter;
+                }
+            }
         }
     }
 }
