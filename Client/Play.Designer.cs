@@ -52,7 +52,7 @@
             this.U = new System.Windows.Forms.Button();
             this.V = new System.Windows.Forms.Button();
             this.W = new System.Windows.Forms.Button();
-            this.button24 = new System.Windows.Forms.Button();
+            this.X = new System.Windows.Forms.Button();
             this.Y = new System.Windows.Forms.Button();
             this.Z = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -66,6 +66,7 @@
             this.FOUR = new System.Windows.Forms.Button();
             this.TWO = new System.Windows.Forms.Button();
             this.THREE = new System.Windows.Forms.Button();
+            this.Label_Current = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -353,17 +354,17 @@
             this.W.UseVisualStyleBackColor = true;
             this.W.Click += new System.EventHandler(this.button1_Click);
             // 
-            // button24
+            // X
             // 
-            this.button24.Location = new System.Drawing.Point(344, 37);
-            this.button24.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.button24.Name = "button24";
-            this.button24.Size = new System.Drawing.Size(25, 25);
-            this.button24.TabIndex = 24;
-            this.button24.TabStop = false;
-            this.button24.Text = "X";
-            this.button24.UseVisualStyleBackColor = true;
-            this.button24.Click += new System.EventHandler(this.button1_Click);
+            this.X.Location = new System.Drawing.Point(344, 37);
+            this.X.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.X.Name = "X";
+            this.X.Size = new System.Drawing.Size(25, 25);
+            this.X.TabIndex = 24;
+            this.X.TabStop = false;
+            this.X.Text = "X";
+            this.X.UseVisualStyleBackColor = true;
+            this.X.Click += new System.EventHandler(this.button1_Click);
             // 
             // Y
             // 
@@ -396,7 +397,7 @@
             this.panel1.Controls.Add(this.B);
             this.panel1.Controls.Add(this.Y);
             this.panel1.Controls.Add(this.C);
-            this.panel1.Controls.Add(this.button24);
+            this.panel1.Controls.Add(this.X);
             this.panel1.Controls.Add(this.D);
             this.panel1.Controls.Add(this.W);
             this.panel1.Controls.Add(this.E);
@@ -553,11 +554,21 @@
             this.THREE.UseVisualStyleBackColor = true;
             this.THREE.Click += new System.EventHandler(this.button1_Click);
             // 
+            // Label_Current
+            // 
+            this.Label_Current.AutoSize = true;
+            this.Label_Current.Location = new System.Drawing.Point(12, 323);
+            this.Label_Current.Name = "Label_Current";
+            this.Label_Current.Size = new System.Drawing.Size(54, 16);
+            this.Label_Current.TabIndex = 28;
+            this.Label_Current.Text = "Player 1";
+            // 
             // Play
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(427, 321);
+            this.ClientSize = new System.Drawing.Size(773, 362);
+            this.Controls.Add(this.Label_Current);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.label1);
             this.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -598,7 +609,7 @@
         private System.Windows.Forms.Button U;
         private System.Windows.Forms.Button V;
         private System.Windows.Forms.Button W;
-        private System.Windows.Forms.Button button24;
+        private System.Windows.Forms.Button X;
         private System.Windows.Forms.Button Y;
         private System.Windows.Forms.Button Z;
         private System.Windows.Forms.Panel panel1;
@@ -612,5 +623,6 @@
         private System.Windows.Forms.Button FOUR;
         private System.Windows.Forms.Button TWO;
         private System.Windows.Forms.Button THREE;
+        private System.Windows.Forms.Label Label_Current;
     }
 }

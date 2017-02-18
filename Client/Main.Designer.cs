@@ -35,13 +35,13 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.ID = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.ListBox_Players = new System.Windows.Forms.ListBox();
             this.ListBox_Levels = new System.Windows.Forms.ListBox();
             this.ListBox_Categories = new System.Windows.Forms.ListBox();
-            this.ListBox_Rooms = new System.Windows.Forms.ListBox();
             this.ListBox_ID = new System.Windows.Forms.ListBox();
-            this.ID = new System.Windows.Forms.Label();
+            this.ListBox_Rooms = new System.Windows.Forms.ListBox();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -51,7 +51,7 @@
             this.Play.Name = "Play";
             this.Play.Size = new System.Drawing.Size(130, 35);
             this.Play.TabIndex = 1;
-            this.Play.Text = "Play";
+            this.Play.Text = "Join";
             this.Play.UseVisualStyleBackColor = true;
             this.Play.Click += new System.EventHandler(this.Play_Click);
             // 
@@ -124,6 +124,16 @@
             this.label2.TabIndex = 5;
             this.label2.Text = "Categories";
             // 
+            // ID
+            // 
+            this.ID.AutoSize = true;
+            this.ID.Location = new System.Drawing.Point(-1, 4);
+            this.ID.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.ID.Name = "ID";
+            this.ID.Size = new System.Drawing.Size(18, 13);
+            this.ID.TabIndex = 4;
+            this.ID.Text = "ID";
+            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -164,16 +174,6 @@
             this.ListBox_Categories.TabIndex = 1;
             this.ListBox_Categories.SelectedIndexChanged += new System.EventHandler(this.ListBox_SelectedIndexChanged);
             // 
-            // ListBox_Rooms
-            // 
-            this.ListBox_Rooms.FormattingEnabled = true;
-            this.ListBox_Rooms.Location = new System.Drawing.Point(74, 19);
-            this.ListBox_Rooms.Margin = new System.Windows.Forms.Padding(2);
-            this.ListBox_Rooms.Name = "ListBox_Rooms";
-            this.ListBox_Rooms.Size = new System.Drawing.Size(68, 160);
-            this.ListBox_Rooms.TabIndex = 0;
-            this.ListBox_Rooms.SelectedIndexChanged += new System.EventHandler(this.ListBox_SelectedIndexChanged);
-            // 
             // ListBox_ID
             // 
             this.ListBox_ID.FormattingEnabled = true;
@@ -184,15 +184,15 @@
             this.ListBox_ID.TabIndex = 0;
             this.ListBox_ID.SelectedIndexChanged += new System.EventHandler(this.ListBox_SelectedIndexChanged);
             // 
-            // ID
+            // ListBox_Rooms
             // 
-            this.ID.AutoSize = true;
-            this.ID.Location = new System.Drawing.Point(-1, 4);
-            this.ID.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.ID.Name = "ID";
-            this.ID.Size = new System.Drawing.Size(18, 13);
-            this.ID.TabIndex = 4;
-            this.ID.Text = "ID";
+            this.ListBox_Rooms.FormattingEnabled = true;
+            this.ListBox_Rooms.Location = new System.Drawing.Point(74, 19);
+            this.ListBox_Rooms.Margin = new System.Windows.Forms.Padding(2);
+            this.ListBox_Rooms.Name = "ListBox_Rooms";
+            this.ListBox_Rooms.Size = new System.Drawing.Size(68, 160);
+            this.ListBox_Rooms.TabIndex = 0;
+            this.ListBox_Rooms.SelectedIndexChanged += new System.EventHandler(this.ListBox_SelectedIndexChanged);
             // 
             // Main
             // 

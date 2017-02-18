@@ -23,7 +23,7 @@ namespace Client
         private string cats;
         private Play game;
         private string temp_str_room_word = null;
-        private int temp_str_room_id=-1;
+        private int temp_str_room_id = -1;
 
         public Main(NetworkStream nStream, String Username)
         {
@@ -42,7 +42,11 @@ namespace Client
 
         private void Watch_Click(object sender, EventArgs e)
         {
-            game = new Play("Watch", 1, endpoint, "watcher", bwriter);
+            int room_id = int.Parse(ListBox_ID.SelectedItem.ToString());
+            bwriter.Write("Watch Room;" + endpoint + ";" + room_id);
+            while (temp_str_room_word == null) ;
+            game = new Play(temp_str_room_word, room_id, endpoint, "Watcher", bwriter);
+            temp_str_room_word = null;
             game.ShowDialog();
         }
 
@@ -69,7 +73,8 @@ namespace Client
             if (NewRules.DialogResult == DialogResult.OK)
             {
                 bwriter.Write("New Room;" + endpoint + ";" + NewRules.Category + ";" + NewRules.Level);
-                while (temp_str_room_word == null&&temp_str_room_id==-1) ;
+                while (temp_str_room_word == null) ;
+                while (temp_str_room_id == -1) ;
                 game = new Play(temp_str_room_word, temp_str_room_id, endpoint, "Player 1", bwriter);
                 temp_str_room_word = null;
                 temp_str_room_id = -1;
@@ -81,8 +86,10 @@ namespace Client
         {
             bwriter.Write("Join Room Confirm;" + ListBox_ID.SelectedItem.ToString() + ";" + endpoint);
             while (temp_str_room_word == null) ;
+            while (temp_str_room_id == -1) ;
             game = new Play(temp_str_room_word, temp_str_room_id, endpoint, "Player 2", bwriter);
             temp_str_room_word = null;
+            temp_str_room_id = -1;
             game.ShowDialog();
         }
 
@@ -129,10 +136,15 @@ namespace Client
 
                         case "Play Form Enable":
                             game.Dimmed = bool.Parse(response[1]);
+                            game.Change_Label = response[2];
                             break;
 
                         case "Dim Button":
-                            game.Dim_Button = response[1];
+                            game.Pressed_Button(response[1]);
+                            break;
+
+                        case "Watch Room Info":
+                            temp_str_room_word = response[1];
                             break;
 
                         default:

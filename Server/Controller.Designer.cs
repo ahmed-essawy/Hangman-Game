@@ -54,22 +54,19 @@
             // List_Connected_endpoint
             // 
             this.List_Connected_endpoint.FormattingEnabled = true;
-            this.List_Connected_endpoint.ItemHeight = 16;
-            this.List_Connected_endpoint.Location = new System.Drawing.Point(35, 44);
-            this.List_Connected_endpoint.Margin = new System.Windows.Forms.Padding(4);
+            this.List_Connected_endpoint.Location = new System.Drawing.Point(26, 36);
             this.List_Connected_endpoint.Name = "List_Connected_endpoint";
             this.List_Connected_endpoint.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
-            this.List_Connected_endpoint.Size = new System.Drawing.Size(145, 212);
+            this.List_Connected_endpoint.Size = new System.Drawing.Size(110, 173);
             this.List_Connected_endpoint.TabIndex = 0;
             this.List_Connected_endpoint.SelectedIndexChanged += new System.EventHandler(this.List_Connected_SelectedIndexChanged);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(124, 25);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Location = new System.Drawing.Point(93, 20);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(122, 17);
+            this.label1.Size = new System.Drawing.Size(93, 13);
             this.label1.TabIndex = 1;
             this.label1.Text = "Connected Clients";
             // 
@@ -77,39 +74,34 @@
             // 
             this.List_Disonnected_endpoint.Enabled = false;
             this.List_Disonnected_endpoint.FormattingEnabled = true;
-            this.List_Disonnected_endpoint.ItemHeight = 16;
-            this.List_Disonnected_endpoint.Location = new System.Drawing.Point(35, 284);
-            this.List_Disonnected_endpoint.Margin = new System.Windows.Forms.Padding(4);
+            this.List_Disonnected_endpoint.Location = new System.Drawing.Point(26, 231);
             this.List_Disonnected_endpoint.Name = "List_Disonnected_endpoint";
-            this.List_Disonnected_endpoint.Size = new System.Drawing.Size(145, 164);
+            this.List_Disonnected_endpoint.Size = new System.Drawing.Size(110, 134);
             this.List_Disonnected_endpoint.TabIndex = 0;
             this.List_Disonnected_endpoint.SelectedIndexChanged += new System.EventHandler(this.List_Disonnected_SelectedIndexChanged);
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(112, 265);
-            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label2.Location = new System.Drawing.Point(84, 215);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(140, 17);
+            this.label2.Size = new System.Drawing.Size(107, 13);
             this.label2.TabIndex = 1;
             this.label2.Text = "Disconnected Clients";
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(39, 462);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(4);
+            this.textBox1.Location = new System.Drawing.Point(29, 375);
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(495, 42);
+            this.textBox1.Size = new System.Drawing.Size(372, 35);
             this.textBox1.TabIndex = 2;
             // 
             // Button_Send
             // 
-            this.Button_Send.Location = new System.Drawing.Point(543, 465);
-            this.Button_Send.Margin = new System.Windows.Forms.Padding(4);
+            this.Button_Send.Location = new System.Drawing.Point(407, 378);
             this.Button_Send.Name = "Button_Send";
-            this.Button_Send.Size = new System.Drawing.Size(139, 43);
+            this.Button_Send.Size = new System.Drawing.Size(104, 35);
             this.Button_Send.TabIndex = 3;
             this.Button_Send.Text = "Send";
             this.Button_Send.UseVisualStyleBackColor = true;
@@ -118,30 +110,26 @@
             // List_ClientMsgs
             // 
             this.List_ClientMsgs.FormattingEnabled = true;
-            this.List_ClientMsgs.ItemHeight = 16;
-            this.List_ClientMsgs.Location = new System.Drawing.Point(344, 44);
-            this.List_ClientMsgs.Margin = new System.Windows.Forms.Padding(4);
+            this.List_ClientMsgs.Location = new System.Drawing.Point(258, 36);
             this.List_ClientMsgs.Name = "List_ClientMsgs";
             this.List_ClientMsgs.SelectionMode = System.Windows.Forms.SelectionMode.None;
-            this.List_ClientMsgs.Size = new System.Drawing.Size(336, 404);
+            this.List_ClientMsgs.Size = new System.Drawing.Size(253, 329);
             this.List_ClientMsgs.TabIndex = 0;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(344, 25);
-            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label3.Location = new System.Drawing.Point(258, 20);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(118, 17);
+            this.label3.Size = new System.Drawing.Size(89, 13);
             this.label3.TabIndex = 1;
             this.label3.Text = "Clients Messages";
             // 
             // Button_Terminate
             // 
-            this.Button_Terminate.Location = new System.Drawing.Point(713, 44);
-            this.Button_Terminate.Margin = new System.Windows.Forms.Padding(4);
+            this.Button_Terminate.Location = new System.Drawing.Point(535, 36);
             this.Button_Terminate.Name = "Button_Terminate";
-            this.Button_Terminate.Size = new System.Drawing.Size(173, 62);
+            this.Button_Terminate.Size = new System.Drawing.Size(130, 50);
             this.Button_Terminate.TabIndex = 3;
             this.Button_Terminate.Text = "Terminate";
             this.Button_Terminate.UseVisualStyleBackColor = true;
@@ -149,20 +137,18 @@
             // 
             // Button_S1
             // 
-            this.Button_S1.Location = new System.Drawing.Point(713, 113);
-            this.Button_S1.Margin = new System.Windows.Forms.Padding(4);
+            this.Button_S1.Location = new System.Drawing.Point(535, 92);
             this.Button_S1.Name = "Button_S1";
-            this.Button_S1.Size = new System.Drawing.Size(173, 62);
+            this.Button_S1.Size = new System.Drawing.Size(130, 50);
             this.Button_S1.TabIndex = 3;
             this.Button_S1.Text = "-------";
             this.Button_S1.UseVisualStyleBackColor = true;
             // 
             // Button_Exit
             // 
-            this.Button_Exit.Location = new System.Drawing.Point(713, 458);
-            this.Button_Exit.Margin = new System.Windows.Forms.Padding(4);
+            this.Button_Exit.Location = new System.Drawing.Point(535, 372);
             this.Button_Exit.Name = "Button_Exit";
-            this.Button_Exit.Size = new System.Drawing.Size(173, 62);
+            this.Button_Exit.Size = new System.Drawing.Size(130, 50);
             this.Button_Exit.TabIndex = 3;
             this.Button_Exit.Text = "Exit";
             this.Button_Exit.UseVisualStyleBackColor = true;
@@ -170,10 +156,9 @@
             // 
             // Button_Start
             // 
-            this.Button_Start.Location = new System.Drawing.Point(713, 320);
-            this.Button_Start.Margin = new System.Windows.Forms.Padding(4);
+            this.Button_Start.Location = new System.Drawing.Point(535, 260);
             this.Button_Start.Name = "Button_Start";
-            this.Button_Start.Size = new System.Drawing.Size(173, 62);
+            this.Button_Start.Size = new System.Drawing.Size(130, 50);
             this.Button_Start.TabIndex = 4;
             this.Button_Start.Text = "Start";
             this.Button_Start.UseVisualStyleBackColor = true;
@@ -182,10 +167,9 @@
             // Button_Stop
             // 
             this.Button_Stop.Enabled = false;
-            this.Button_Stop.Location = new System.Drawing.Point(713, 389);
-            this.Button_Stop.Margin = new System.Windows.Forms.Padding(4);
+            this.Button_Stop.Location = new System.Drawing.Point(535, 316);
             this.Button_Stop.Name = "Button_Stop";
-            this.Button_Stop.Size = new System.Drawing.Size(173, 62);
+            this.Button_Stop.Size = new System.Drawing.Size(130, 50);
             this.Button_Stop.TabIndex = 4;
             this.Button_Stop.Text = "Stop";
             this.Button_Stop.UseVisualStyleBackColor = true;
@@ -193,20 +177,18 @@
             // 
             // Button_S2
             // 
-            this.Button_S2.Location = new System.Drawing.Point(713, 182);
-            this.Button_S2.Margin = new System.Windows.Forms.Padding(4);
+            this.Button_S2.Location = new System.Drawing.Point(535, 148);
             this.Button_S2.Name = "Button_S2";
-            this.Button_S2.Size = new System.Drawing.Size(173, 62);
+            this.Button_S2.Size = new System.Drawing.Size(130, 50);
             this.Button_S2.TabIndex = 3;
             this.Button_S2.Text = "-------";
             this.Button_S2.UseVisualStyleBackColor = true;
             // 
             // Button_S3
             // 
-            this.Button_S3.Location = new System.Drawing.Point(713, 251);
-            this.Button_S3.Margin = new System.Windows.Forms.Padding(4);
+            this.Button_S3.Location = new System.Drawing.Point(535, 204);
             this.Button_S3.Name = "Button_S3";
-            this.Button_S3.Size = new System.Drawing.Size(173, 62);
+            this.Button_S3.Size = new System.Drawing.Size(130, 50);
             this.Button_S3.TabIndex = 3;
             this.Button_S3.Text = "-------";
             this.Button_S3.UseVisualStyleBackColor = true;
@@ -214,12 +196,10 @@
             // List_Connected_name
             // 
             this.List_Connected_name.FormattingEnabled = true;
-            this.List_Connected_name.ItemHeight = 16;
-            this.List_Connected_name.Location = new System.Drawing.Point(189, 44);
-            this.List_Connected_name.Margin = new System.Windows.Forms.Padding(4);
+            this.List_Connected_name.Location = new System.Drawing.Point(142, 36);
             this.List_Connected_name.Name = "List_Connected_name";
             this.List_Connected_name.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
-            this.List_Connected_name.Size = new System.Drawing.Size(145, 212);
+            this.List_Connected_name.Size = new System.Drawing.Size(110, 173);
             this.List_Connected_name.TabIndex = 0;
             this.List_Connected_name.SelectedIndexChanged += new System.EventHandler(this.List_Connected_SelectedIndexChanged);
             // 
@@ -227,42 +207,44 @@
             // 
             this.List_Disonnected_name.Enabled = false;
             this.List_Disonnected_name.FormattingEnabled = true;
-            this.List_Disonnected_name.ItemHeight = 16;
-            this.List_Disonnected_name.Location = new System.Drawing.Point(189, 284);
-            this.List_Disonnected_name.Margin = new System.Windows.Forms.Padding(4);
+            this.List_Disonnected_name.Location = new System.Drawing.Point(142, 231);
             this.List_Disonnected_name.Name = "List_Disonnected_name";
-            this.List_Disonnected_name.Size = new System.Drawing.Size(145, 164);
+            this.List_Disonnected_name.Size = new System.Drawing.Size(110, 134);
             this.List_Disonnected_name.TabIndex = 0;
             this.List_Disonnected_name.SelectedIndexChanged += new System.EventHandler(this.List_Disonnected_SelectedIndexChanged);
             // 
             // comboBox_level
             // 
             this.comboBox_level.FormattingEnabled = true;
-            this.comboBox_level.Location = new System.Drawing.Point(39, 520);
+            this.comboBox_level.Location = new System.Drawing.Point(29, 422);
+            this.comboBox_level.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.comboBox_level.Name = "comboBox_level";
-            this.comboBox_level.Size = new System.Drawing.Size(121, 24);
+            this.comboBox_level.Size = new System.Drawing.Size(92, 21);
             this.comboBox_level.TabIndex = 5;
             // 
             // comboBox_Category
             // 
             this.comboBox_Category.FormattingEnabled = true;
-            this.comboBox_Category.Location = new System.Drawing.Point(189, 520);
+            this.comboBox_Category.Location = new System.Drawing.Point(142, 422);
+            this.comboBox_Category.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.comboBox_Category.Name = "comboBox_Category";
-            this.comboBox_Category.Size = new System.Drawing.Size(121, 24);
+            this.comboBox_Category.Size = new System.Drawing.Size(92, 21);
             this.comboBox_Category.TabIndex = 6;
             // 
             // textBox_Word
             // 
-            this.textBox_Word.Location = new System.Drawing.Point(335, 522);
+            this.textBox_Word.Location = new System.Drawing.Point(251, 424);
+            this.textBox_Word.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.textBox_Word.Name = "textBox_Word";
-            this.textBox_Word.Size = new System.Drawing.Size(143, 22);
+            this.textBox_Word.Size = new System.Drawing.Size(108, 20);
             this.textBox_Word.TabIndex = 7;
             // 
             // Insert
             // 
-            this.Insert.Location = new System.Drawing.Point(543, 522);
+            this.Insert.Location = new System.Drawing.Point(407, 424);
+            this.Insert.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Insert.Name = "Insert";
-            this.Insert.Size = new System.Drawing.Size(137, 31);
+            this.Insert.Size = new System.Drawing.Size(103, 25);
             this.Insert.TabIndex = 8;
             this.Insert.Text = "Insert";
             this.Insert.UseVisualStyleBackColor = true;
@@ -270,9 +252,9 @@
             // 
             // Controller
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(927, 556);
+            this.ClientSize = new System.Drawing.Size(695, 486);
             this.Controls.Add(this.Insert);
             this.Controls.Add(this.textBox_Word);
             this.Controls.Add(this.comboBox_Category);
@@ -294,7 +276,6 @@
             this.Controls.Add(this.List_Disonnected_endpoint);
             this.Controls.Add(this.List_Connected_name);
             this.Controls.Add(this.List_Connected_endpoint);
-            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Controller";
             this.Text = "Server";
             this.ResumeLayout(false);

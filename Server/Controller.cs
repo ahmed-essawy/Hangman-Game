@@ -125,15 +125,8 @@ namespace Server
                                 int player2 = int.Parse(response[2]);
                                 rooms[joinroom].AddPlayer(player2);
                                 clients[player2].bWriter = "Join Room Accepted;" + rooms[joinroom].Word + ";" + joinroom;
-                                clients[rooms[joinroom].Player1].bWriter = "Play Form Enable;true";
+                                clients[rooms[joinroom].Player1].bWriter = "Play Form Enable;true;Player 1";
                                 type += " (" + clients[player2].Name + " joined room to play)";
-                                break;
-
-                            case "Watch Room":
-                                int watchroom = int.Parse(response[1]);
-                                int watcher = int.Parse(response[2]);
-                                rooms[watchroom].AddWatcher(watcher);
-                                type += " (" + clients[watcher].Name + " joined room to watch)";
                                 break;
 
                             case "Button Pressed":
@@ -144,6 +137,10 @@ namespace Server
                                     clients[rooms[roomsendpress].Player2].bWriter = "Dim Button;" + charpressed;
                                 else if (playersendpress == "Player 2")
                                     clients[rooms[roomsendpress].Player1].bWriter = "Dim Button;" + charpressed;
+                                foreach (int index in rooms[roomsendpress].Watchers)
+                                {
+                                    clients[index].bWriter = "Dim Button;" + charpressed;
+                                }
                                 type += " (" + playersendpress + " press " + response[3] + ")";
                                 break;
 
@@ -152,21 +149,22 @@ namespace Server
                                 string playersendchange = response[2];
                                 if (playersendchange == "Player 1")
                                 {
-                                    clients[rooms[roomsendchange].Player1].bWriter = "Play Form Enable;false";
-                                    clients[rooms[roomsendchange].Player2].bWriter = "Play Form Enable;true";
+                                    clients[rooms[roomsendchange].Player1].bWriter = "Play Form Enable;false;Player 2";
+                                    clients[rooms[roomsendchange].Player2].bWriter = "Play Form Enable;true;Player 2";
                                 }
                                 else if (playersendchange == "Player 2")
                                 {
-                                    clients[rooms[roomsendchange].Player1].bWriter = "Play Form Enable;true";
-                                    clients[rooms[roomsendchange].Player2].bWriter = "Play Form Enable;false";
+                                    clients[rooms[roomsendchange].Player1].bWriter = "Play Form Enable;true;Player 1";
+                                    clients[rooms[roomsendchange].Player2].bWriter = "Play Form Enable;false;Player 1";
                                 }
                                 break;
 
-                            case "Win Game":
-                                int winnerroom = int.Parse(response[1]);
-                                int winner = int.Parse(response[2]);
-                                rooms[winnerroom].AddWatcher(winner);
-                                type += " (" + clients[winner].Name + " win game)";
+                            case "Watch Room":
+                                int watcherid = int.Parse(response[1]);
+                                int watchroomid = int.Parse(response[2]);
+                                rooms[watchroomid].AddWatcher(watcherid);
+                                clients[watcherid].bWriter = "Watch Room Info;" + rooms[watchroomid].Word;
+                                type += " (" + clients[watcherid].Name + " watch game)";
                                 break;
 
                             default:
@@ -327,7 +325,8 @@ namespace Server
             }
             return cats;
         }
-        private void Insert_word(string cat,int lvl,string word)
+
+        private void Insert_word(string cat, int lvl, string word)
         {
             com.CommandType = CommandType.StoredProcedure;
             com.CommandText = "ADD_word";
@@ -336,7 +335,6 @@ namespace Server
                     new SqlParameter("@cat",cat),
                     new SqlParameter("@lvl",lvl),
                     new SqlParameter("@word",word)
-
                 };
             com.Parameters.AddRange(par);
             com.Connection = con;
@@ -419,7 +417,7 @@ namespace Server
     {
         private int player1, player2, owner, Winner, level;
         private string category, word;
-        private List<int> Watchers;
+        private List<int> watchers;
 
         public Room(int Owner, string Category, int Level, string Word)
         {
@@ -428,6 +426,7 @@ namespace Server
             this.category = Category;
             this.level = Level;
             this.word = Word;
+            this.watchers = new List<int>();
         }
 
         public int Owner { get { return owner; } }
@@ -436,6 +435,7 @@ namespace Server
         public string Category { get { return category; } }
         public int Level { get { return level; } }
         public string Word { get { return word; } }
+        public List<int> Watchers { get { return watchers; } }
 
         public void AddPlayer(int Player2)
         {
