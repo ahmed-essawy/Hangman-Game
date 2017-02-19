@@ -150,7 +150,7 @@ namespace Server
                             case "Change Control":
                                 int roomsendchange = int.Parse(response[1]);
                                 string playersendchange = response[2];
-                                if (playersendchange == "Player 1")
+                                if (playersendchange.Contains("Player 1"))
                                 {
                                     rooms[roomsendchange].Current = "Player 2";
                                     clients[rooms[roomsendchange].Player1].bWriter = "Play Form Enable;false;Player 2: " + clients[rooms[roomsendchange].Player2].Name;
@@ -160,7 +160,7 @@ namespace Server
                                         clients[index].bWriter = "Play Form Enable;false;Player 2: " + clients[rooms[roomsendchange].Player2].Name;
                                     }
                                 }
-                                else if (playersendchange == "Player 2")
+                                else if (playersendchange.Contains( "Player 2"))
                                 {
                                     rooms[roomsendchange].Current = "Player 1";
                                     clients[rooms[roomsendchange].Player1].bWriter = "Play Form Enable;true;Your Turn";
