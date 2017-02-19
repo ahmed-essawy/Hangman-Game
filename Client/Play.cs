@@ -21,6 +21,7 @@ namespace Client
         private int player_id;
         private string player_type;
         private int count = 0;
+        int space_count = 0;
 
         public bool Dimmed { set { panel1.Enabled = value; } }
         public string Change_Label { set { Label_Current.Text = value; } }
@@ -68,6 +69,7 @@ namespace Client
                 if (word[i].ToString() == " ")
                 {
                     labels[i].Text = " ";
+                    ++space_count;
                 }
                 this.Controls.Add(labels[i]);
             }
@@ -84,10 +86,6 @@ namespace Client
                     {
                         labels[i].Text = word[i].ToString().ToUpper();
                         ++count;
-                        if (count == len)
-                        {
-                            MessageBox.Show(player_type+" End of game");
-                        }
                     }
                     Invalidate();
                 }
@@ -95,13 +93,41 @@ namespace Client
             else
             {
                 panel1.Enabled = false;
-                bWriter.Write("Change Control;" + room_id + ";" + player_type+";"+count);
+                bWriter.Write("Change Control;" + room_id + ";" + player_type + ";" + count);
                 for (int i = 0; i < 1000000; i++) ;
             }
              ((Button)sender).Enabled = false;
             bWriter.Write("Button Pressed;" + room_id + ";" + player_type + ";" + button_text);
+            for (int j = 0; j < 1000000; j++) ;
+            if (count + space_count == word.Length)
+            {
+                this.panel1.Enabled = false;
+                bWriter.Write("Win Game;" + room_id + ";" + player_type);
+                Label_Current.Text = "Congratulations !";
+                DialogResult result = MessageBox.Show("Do you want to play again ?", "Congratulations !", MessageBoxButtons.YesNo);
+                if(result == DialogResult.OK)
+                {
+
+                }
+                else if (result == DialogResult.Cancel)
+                {
+
+                }
+            }
         }
 
+        public void PlayerMessageBox()
+        {
+            DialogResult result = MessageBox.Show("Do you want to play again ?", "Play again !", MessageBoxButtons.YesNo);
+            if (result == DialogResult.OK)
+            {
+                
+            }
+            else if (result == DialogResult.Cancel)
+            {
+
+            }
+        }
         public void Pressed_Button(string letter)
         {
             panel1.Controls.Find("_" + letter, false)[0].Enabled = false;

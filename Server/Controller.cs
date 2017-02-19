@@ -32,7 +32,7 @@ namespace Server
             players = new Dictionary<int, string>();
             rooms = new Dictionary<int, Room>();
             cats = new List<string>();
-            con = new SqlConnection(@"Data Source =DESKTOP-A4PGC7O\MSSQLSERVER_EMAN; Initial Catalog = HangMan; Integrated Security = True");
+            con = new SqlConnection("Data Source =.; Initial Catalog = Hangman-Game; Integrated Security = True");
             com = new SqlCommand();
             com.Connection = con;
             for (int i = 1; i <= 3; i++)
@@ -179,6 +179,26 @@ namespace Server
                                 rooms[watchroomid].AddWatcher(watcherid);
                                 clients[watcherid].bWriter = "Watch Room Info;" + rooms[watchroomid].Word + ";" + rooms[watchroomid].Pressed + ";" + rooms[watchroomid].Current;
                                 type += " (" + clients[watcherid].Name + " watch game)";
+                                break;
+                            case "Win Game":
+                                int winroomid = int.Parse(response[1]);
+                                string winplayer = response[2];
+                                if (winplayer.Contains("Player 1"))
+                                {
+                                    clients[rooms[winroomid].Player2].bWriter = "Play Form Enable;false;Winner: Player 1: " + clients[rooms[winroomid].Player1].Name+";0";
+                                    foreach (int index in rooms[winroomid].Watchers)
+                                    {
+                                        clients[index].bWriter = "Play Form Enable;false;Winner: Player 1: " + clients[rooms[winroomid].Player1].Name + ";0";
+                                    }
+                                }
+                                else if (winplayer.Contains("Player 2"))
+                                {
+                                    clients[rooms[winroomid].Player1].bWriter = "Play Form Enable;false;Winner: Player 2: " + clients[rooms[winroomid].Player1].Name + ";0";
+                                    foreach (int index in rooms[winroomid].Watchers)
+                                    {
+                                        clients[index].bWriter = "Play Form Enable;false;Winner: Player 2: " + clients[rooms[winroomid].Player1].Name + ";0";
+                                    }
+                                }
                                 break;
 
                             default:

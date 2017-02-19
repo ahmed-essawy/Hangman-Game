@@ -148,6 +148,8 @@ namespace Client
                             game.Dimmed = bool.Parse(response[1]);
                             game.Change_Label = response[2];
                             game.Count = int.Parse(response[3]);
+                            if (response[3].Contains("Winner"))
+                                game.PlayerMessageBox();
                             break;
 
                         case "Dim Button":

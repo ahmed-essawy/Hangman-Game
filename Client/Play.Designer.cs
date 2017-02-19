@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.label1 = new System.Windows.Forms.Label();
             this._A = new System.Windows.Forms.Button();
             this._B = new System.Windows.Forms.Button();
             this._C = new System.Windows.Forms.Button();
@@ -69,14 +68,6 @@
             this.Label_Current = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(38, 102);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(0, 16);
-            this.label1.TabIndex = 0;
             // 
             // _A
             // 
@@ -559,18 +550,17 @@
             this.Label_Current.AutoSize = true;
             this.Label_Current.Location = new System.Drawing.Point(12, 323);
             this.Label_Current.Name = "Label_Current";
-            this.Label_Current.Size = new System.Drawing.Size(133, 16);
+            this.Label_Current.Size = new System.Drawing.Size(170, 21);
             this.Label_Current.TabIndex = 28;
             this.Label_Current.Text = "Waiting for player 2...";
             // 
             // Play
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 19F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(773, 362);
             this.Controls.Add(this.Label_Current);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.label1);
             this.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "Play";
@@ -583,8 +573,6 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button _A;
         private System.Windows.Forms.Button _B;
         private System.Windows.Forms.Button _C;
