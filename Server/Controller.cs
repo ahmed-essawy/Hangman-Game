@@ -135,9 +135,9 @@ namespace Server
                                 int roomsendpress = int.Parse(response[1]);
                                 string playersendpress = response[2];
                                 string charpressed = response[3];
-                                if (playersendpress == "Player 1")
+                                if (playersendpress.Contains("Player 1"))
                                     clients[rooms[roomsendpress].Player2].bWriter = "Dim Button;" + charpressed;
-                                else if (playersendpress == "Player 2")
+                                else if (playersendpress.Contains("Player 2"))
                                     clients[rooms[roomsendpress].Player1].bWriter = "Dim Button;" + charpressed;
                                 foreach (int index in rooms[roomsendpress].Watchers)
                                 {
