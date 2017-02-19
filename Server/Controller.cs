@@ -32,7 +32,7 @@ namespace Server
             players = new Dictionary<int, string>();
             rooms = new Dictionary<int, Room>();
             cats = new List<string>();
-            con = new SqlConnection("Data Source =.; Initial Catalog = HangMan; Integrated Security = True");
+            con = new SqlConnection(@"Data Source =DESKTOP-A4PGC7O\MSSQLSERVER_EMAN; Initial Catalog = HangMan; Integrated Security = True");
             com = new SqlCommand();
             com.Connection = con;
             for (int i = 1; i <= 3; i++)
@@ -123,7 +123,7 @@ namespace Server
                                 int player2 = int.Parse(response[2]);
                                 rooms[joinroom].AddPlayer(player2);
                                 clients[player2].bWriter = "Join Room Accepted;" + rooms[joinroom].Word + ";" + rooms[joinroom].Pressed + ";" + joinroom;
-                                clients[rooms[joinroom].Player1].bWriter = "Play Form Enable;true;Player 1: " + clients[rooms[joinroom].Player1].Name;
+                                clients[rooms[joinroom].Player1].bWriter = "Play Form Enable;true;Player 1: " + clients[rooms[joinroom].Player1].Name + ";0";
                                 foreach (int index in clients.Keys.ToList())
                                 {
                                     clients[index].bWriter = "Change Room Capacity;" + joinroom;
@@ -150,24 +150,25 @@ namespace Server
                             case "Change Control":
                                 int roomsendchange = int.Parse(response[1]);
                                 string playersendchange = response[2];
+                                int count = int.Parse(response[3]);
                                 if (playersendchange.Contains("Player 1"))
                                 {
                                     rooms[roomsendchange].Current = "Player 2";
-                                    clients[rooms[roomsendchange].Player1].bWriter = "Play Form Enable;false;Player 2: " + clients[rooms[roomsendchange].Player2].Name;
-                                    clients[rooms[roomsendchange].Player2].bWriter = "Play Form Enable;true;Your Turn";
+                                    clients[rooms[roomsendchange].Player1].bWriter = "Play Form Enable;false;Player 2: " + clients[rooms[roomsendchange].Player2].Name + ";" + count;
+                                    clients[rooms[roomsendchange].Player2].bWriter = "Play Form Enable;true;Your Turn;" + count;
                                     foreach (int index in rooms[roomsendchange].Watchers)
                                     {
-                                        clients[index].bWriter = "Play Form Enable;false;Player 2: " + clients[rooms[roomsendchange].Player2].Name;
+                                        clients[index].bWriter = "Play Form Enable;false;Player 2: " + clients[rooms[roomsendchange].Player2].Name + ";" + count;
                                     }
                                 }
-                                else if (playersendchange.Contains( "Player 2"))
+                                else if (playersendchange.Contains("Player 2"))
                                 {
                                     rooms[roomsendchange].Current = "Player 1";
-                                    clients[rooms[roomsendchange].Player1].bWriter = "Play Form Enable;true;Your Turn";
-                                    clients[rooms[roomsendchange].Player2].bWriter = "Play Form Enable;false;Player 1: " + clients[rooms[roomsendchange].Player1].Name;
+                                    clients[rooms[roomsendchange].Player1].bWriter = "Play Form Enable;true;Your Turn; " + count;
+                                    clients[rooms[roomsendchange].Player2].bWriter = "Play Form Enable;false;Player 1: " + clients[rooms[roomsendchange].Player1].Name + ";" + count;
                                     foreach (int index in rooms[roomsendchange].Watchers)
                                     {
-                                        clients[index].bWriter = "Play Form Enable;false;Player 1: " + clients[rooms[roomsendchange].Player1].Name;
+                                        clients[index].bWriter = "Play Form Enable;false;Player 1: " + clients[rooms[roomsendchange].Player1].Name + ";" + count;
                                     }
                                 }
                                 break;
