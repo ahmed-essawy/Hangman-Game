@@ -147,6 +147,7 @@ namespace Client
                         case "Play Form Enable":
                             game.Dimmed = bool.Parse(response[1]);
                             game.Change_Label = response[2];
+                            game.Count = int.Parse(response[3]);
                             break;
 
                         case "Dim Button":

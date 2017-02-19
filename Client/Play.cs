@@ -24,6 +24,7 @@ namespace Client
 
         public bool Dimmed { set { panel1.Enabled = value; } }
         public string Change_Label { set { Label_Current.Text = value; } }
+        public int Count { set { count = value; } }
 
         public Play(string word, int Room_id, int Player_id, string Player_Type, string Pressed, BinaryWriter bWriter)
         {
@@ -85,7 +86,7 @@ namespace Client
                         ++count;
                         if (count == len)
                         {
-                            MessageBox.Show("End of game");
+                            MessageBox.Show(player_type+" End of game");
                         }
                     }
                     Invalidate();
@@ -94,7 +95,7 @@ namespace Client
             else
             {
                 panel1.Enabled = false;
-                bWriter.Write("Change Control;" + room_id + ";" + player_type);
+                bWriter.Write("Change Control;" + room_id + ";" + player_type+";"+count);
                 for (int i = 0; i < 1000000; i++) ;
             }
              ((Button)sender).Enabled = false;
