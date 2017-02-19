@@ -25,9 +25,10 @@ namespace Client
         public bool Dimmed { set { panel1.Enabled = value; } }
         public string Change_Label { set { Label_Current.Text = value; } }
 
-        public Play(string word, int Room_id, int Player_id, string Player_Type, BinaryWriter bWriter)
+        public Play(string word, int Room_id, int Player_id, string Player_Type, string Pressed, BinaryWriter bWriter)
         {
             InitializeComponent();
+            this.Text = Player_Type;
             this.word = word;
             this.room_id = Room_id;
             this.player_id = Player_id;
@@ -35,11 +36,17 @@ namespace Client
             this.bWriter = bWriter;
             len = word.Length;
             labels = new Label[len];
+            InitializeWord();
+            if (Pressed.Contains(","))
+                foreach (string letter in Pressed.Split(','))
+                    Pressed_Button(letter);
+            else if (Pressed != String.Empty && !Pressed.Contains(","))
+                Pressed_Button(Pressed);
         }
 
-        private void Form1_Load(object sender, EventArgs e)
+        private void InitializeWord()
         {
-            int x = 30;
+            int x = 50;
             int y = 50;
             for (int i = 0; i < len; i++)
             {
@@ -49,12 +56,12 @@ namespace Client
                 if (x < this.Width - 50)
                 {
                     labels[i].Location = new Point(x, y);
-                    x += 50;
+                    x += 25;
                 }
                 else
                 {
-                    y += 50;
-                    x = 10;
+                    y += 25;
+                    x = 50;
                     labels[i].Location = new Point(x, y);
                 }
                 if (word[i].ToString() == " ")
@@ -65,17 +72,16 @@ namespace Client
             }
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void Button_Click(object sender, EventArgs e)
         {
             string button_text = ((Button)sender).Text;
-            string str1 = word.ToUpper();
-            if (str1.Contains(button_text))
+            if (word.ToUpper().Contains(button_text))
             {
                 for (int i = 0; i < len; i++)
                 {
-                    if (str1[i].ToString() == button_text)
+                    if (word[i].ToString().ToUpper() == button_text)
                     {
-                        labels[i].Text = button_text;
+                        labels[i].Text = word[i].ToString().ToUpper();
                         ++count;
                         if (count == len)
                         {
@@ -97,12 +103,12 @@ namespace Client
 
         public void Pressed_Button(string letter)
         {
-            panel1.Controls.Find(letter, false)[0].Enabled = false;
+            panel1.Controls.Find("_" + letter, false)[0].Enabled = false;
             for (int i = 0; i < len; i++)
             {
                 if (word[i].ToString().ToUpper() == letter.ToUpper())
                 {
-                    labels[i].Text = letter;
+                    labels[i].Text = word[i].ToString().ToUpper();
                 }
             }
         }

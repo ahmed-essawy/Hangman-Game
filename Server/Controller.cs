@@ -34,22 +34,17 @@ namespace Server
             cats = new List<string>();
             con = new SqlConnection("Data Source =.; Initial Catalog = HangMan; Integrated Security = True");
             com = new SqlCommand();
-            // Bring data from database
-            cats = Get_Categories();
-            foreach (string item in cats)
-            {
-                comboBox_Category.Items.Add(item);
-            }
+            com.Connection = con;
             for (int i = 1; i <= 3; i++)
             {
                 comboBox_level.Items.Add(i);
             }
-            comboBox_Category.SelectedIndex = 0;
             comboBox_level.SelectedIndex = 0;
-            Room r1 = new Room(1, "Sports", 1, "Test");
-            Room r2 = new Room(3, "Movies", 2, "Test");
+            // Bring data from database
+            Room r1 = new Room(1, "Room 1", "Sports", 1, "Test");
+            Room r2 = new Room(3, "Room 2", "Movies", 2, "Test");
             r2.AddPlayer(50);
-            Room r3 = new Room(5, "Sports", 3, "Test");
+            Room r3 = new Room(5, "Room 3", "Sports", 3, "Test");
             rooms.Add(rooms_count++, r1);
             rooms.Add(rooms_count++, r2);
             rooms.Add(rooms_count++, r3);
@@ -68,13 +63,15 @@ namespace Server
                     clients.Add(temp_client.Endpoint, temp_client);
                     List_Connected_endpoint.Items.Add(temp_client.Endpoint);
                     List_Connected_name.Items.Add(temp_client.Name);
-                    foreach (string item in cats)
+                    foreach (string item in Get_Categories())
                     {
                         temp_client.bWriter = "Category;" + item;
+                        for (int i = 0; i < 1000000; i++) ;
                     }
                     foreach (int index in rooms.Keys.ToList())
                     {
-                        temp_client.bWriter = "Room;" + index + ";" + rooms[index].Category + ";" + rooms[index].Level + ";" + rooms[index].Check_Count();
+                        temp_client.bWriter = "Room;" + index + ";" + rooms[index].Name + ";" + rooms[index].Category + ";" + rooms[index].Level + ";" + rooms[index].Check_Count();
+                        for (int i = 0; i < 1000000; i++) ;
                     }
                     //players.Add(temp_client.Endpoint, temp_client.Name);
                 }
@@ -99,16 +96,17 @@ namespace Server
 
                             case "New Room":
                                 int creator = int.Parse(response[1]);
-                                string newroomcat = response[2];
-                                int newroomlvl = int.Parse(response[3]);
-                                string newroomword = Get_Word(newroomcat, newroomlvl).ToString();
-                                clients[creator].bWriter = "Room Word;" + newroomword + ";" + rooms_count;
-                                Room temp_room = new Room(creator, newroomcat, newroomlvl, newroomword);
+                                string newroomname = response[2];
+                                string newroomcat = response[3];
+                                int newroomlvl = int.Parse(response[4]);
+                                string newroomword = Get_Word(newroomcat, newroomlvl);
+                                clients[creator].bWriter = "Room Word;" + newroomword + ";;" + rooms_count;
+                                Room temp_room = new Room(creator, newroomname, newroomcat, newroomlvl, newroomword);
                                 rooms.Add(rooms_count, temp_room);
                                 type += " (" + newroomcat + ", lvl" + newroomlvl + ")";
                                 foreach (int index in clients.Keys.ToList())
                                 {
-                                    clients[index].bWriter = "Room;" + rooms_count + ";" + temp_room.Category + ";" + temp_room.Level + ";" + temp_room.Check_Count();
+                                    clients[index].bWriter = "Room;" + rooms_count + ";" + temp_room.Name + ";" + temp_room.Category + ";" + temp_room.Level + ";" + temp_room.Check_Count();
                                 }
                                 rooms_count++;
                                 break;
@@ -124,8 +122,12 @@ namespace Server
                                 int joinroom = int.Parse(response[1]);
                                 int player2 = int.Parse(response[2]);
                                 rooms[joinroom].AddPlayer(player2);
-                                clients[player2].bWriter = "Join Room Accepted;" + rooms[joinroom].Word + ";" + joinroom;
-                                clients[rooms[joinroom].Player1].bWriter = "Play Form Enable;true;Player 1";
+                                clients[player2].bWriter = "Join Room Accepted;" + rooms[joinroom].Word + ";" + rooms[joinroom].Pressed + ";" + joinroom;
+                                clients[rooms[joinroom].Player1].bWriter = "Play Form Enable;true;Player 1: " + clients[rooms[joinroom].Player1].Name;
+                                foreach (int index in clients.Keys.ToList())
+                                {
+                                    clients[index].bWriter = "Change Room Capacity;" + joinroom;
+                                }
                                 type += " (" + clients[player2].Name + " joined room to play)";
                                 break;
 
@@ -141,6 +143,7 @@ namespace Server
                                 {
                                     clients[index].bWriter = "Dim Button;" + charpressed;
                                 }
+                                rooms[roomsendpress].AddPress(charpressed);
                                 type += " (" + playersendpress + " press " + response[3] + ")";
                                 break;
 
@@ -149,13 +152,23 @@ namespace Server
                                 string playersendchange = response[2];
                                 if (playersendchange == "Player 1")
                                 {
-                                    clients[rooms[roomsendchange].Player1].bWriter = "Play Form Enable;false;Player 2";
-                                    clients[rooms[roomsendchange].Player2].bWriter = "Play Form Enable;true;Player 2";
+                                    rooms[roomsendchange].Current = "Player 2";
+                                    clients[rooms[roomsendchange].Player1].bWriter = "Play Form Enable;false;Player 2: " + clients[rooms[roomsendchange].Player2].Name;
+                                    clients[rooms[roomsendchange].Player2].bWriter = "Play Form Enable;true;Your Turn";
+                                    foreach (int index in rooms[roomsendchange].Watchers)
+                                    {
+                                        clients[index].bWriter = "Play Form Enable;false;Player 2: " + clients[rooms[roomsendchange].Player2].Name;
+                                    }
                                 }
                                 else if (playersendchange == "Player 2")
                                 {
-                                    clients[rooms[roomsendchange].Player1].bWriter = "Play Form Enable;true;Player 1";
-                                    clients[rooms[roomsendchange].Player2].bWriter = "Play Form Enable;false;Player 1";
+                                    rooms[roomsendchange].Current = "Player 1";
+                                    clients[rooms[roomsendchange].Player1].bWriter = "Play Form Enable;true;Your Turn";
+                                    clients[rooms[roomsendchange].Player2].bWriter = "Play Form Enable;false;Player 1: " + clients[rooms[roomsendchange].Player1].Name;
+                                    foreach (int index in rooms[roomsendchange].Watchers)
+                                    {
+                                        clients[index].bWriter = "Play Form Enable;false;Player 1: " + clients[rooms[roomsendchange].Player1].Name;
+                                    }
                                 }
                                 break;
 
@@ -163,7 +176,7 @@ namespace Server
                                 int watcherid = int.Parse(response[1]);
                                 int watchroomid = int.Parse(response[2]);
                                 rooms[watchroomid].AddWatcher(watcherid);
-                                clients[watcherid].bWriter = "Watch Room Info;" + rooms[watchroomid].Word;
+                                clients[watcherid].bWriter = "Watch Room Info;" + rooms[watchroomid].Word + ";" + rooms[watchroomid].Pressed + ";" + rooms[watchroomid].Current;
                                 type += " (" + clients[watcherid].Name + " watch game)";
                                 break;
 
@@ -184,7 +197,7 @@ namespace Server
 
         private void Check_disconnected()
         {
-            while (false)
+            while (true)
             {
                 foreach (int index in clients.Keys.ToList())
                 {
@@ -194,8 +207,8 @@ namespace Server
                         List_Disonnected_name.Items.Add(clients[index].Name);
                         List_Connected_name.Items.RemoveAt(List_Connected_endpoint.FindStringExact(index.ToString()));
                         List_Connected_endpoint.Items.RemoveAt(List_Connected_endpoint.FindStringExact(index.ToString()));
-                        //clients[index] = null;
-                        //clients.Remove(index);
+                        clients[index] = null;
+                        clients.Remove(index);
                     }
                 }
             }
@@ -277,14 +290,14 @@ namespace Server
             try
             {
                 com.CommandType = CommandType.StoredProcedure;
-                com.CommandText = "Get_word";
+                com.CommandText = "Get_Word";
                 SqlParameter[] par =
                     {
                     new SqlParameter("@cat",newroomcat),
                     new SqlParameter("@lvl",newroomlvl)
                 };
+                com.Parameters.Clear();
                 com.Parameters.AddRange(par);
-                com.Connection = con;
                 con.Open();
                 affected = com.ExecuteScalar().ToString();
                 con.Close();
@@ -296,34 +309,33 @@ namespace Server
             return affected;
         }
 
-        private void Insert_Click(object sender, EventArgs e)
-        {
-            string word = textBox_Word.Text;
-            string cat = comboBox_Category.Text;
-            int lvl = int.Parse(comboBox_level.Text);
-            Insert_word(cat, lvl, word);
-            textBox_Word.Text = string.Empty;
-            comboBox_Category.Text = string.Empty;
-            comboBox_level.Text = string.Empty;
-        }
-
         private List<string> Get_Categories()
         {
             DataTable table = new DataTable();
+            com.CommandType = CommandType.Text;
             com.CommandText = "select * from Categories";
             com.Connection = con;
-            DataSet ds = new DataSet();
-            SqlDataAdapter adapt = new SqlDataAdapter();
-            DataTable dt = new DataTable();
             List<string> cats = new List<string>();
-            adapt.SelectCommand = com;
-            adapt.Fill(ds);
-            dt = ds.Tables[0];
-            foreach (DataRow data in dt.Rows)
+            con.Open();
+            SqlDataReader rdr = com.ExecuteReader();
+            while (rdr.Read())
             {
-                cats.Add(data[0].ToString());
+                cats.Add(Convert.ToString(rdr[0]));
             }
+            rdr.Close();
+            con.Close();
             return cats;
+        }
+
+        private void Insert_Click(object sender, EventArgs e)
+        {
+            string word = textBox_Word.Text;
+            string cat = textBox_Category.Text;
+            int lvl = int.Parse(comboBox_level.Text);
+            Insert_word(cat, lvl, word);
+            textBox_Word.Text = String.Empty;
+            textBox_Category.Text = String.Empty;
+            comboBox_level.SelectedIndex = 0;
         }
 
         private void Insert_word(string cat, int lvl, string word)
@@ -397,7 +409,7 @@ namespace Server
         public bool isConnected()
         {
             bool connected = true;
-            if (socket.Poll(1000, SelectMode.SelectRead) && socket.Available == 0)
+            if (socket.Poll(0, SelectMode.SelectRead) && socket.Available == 0)
                 connected = false;
             return connected;
         }
@@ -416,13 +428,15 @@ namespace Server
     public class Room
     {
         private int player1, player2, owner, Winner, level;
-        private string category, word;
+        private string name, category, word, current_player;
         private List<int> watchers;
+        private string pressed = String.Empty;
 
-        public Room(int Owner, string Category, int Level, string Word)
+        public Room(int Owner, string Name, string Category, int Level, string Word)
         {
             this.owner = Owner;
             this.player1 = Owner;
+            this.name = Name;
             this.category = Category;
             this.level = Level;
             this.word = Word;
@@ -432,10 +446,19 @@ namespace Server
         public int Owner { get { return owner; } }
         public int Player1 { get { return player1; } }
         public int Player2 { get { return player2; } }
+        public string Name { get { return name; } }
         public string Category { get { return category; } }
         public int Level { get { return level; } }
         public string Word { get { return word; } }
         public List<int> Watchers { get { return watchers; } }
+
+        public string Current
+        {
+            set { current_player = value; }
+            get { return current_player; }
+        }
+
+        public string Pressed { get { return pressed; } }
 
         public void AddPlayer(int Player2)
         {
@@ -451,6 +474,14 @@ namespace Server
         public void AddWinner(int Winner)
         {
             this.Winner = Winner;
+        }
+
+        public void AddPress(string pressed)
+        {
+            if (this.pressed == String.Empty)
+                this.pressed = pressed;
+            else
+                this.pressed += "," + pressed;
         }
 
         public int Check_Count()

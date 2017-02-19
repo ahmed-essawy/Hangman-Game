@@ -23,6 +23,7 @@ namespace Client
         private string cats;
         private Play game;
         private string temp_str_room_word = null;
+        private string temp_str_room_pressed = null;
         private int temp_str_room_id = -1;
 
         public Main(NetworkStream nStream, String Username)
@@ -30,6 +31,7 @@ namespace Client
             InitializeComponent();
             this.nStream = nStream;
             this.Username = Username;
+            this.Text = Username;
             bwriter = new BinaryWriter(nStream);
             breader = new BinaryReader(nStream);
             bwriter.Write(Username);
@@ -45,24 +47,28 @@ namespace Client
             int room_id = int.Parse(ListBox_ID.SelectedItem.ToString());
             bwriter.Write("Watch Room;" + endpoint + ";" + room_id);
             while (temp_str_room_word == null) ;
-            game = new Play(temp_str_room_word, room_id, endpoint, "Watcher", bwriter);
-            temp_str_room_word = null;
+            while (temp_str_room_pressed == null) ;
+            game = new Play(temp_str_room_word, room_id, endpoint, "Watcher: " + Username, temp_str_room_pressed, bwriter);
+            temp_str_room_word = temp_str_room_pressed = null;
             game.ShowDialog();
         }
 
         private void ListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             int index = ((ListBox)sender).SelectedIndex;
-            ListBox_ID.SelectedIndex = index;
-            ListBox_Rooms.SelectedIndex = index;
-            ListBox_Categories.SelectedIndex = index;
-            ListBox_Levels.SelectedIndex = index;
-            ListBox_Players.SelectedIndex = index;
-            Watch.Enabled = true;
-            if (ListBox_Players.SelectedItem.ToString() == "2/2")
-                Play.Enabled = false;
-            else
-                Play.Enabled = true;
+            if (index != -1)
+            {
+                ListBox_ID.SelectedIndex = index;
+                ListBox_Rooms.SelectedIndex = index;
+                ListBox_Categories.SelectedIndex = index;
+                ListBox_Levels.SelectedIndex = index;
+                ListBox_Players.SelectedIndex = index;
+                Watch.Enabled = true;
+                if (ListBox_Players.SelectedItem.ToString() == "2/2")
+                    Play.Enabled = false;
+                else
+                    Play.Enabled = true;
+            }
         }
 
         private void New_Click(object sender, EventArgs e)
@@ -72,11 +78,12 @@ namespace Client
             NewRules.ShowDialog();
             if (NewRules.DialogResult == DialogResult.OK)
             {
-                bwriter.Write("New Room;" + endpoint + ";" + NewRules.Category + ";" + NewRules.Level);
+                bwriter.Write("New Room;" + endpoint + ";" + NewRules.Room_name + ";" + NewRules.Category + ";" + NewRules.Level);
                 while (temp_str_room_word == null) ;
+                while (temp_str_room_pressed == null) ;
                 while (temp_str_room_id == -1) ;
-                game = new Play(temp_str_room_word, temp_str_room_id, endpoint, "Player 1", bwriter);
-                temp_str_room_word = null;
+                game = new Play(temp_str_room_word, temp_str_room_id, endpoint, "Player 1: " + Username, temp_str_room_pressed, bwriter);
+                temp_str_room_word = temp_str_room_pressed = null;
                 temp_str_room_id = -1;
                 game.ShowDialog();
             }
@@ -86,9 +93,10 @@ namespace Client
         {
             bwriter.Write("Join Room Confirm;" + ListBox_ID.SelectedItem.ToString() + ";" + endpoint);
             while (temp_str_room_word == null) ;
+            while (temp_str_room_pressed == null) ;
             while (temp_str_room_id == -1) ;
-            game = new Play(temp_str_room_word, temp_str_room_id, endpoint, "Player 2", bwriter);
-            temp_str_room_word = null;
+            game = new Play(temp_str_room_word, temp_str_room_id, endpoint, "Player 2: " + Username, temp_str_room_pressed, bwriter);
+            temp_str_room_word = temp_str_room_pressed = null;
             temp_str_room_id = -1;
             game.ShowDialog();
         }
@@ -108,11 +116,11 @@ namespace Client
                             break;
 
                         case "Room":
-                            ListBox_Rooms.Items.Add("Room");
                             ListBox_ID.Items.Add(response[1]);
-                            ListBox_Categories.Items.Add(response[2]);
-                            ListBox_Levels.Items.Add(response[3]);
-                            ListBox_Players.Items.Add(response[4] + "/2");
+                            ListBox_Rooms.Items.Add(response[2]);
+                            ListBox_Categories.Items.Add(response[3]);
+                            ListBox_Levels.Items.Add(response[4]);
+                            ListBox_Players.Items.Add(response[5] + "/2");
                             break;
 
                         case "New Player":
@@ -126,12 +134,14 @@ namespace Client
 
                         case "Join Room Accepted":
                             temp_str_room_word = response[1];
-                            temp_str_room_id = int.Parse(response[2]);
+                            temp_str_room_pressed = response[2];
+                            temp_str_room_id = int.Parse(response[3]);
                             break;
 
                         case "Room Word":
                             temp_str_room_word = response[1];
-                            temp_str_room_id = int.Parse(response[2]);
+                            temp_str_room_pressed = response[2];
+                            temp_str_room_id = int.Parse(response[3]);
                             break;
 
                         case "Play Form Enable":
@@ -145,6 +155,13 @@ namespace Client
 
                         case "Watch Room Info":
                             temp_str_room_word = response[1];
+                            temp_str_room_pressed = response[2];
+                            game.Change_Label = response[3];
+                            break;
+
+                        case "Change Room Capacity":
+                            int index = ListBox_ID.FindStringExact(response[1]);
+                            ListBox_Players.Items[index] = "2/2";
                             break;
 
                         default:
