@@ -164,6 +164,15 @@ namespace Client
                             ListBox_Players.Items[index] = "2/2";
                             break;
 
+                        case "Terminated":
+                            MessageBox.Show("You Are Terminated", "Termination Message", MessageBoxButtons.OK);
+                            breader.Close();
+                            bwriter.Close();
+                            nStream.Close();
+                            this.Dispose();
+                            thread.Abort();
+                            break;
+
                         default:
                             MessageBox.Show(response[0]);
                             break;
@@ -178,10 +187,11 @@ namespace Client
                     breader.Close();
                     bwriter.Close();
                     nStream.Close();
-                    Application.Exit();
+                    this.Dispose();
                     thread.Abort();
                 }
             }
         }
+
     }
 }

@@ -32,7 +32,7 @@ namespace Server
             players = new Dictionary<int, string>();
             rooms = new Dictionary<int, Room>();
             cats = new List<string>();
-            con = new SqlConnection("Data Source =.; Initial Catalog = HangMan; Integrated Security = True");
+            con = new SqlConnection("Data Source =.; Initial Catalog = Hangman-Game; Integrated Security = True");
             com = new SqlCommand();
             com.Connection = con;
             for (int i = 1; i <= 3; i++)
@@ -160,7 +160,7 @@ namespace Server
                                         clients[index].bWriter = "Play Form Enable;false;Player 2: " + clients[rooms[roomsendchange].Player2].Name;
                                     }
                                 }
-                                else if (playersendchange.Contains( "Player 2"))
+                                else if (playersendchange.Contains("Player 2"))
                                 {
                                     rooms[roomsendchange].Current = "Player 1";
                                     clients[rooms[roomsendchange].Player1].bWriter = "Play Form Enable;true;Your Turn";
@@ -180,6 +180,7 @@ namespace Server
                                 type += " (" + clients[watcherid].Name + " watch game)";
                                 break;
 
+
                             default:
                                 break;
                         }
@@ -197,7 +198,7 @@ namespace Server
 
         private void Check_disconnected()
         {
-            while (true)
+            while (false)
             {
                 foreach (int index in clients.Keys.ToList())
                 {
@@ -235,15 +236,19 @@ namespace Server
 
         private void Button_Terminate_Click(object sender, EventArgs e)
         {
-            /*foreach (string item in List_Connected_endpoint.SelectedItems)
+            int listindex = List_Connected_endpoint.SelectedIndex;
+            if (listindex != -1)
             {
-                        List_Disonnected_endpoint.Items.Add(index);
-                        List_Disonnected_name.Items.Add(clients[index].Name);
-                        List_Connected_name.Items.RemoveAt(List_Connected_endpoint.FindStringExact(index.ToString()));
-                        List_Connected_endpoint.Items.RemoveAt(List_Connected_endpoint.FindStringExact(index.ToString()));
+                int index = int.Parse(List_Connected_endpoint.SelectedItem.ToString());
+                List_Disonnected_endpoint.Items.Add(index);
+                List_Disonnected_name.Items.Add(clients[index].Name);
+                List_Connected_name.Items.RemoveAt(listindex);
+                List_Connected_endpoint.Items.RemoveAt(listindex);
+                clients[index].bWriter = "Terminated;";
+                clients[index].Disconnect();
                 clients[index] = null;
                 clients.Remove(index);
-            }*/
+            }
         }
 
         private void Button_Exit_Click(object sender, EventArgs e)
@@ -414,14 +419,14 @@ namespace Server
             return connected;
         }
 
-        private void Disconnect()
+        public void Disconnect()
         {
             thread.Abort();
             breader.Close();
             bwriter.Close();
             nStream.Close();
-            socket.Shutdown(SocketShutdown.Both);
-            socket.Close();
+            // socket.Shutdown(SocketShutdown.Both);
+            //socket.Close();
         }
     }
 
