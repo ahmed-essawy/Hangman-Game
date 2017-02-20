@@ -243,7 +243,7 @@ namespace Server
                                 {
                                     MessageBox.Show("Refused by Player 1 & 2");
                                     rooms[retryroomid].Player1_ret = rooms[retryroomid].Player2_ret = null;
-                                    // Here put insert into file code
+                                    Save_score(clients[rooms[retryroomid].Player1].Name, clients[rooms[retryroomid].Player2].Name, clients[rooms[retryroomid].Player1].Endpoint.ToString(), clients[rooms[retryroomid].Player2].Endpoint.ToString());
                                     rooms[retryroomid].GetScore(1);// return int score for player 1
                                     rooms[retryroomid].GetScore(2);// return int score for player 2
                                 }
@@ -251,7 +251,7 @@ namespace Server
                                 {
                                     MessageBox.Show("Refused by Player 1");
                                     rooms[retryroomid].Player1_ret = rooms[retryroomid].Player2_ret = null;
-                                    // Here put insert into file code
+                                    Save_score(clients[rooms[retryroomid].Player1].Name, clients[rooms[retryroomid].Player2].Name, clients[rooms[retryroomid].Player1].Endpoint.ToString(), clients[rooms[retryroomid].Player2].Endpoint.ToString());
                                     rooms[retryroomid].GetScore(1);// return int score for player 1
                                     rooms[retryroomid].GetScore(2);// return int score for player 2
                                 }
@@ -259,7 +259,7 @@ namespace Server
                                 {
                                     MessageBox.Show("Refused by Player 2");
                                     rooms[retryroomid].Player1_ret = rooms[retryroomid].Player2_ret = null;
-                                    // Here put insert into file code
+                                    Save_score(clients[rooms[retryroomid].Player1].Name, clients[rooms[retryroomid].Player2].Name, clients[rooms[retryroomid].Player1].Endpoint.ToString(), clients[rooms[retryroomid].Player2].Endpoint.ToString());
                                     rooms[retryroomid].GetScore(1);// return int score for player 1
                                     rooms[retryroomid].GetScore(2);// return int score for player 2
                                 }
@@ -300,6 +300,7 @@ namespace Server
                 }
                 catch (Exception ex)
                 {
+                    MessageBox.Show(ex.ToString());
                     MessageBox.Show("There is error happened while reading data.\n" + ex.Message, "Error msg!",
                         MessageBoxButtons.OK, MessageBoxIcon.Error);
                     Application.ExitThread();
@@ -328,6 +329,30 @@ namespace Server
                 }
                 catch (Exception ex) { MessageBox.Show(ex.Message); }
             }
+        }
+
+        private void Save_score(string player1, string player2, string endpoint1, string endpoint2)
+        {
+            StreamWriter sw=null;
+            string startupPath = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName;
+            string path = Path.Combine(startupPath, player1 + "_" + player2 + "_" + endpoint1 + "_" + endpoint2 + ".txt");
+            if (!File.Exists(path))
+            {
+                // Create a file to write to. 
+                sw = File.CreateText(path);
+                sw.Close();
+            }
+            else
+            {
+                File.Open(path, FileMode.Open, FileAccess.Write);
+            }
+            string text = "";
+            foreach (var item in List_ClientMsgs.Items)
+            {
+                text += item.ToString() + "/n"; // /n to print each item on new line or you omit /n to print text on same line 
+            }
+            string msg = text;
+            File.WriteAllText(path, msg);
         }
 
         public static ReaderInfo Strings
