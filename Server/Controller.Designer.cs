@@ -37,7 +37,7 @@
             this.List_ClientMsgs = new System.Windows.Forms.ListBox();
             this.label3 = new System.Windows.Forms.Label();
             this.Button_Terminate = new System.Windows.Forms.Button();
-            this.Button_S1 = new System.Windows.Forms.Button();
+            this.Button_Log = new System.Windows.Forms.Button();
             this.Button_Exit = new System.Windows.Forms.Button();
             this.Button_Start = new System.Windows.Forms.Button();
             this.Button_Stop = new System.Windows.Forms.Button();
@@ -48,9 +48,9 @@
             this.comboBox_level = new System.Windows.Forms.ComboBox();
             this.Insert = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.List_Categories = new System.Windows.Forms.ListBox();
             this.textBox_Category = new My_TextBox.My_TextBox();
             this.textBox_Word = new My_TextBox.My_TextBox();
+            this.List_Categories = new System.Windows.Forms.ListBox();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -157,18 +157,19 @@
             this.Button_Terminate.UseVisualStyleBackColor = false;
             this.Button_Terminate.Click += new System.EventHandler(this.Button_Terminate_Click);
             // 
-            // Button_S1
+            // Button_Log
             // 
-            this.Button_S1.BackColor = System.Drawing.Color.Orange;
-            this.Button_S1.FlatAppearance.BorderColor = System.Drawing.Color.Orange;
-            this.Button_S1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.Button_S1.Location = new System.Drawing.Point(759, 112);
-            this.Button_S1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.Button_S1.Name = "Button_S1";
-            this.Button_S1.Size = new System.Drawing.Size(152, 62);
-            this.Button_S1.TabIndex = 3;
-            this.Button_S1.Text = "-------";
-            this.Button_S1.UseVisualStyleBackColor = false;
+            this.Button_Log.BackColor = System.Drawing.Color.Orange;
+            this.Button_Log.FlatAppearance.BorderColor = System.Drawing.Color.Orange;
+            this.Button_Log.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Button_Log.Location = new System.Drawing.Point(759, 112);
+            this.Button_Log.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.Button_Log.Name = "Button_Log";
+            this.Button_Log.Size = new System.Drawing.Size(152, 62);
+            this.Button_Log.TabIndex = 3;
+            this.Button_Log.Text = "Save Log";
+            this.Button_Log.UseVisualStyleBackColor = false;
+            this.Button_Log.Click += new System.EventHandler(this.Button_Log_Click);
             // 
             // Button_Exit
             // 
@@ -302,17 +303,6 @@
             this.panel1.Size = new System.Drawing.Size(566, 36);
             this.panel1.TabIndex = 10;
             // 
-            // List_Categories
-            // 
-            this.List_Categories.BackColor = System.Drawing.SystemColors.ButtonShadow;
-            this.List_Categories.FormattingEnabled = true;
-            this.List_Categories.ItemHeight = 16;
-            this.List_Categories.Location = new System.Drawing.Point(30, 468);
-            this.List_Categories.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.List_Categories.Name = "List_Categories";
-            this.List_Categories.Size = new System.Drawing.Size(128, 84);
-            this.List_Categories.TabIndex = 11;
-            // 
             // textBox_Category
             // 
             this.textBox_Category.BackColor = System.Drawing.SystemColors.ButtonShadow;
@@ -339,6 +329,17 @@
             this.textBox_Word.TabIndex = 9;
             this.textBox_Word.Text = "Word";
             // 
+            // List_Categories
+            // 
+            this.List_Categories.BackColor = System.Drawing.SystemColors.ButtonShadow;
+            this.List_Categories.FormattingEnabled = true;
+            this.List_Categories.ItemHeight = 16;
+            this.List_Categories.Location = new System.Drawing.Point(30, 468);
+            this.List_Categories.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.List_Categories.Name = "List_Categories";
+            this.List_Categories.Size = new System.Drawing.Size(128, 84);
+            this.List_Categories.TabIndex = 11;
+            // 
             // Controller
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
@@ -353,7 +354,7 @@
             this.Controls.Add(this.Button_Exit);
             this.Controls.Add(this.Button_Restar);
             this.Controls.Add(this.Button_S2);
-            this.Controls.Add(this.Button_S1);
+            this.Controls.Add(this.Button_Log);
             this.Controls.Add(this.Button_Terminate);
             this.Controls.Add(this.Button_Send);
             this.Controls.Add(this.textBox1);
@@ -392,7 +393,7 @@
         private System.Windows.Forms.ListBox List_ClientMsgs;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button Button_Terminate;
-        private System.Windows.Forms.Button Button_S1;
+        private System.Windows.Forms.Button Button_Log;
         private System.Windows.Forms.Button Button_Exit;
         private System.Windows.Forms.Button Button_Start;
         private System.Windows.Forms.Button Button_Stop;

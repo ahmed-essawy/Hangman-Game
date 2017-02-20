@@ -235,7 +235,7 @@ namespace Server
                                     clients[rooms[retryroomid].Player2].bWriter = "Rebuild Form;" + retryroomid + ";" + rooms[retryroomid].Word + ";" + "Player 2: " + clients[rooms[retryroomid].Player2].Name + ";" + rooms[retryroomid].Winner.Contains("Player 2");
                                     foreach (int index in rooms[retryroomid].Watchers)
                                     {
-                                        clients[index].bWriter = "Rebuild Form;" + retryroomid + ";" + rooms[retryroomid].Word + ";" + rooms[retryroomid].Winner + ";" + clients[rooms[retryroomid].Player2].Name + ";false";
+                                        clients[index].bWriter = "Rebuild Form;" + retryroomid + ";" + rooms[retryroomid].Word + ";" + rooms[retryroomid].Winner + ";false";
                                     }
                                     rooms[retryroomid].Player1_ret = rooms[retryroomid].Player2_ret = null;
                                 }
@@ -465,6 +465,20 @@ namespace Server
             textBox_Word.Text = String.Empty;
             textBox_Category.Text = String.Empty;
             comboBox_level.SelectedIndex = 0;
+        }
+
+        private void Button_Log_Click(object sender, EventArgs e)
+        {
+            string startupPath = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName;
+            string path = Path.Combine(startupPath, "Logs\\Log.txt");
+            if (!File.Exists(path))
+                File.CreateText(path);
+            string text = String.Empty;
+            foreach (var item in List_ClientMsgs.Items)
+            {
+                text += item.ToString() + Environment.NewLine;
+            }
+            File.AppendAllText(path, text);
         }
 
         private void Insert_word(string cat, int lvl, string word)
