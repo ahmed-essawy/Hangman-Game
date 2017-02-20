@@ -35,6 +35,10 @@ namespace Server
             con = new SqlConnection("Data Source =.; Initial Catalog = Hangman-Game; Integrated Security = True");
             com = new SqlCommand();
             com.Connection = con;
+            foreach (string Cat in Get_Categories())
+            {
+                List_Categories.Items.Add(Cat);
+            }
             for (int i = 1; i <= 3; i++)
             {
                 comboBox_level.Items.Add(i);
@@ -80,9 +84,9 @@ namespace Server
 
         private void DataReader()
         {
-            try
+            while (true)
             {
-                while (true)
+                try
                 {
                     foreach (int port in ClientsData.Keys.ToList())
                     {
@@ -153,7 +157,7 @@ namespace Server
                                 int count = int.Parse(response[3]);
                                 if (playersendchange.Contains("Player 1"))
                                 {
-                                    rooms[roomsendchange].Current = "Player 2";
+                                    rooms[roomsendchange].Current = "Player 2: " + clients[rooms[roomsendchange].Player2].Name;
                                     clients[rooms[roomsendchange].Player1].bWriter = "Play Form Enable;false;Player 2: " + clients[rooms[roomsendchange].Player2].Name + ";" + count;
                                     clients[rooms[roomsendchange].Player2].bWriter = "Play Form Enable;true;Your Turn;" + count;
                                     foreach (int index in rooms[roomsendchange].Watchers)
@@ -163,7 +167,7 @@ namespace Server
                                 }
                                 else if (playersendchange.Contains("Player 2"))
                                 {
-                                    rooms[roomsendchange].Current = "Player 1";
+                                    rooms[roomsendchange].Current = "Player 1: " + clients[rooms[roomsendchange].Player1].Name;
                                     clients[rooms[roomsendchange].Player1].bWriter = "Play Form Enable;true;Your Turn; " + count;
                                     clients[rooms[roomsendchange].Player2].bWriter = "Play Form Enable;false;Player 1: " + clients[rooms[roomsendchange].Player1].Name + ";" + count;
                                     foreach (int index in rooms[roomsendchange].Watchers)
@@ -180,12 +184,15 @@ namespace Server
                                 clients[watcherid].bWriter = "Watch Room Info;" + rooms[watchroomid].Word + ";" + rooms[watchroomid].Pressed + ";" + rooms[watchroomid].Current;
                                 type += " (" + clients[watcherid].Name + " watch game)";
                                 break;
+
                             case "Win Game":
                                 int winroomid = int.Parse(response[1]);
                                 string winplayer = response[2];
                                 if (winplayer.Contains("Player 1"))
                                 {
-                                    clients[rooms[winroomid].Player2].bWriter = "Play Form Enable;false;Winner: Player 1: " + clients[rooms[winroomid].Player1].Name+";0";
+                                    rooms[winroomid].Winner_Count = 1;
+                                    rooms[winroomid].AddWinner(1);
+                                    clients[rooms[winroomid].Player2].bWriter = "Play Form Enable;false;Winner: Player 1: " + clients[rooms[winroomid].Player1].Name + ";0";
                                     foreach (int index in rooms[winroomid].Watchers)
                                     {
                                         clients[index].bWriter = "Play Form Enable;false;Winner: Player 1: " + clients[rooms[winroomid].Player1].Name + ";0";
@@ -193,26 +200,72 @@ namespace Server
                                 }
                                 else if (winplayer.Contains("Player 2"))
                                 {
-                                    clients[rooms[winroomid].Player1].bWriter = "Play Form Enable;false;Winner: Player 2: " + clients[rooms[winroomid].Player1].Name + ";0";
+                                    rooms[winroomid].Winner_Count = 2;
+                                    rooms[winroomid].AddWinner(2);
+                                    clients[rooms[winroomid].Player1].bWriter = "Play Form Enable;false;Winner: Player 2: " + clients[rooms[winroomid].Player2].Name + ";0";
                                     foreach (int index in rooms[winroomid].Watchers)
                                     {
-                                        clients[index].bWriter = "Play Form Enable;false;Winner: Player 2: " + clients[rooms[winroomid].Player1].Name + ";0";
+                                        clients[index].bWriter = "Play Form Enable;false;Winner: Player 2: " + clients[rooms[winroomid].Player2].Name + ";0";
                                     }
                                 }
                                 break;
 
+                            case "Retry again":
+                                int retryroomid = int.Parse(response[1]);
+                                string retryplayer = response[2];
+                                bool retryopinion = bool.Parse(response[3]);
+                                if (retryplayer.Contains("Player 1"))
+                                    rooms[retryroomid].Player1_ret = retryopinion;
+                                else if (retryplayer.Contains("Player 2"))
+                                    rooms[retryroomid].Player2_ret = retryopinion;
+                                if (rooms[retryroomid].Player1_ret == true && rooms[retryroomid].Player2_ret == true)
+                                {
+                                    rooms[retryroomid].Word = Get_Word(rooms[retryroomid].Category, rooms[retryroomid].Level);
+                                    clients[rooms[retryroomid].Player1].bWriter = "Rebuild Form;" + retryroomid + ";" + rooms[retryroomid].Word + ";" + "Player 1: " + clients[rooms[retryroomid].Player1].Name + ";" + rooms[retryroomid].Winner.Contains("Player 1");
+                                    for (int i = 0; i < 1000000; i++) ;
+                                    clients[rooms[retryroomid].Player2].bWriter = "Rebuild Form;" + retryroomid + ";" + rooms[retryroomid].Word + ";" + "Player 2: " + clients[rooms[retryroomid].Player2].Name + ";" + rooms[retryroomid].Winner.Contains("Player 2");
+                                    rooms[retryroomid].Player1_ret = rooms[retryroomid].Player2_ret = null;
+                                }
+                                else if (rooms[retryroomid].Player1_ret == false && rooms[retryroomid].Player2_ret == false)
+                                {
+                                    MessageBox.Show("Refused by Player 1 & 2");
+                                    rooms[retryroomid].Player1_ret = rooms[retryroomid].Player2_ret = null;
+                                    // Here put insert into file code
+                                    rooms[retryroomid].GetScore(1);// return int score for player 1
+                                    rooms[retryroomid].GetScore(2);// return int score for player 2
+                                }
+                                else if (rooms[retryroomid].Player1_ret == false && rooms[retryroomid].Player2_ret == true)
+                                {
+                                    MessageBox.Show("Refused by Player 1");
+                                    rooms[retryroomid].Player1_ret = rooms[retryroomid].Player2_ret = null;
+                                    // Here put insert into file code
+                                    rooms[retryroomid].GetScore(1);// return int score for player 1
+                                    rooms[retryroomid].GetScore(2);// return int score for player 2
+                                }
+                                else if (rooms[retryroomid].Player1_ret == true && rooms[retryroomid].Player2_ret == false)
+                                {
+                                    MessageBox.Show("Refused by Player 2");
+                                    rooms[retryroomid].Player1_ret = rooms[retryroomid].Player2_ret = null;
+                                    // Here put insert into file code
+                                    rooms[retryroomid].GetScore(1);// return int score for player 1
+                                    rooms[retryroomid].GetScore(2);// return int score for player 2
+                                }
+                                break;
+
                             default:
+                                MessageBox.Show(response[0]);
                                 break;
                         }
                         List_ClientMsgs.Items.Add(clients[port].Name + ": " + type);
                         ClientsData.Remove(port);
                     }
                 }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("There is error happened while reading data.\nPlease, restart server.\n" + ex.Message, "Error msg!", MessageBoxButtons.OK);
-                Application.Exit();
+                catch (Exception ex)
+                {
+                    MessageBox.Show("There is error happened while reading data.\n" + ex.Message, "Error msg!",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    Application.ExitThread();
+                }
             }
         }
 
@@ -252,19 +305,18 @@ namespace Server
             {
                 clients[index].bWriter = textBox1.Text;
             }
+            textBox1.Text = String.Empty;
         }
 
         private void Button_Terminate_Click(object sender, EventArgs e)
         {
-            /*foreach (string item in List_Connected_endpoint.SelectedItems)
+            int listindex = List_Connected_endpoint.SelectedIndex;
+            if (listindex != -1)
             {
-                        List_Disonnected_endpoint.Items.Add(index);
-                        List_Disonnected_name.Items.Add(clients[index].Name);
-                        List_Connected_name.Items.RemoveAt(List_Connected_endpoint.FindStringExact(index.ToString()));
-                        List_Connected_endpoint.Items.RemoveAt(List_Connected_endpoint.FindStringExact(index.ToString()));
-                clients[index] = null;
-                clients.Remove(index);
-            }*/
+                int index = int.Parse(List_Connected_endpoint.SelectedItem.ToString());
+                clients[index].bWriter = "Terminated;";
+                clients[index].Disconnect();
+            }
         }
 
         private void Button_Exit_Click(object sender, EventArgs e)
@@ -298,9 +350,6 @@ namespace Server
 
         private void Button_Stop_Click(object sender, EventArgs e)
         {
-            thread1.Abort();
-            thread2.Abort();
-            thread3.Abort();
             Button_Start.Enabled = true;
             Button_Stop.Enabled = false;
         }
@@ -346,6 +395,20 @@ namespace Server
             rdr.Close();
             con.Close();
             return cats;
+        }
+
+        private void Button_Restart(object sender, EventArgs e)
+        {
+            Application.Restart();
+        }
+
+        private void Controller_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            foreach (int index in clients.Keys.ToList())
+            {
+                clients[index].Disconnect();
+            }
+            Application.ExitThread();
         }
 
         private void Insert_Click(object sender, EventArgs e)
@@ -435,23 +498,23 @@ namespace Server
             return connected;
         }
 
-        private void Disconnect()
+        public void Disconnect()
         {
             thread.Abort();
             breader.Close();
             bwriter.Close();
             nStream.Close();
-            socket.Shutdown(SocketShutdown.Both);
-            socket.Close();
         }
     }
 
     public class Room
     {
-        private int player1, player2, owner, Winner, level;
+        private int player1, player2, owner, winner, level;
         private string name, category, word, current_player;
         private List<int> watchers;
         private string pressed = String.Empty;
+        private bool? player1_ret = null, player2_ret = null;
+        private Dictionary<int, int> win_counter;
 
         public Room(int Owner, string Name, string Category, int Level, string Word)
         {
@@ -462,6 +525,14 @@ namespace Server
             this.level = Level;
             this.word = Word;
             this.watchers = new List<int>();
+            this.win_counter = new Dictionary<int, int>();
+            win_counter.Add(player1, 0);
+        }
+
+        public string Current
+        {
+            set { current_player = value; }
+            get { return current_player; }
         }
 
         public int Owner { get { return owner; } }
@@ -470,21 +541,42 @@ namespace Server
         public string Name { get { return name; } }
         public string Category { get { return category; } }
         public int Level { get { return level; } }
-        public string Word { get { return word; } }
+        public string Word { set { word = value; } get { return word; } }
         public List<int> Watchers { get { return watchers; } }
+        public string Pressed { get { return pressed; } }
 
-        public string Current
+        public string Winner
         {
-            set { current_player = value; }
-            get { return current_player; }
+            get
+            {
+                string ret_val;
+                if (winner == player1)
+                    ret_val = "Player 1";
+                else
+                    ret_val = "Player 2";
+                return ret_val;
+            }
         }
 
-        public string Pressed { get { return pressed; } }
+        public int Winner_Count
+        {
+            set
+            {
+                if (value == 1) win_counter[player1]++;
+                if (value == 2) win_counter[player2]++;
+            }
+        }
+
+        public bool? Player1_ret { get { return player1_ret; } set { player1_ret = value; } }
+        public bool? Player2_ret { get { return player2_ret; } set { player2_ret = value; } }
 
         public void AddPlayer(int Player2)
         {
             if (Check_Count() < 2)
+            {
                 this.player2 = Player2;
+                win_counter.Add(player2, 0);
+            }
         }
 
         public void AddWatcher(int Watcher)
@@ -494,7 +586,11 @@ namespace Server
 
         public void AddWinner(int Winner)
         {
-            this.Winner = Winner;
+            if (Winner == 1)
+                this.winner = player1;
+            else if (Winner == 2)
+                this.winner = player2;
+            pressed = String.Empty;
         }
 
         public void AddPress(string pressed)
@@ -503,6 +599,16 @@ namespace Server
                 this.pressed = pressed;
             else
                 this.pressed += "," + pressed;
+        }
+
+        public int GetScore(int player)
+        {
+            int ret_val = 0;
+            if (player == 1)
+                ret_val = win_counter[player1];
+            if (player == 2)
+                ret_val = win_counter[player2];
+            return ret_val;
         }
 
         public int Check_Count()

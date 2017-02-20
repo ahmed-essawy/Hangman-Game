@@ -125,7 +125,7 @@ namespace Client
 
                         case "New Player":
                             DialogResult result = MessageBox.Show(response[3] + " wants to join your room", "Join Confirmation",
-                                 MessageBoxButtons.OKCancel);
+                                 MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
                             if (result == DialogResult.OK)
                             {
                                 bwriter.Write("Join Room Reply;" + response[1] + ";" + response[2]);
@@ -148,7 +148,7 @@ namespace Client
                             game.Dimmed = bool.Parse(response[1]);
                             game.Change_Label = response[2];
                             game.Count = int.Parse(response[3]);
-                            if (response[3].Contains("Winner"))
+                            if (response[2].Contains("Winner: Player"))
                                 game.PlayerMessageBox();
                             break;
 
@@ -159,6 +159,7 @@ namespace Client
                         case "Watch Room Info":
                             temp_str_room_word = response[1];
                             temp_str_room_pressed = response[2];
+                            while (game == null) ;
                             game.Change_Label = response[3];
                             break;
 
@@ -167,13 +168,16 @@ namespace Client
                             ListBox_Players.Items[index] = "2/2";
                             break;
 
+                        case "Rebuild Form":
+                            game.Close();
+                            game = new Play(response[2], int.Parse(response[1]), endpoint, response[3], "", bwriter);
+                            game.Dimmed = bool.Parse(response[4]);
+                            game.ShowDialog();
+                            break;
+
                         case "Terminated":
-                            MessageBox.Show("You Are Terminated", "Termination Message", MessageBoxButtons.OK);
-                            breader.Close();
-                            bwriter.Close();
-                            nStream.Close();
-                            this.Dispose();
-                            thread.Abort();
+                            MessageBox.Show("You Are Terminated", "Termination Message", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+                            this.Close();
                             break;
 
                         default:
@@ -187,14 +191,18 @@ namespace Client
                 DialogResult result = MessageBox.Show("Error : Web Server is Down");
                 if (result == DialogResult.OK)
                 {
-                    breader.Close();
-                    bwriter.Close();
-                    nStream.Close();
-                    this.Dispose();
-                    thread.Abort();
+                    this.Close();
                 }
             }
         }
 
+        private void Main_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            thread.Abort();
+            breader.Close();
+            bwriter.Close();
+            nStream.Close();
+            Application.ExitThread();
+        }
     }
 }

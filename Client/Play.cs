@@ -21,7 +21,7 @@ namespace Client
         private int player_id;
         private string player_type;
         private int count = 0;
-        int space_count = 0;
+        private int space_count = 0;
 
         public bool Dimmed { set { panel1.Enabled = value; } }
         public string Change_Label { set { Label_Current.Text = value; } }
@@ -30,15 +30,10 @@ namespace Client
         public Play(string word, int Room_id, int Player_id, string Player_Type, string Pressed, BinaryWriter bWriter)
         {
             InitializeComponent();
-            this.Text = Player_Type;
-            this.word = word;
             this.room_id = Room_id;
             this.player_id = Player_id;
-            this.player_type = Player_Type;
             this.bWriter = bWriter;
-            len = word.Length;
-            labels = new Label[len];
-            InitializeWord();
+            InitializeWord(word, Player_Type);
             if (Pressed.Contains(","))
                 foreach (string letter in Pressed.Split(','))
                     Pressed_Button(letter);
@@ -46,8 +41,14 @@ namespace Client
                 Pressed_Button(Pressed);
         }
 
-        private void InitializeWord()
+        private void InitializeWord(string word, string Player_Type)
         {
+            this.word = word;
+            this.player_type = Player_Type;
+            this.Text = Player_Type;
+            len = word.Length;
+            labels = new Label[len];
+            space_count = count = 0;
             int x = 50;
             int y = 50;
             for (int i = 0; i < len; i++)
@@ -87,7 +88,6 @@ namespace Client
                         labels[i].Text = word[i].ToString().ToUpper();
                         ++count;
                     }
-                    Invalidate();
                 }
             }
             else
@@ -104,30 +104,31 @@ namespace Client
                 this.panel1.Enabled = false;
                 bWriter.Write("Win Game;" + room_id + ";" + player_type);
                 Label_Current.Text = "Congratulations !";
-                DialogResult result = MessageBox.Show("Do you want to play again ?", "Congratulations !", MessageBoxButtons.YesNo);
-                if(result == DialogResult.OK)
+                DialogResult result = MessageBox.Show("Do you want to play again ?", "Congratulations !",
+                    MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+                if (result == DialogResult.Yes)
+                    bWriter.Write("Retry again;" + room_id + ";" + player_type + ";true");
+                else
                 {
-
-                }
-                else if (result == DialogResult.Cancel)
-                {
-
+                    bWriter.Write("Retry again;" + room_id + ";" + player_type + ";false");
+                    this.Close();
                 }
             }
         }
 
         public void PlayerMessageBox()
         {
-            DialogResult result = MessageBox.Show("Do you want to play again ?", "Play again !", MessageBoxButtons.YesNo);
-            if (result == DialogResult.OK)
+            DialogResult result = MessageBox.Show("Do you want to play again ?",
+                "Play again !", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (result == DialogResult.Yes)
+                bWriter.Write("Retry again;" + room_id + ";" + player_type + ";true");
+            else
             {
-                
-            }
-            else if (result == DialogResult.Cancel)
-            {
-
+                bWriter.Write("Retry again;" + room_id + ";" + player_type + ";false");
+                this.Close();
             }
         }
+
         public void Pressed_Button(string letter)
         {
             panel1.Controls.Find("_" + letter, false)[0].Enabled = false;

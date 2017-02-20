@@ -42,7 +42,7 @@
             this.Button_Start = new System.Windows.Forms.Button();
             this.Button_Stop = new System.Windows.Forms.Button();
             this.Button_S2 = new System.Windows.Forms.Button();
-            this.Button_S3 = new System.Windows.Forms.Button();
+            this.Button_Restar = new System.Windows.Forms.Button();
             this.List_Connected_name = new System.Windows.Forms.ListBox();
             this.List_Disonnected_name = new System.Windows.Forms.ListBox();
             this.comboBox_level = new System.Windows.Forms.ComboBox();
@@ -50,6 +50,7 @@
             this.textBox_Category = new My_TextBox.My_TextBox();
             this.textBox_Word = new My_TextBox.My_TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.List_Categories = new System.Windows.Forms.ListBox();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -93,7 +94,7 @@
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(26, 378);
+            this.textBox1.Location = new System.Drawing.Point(142, 382);
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(372, 35);
@@ -101,7 +102,7 @@
             // 
             // Button_Send
             // 
-            this.Button_Send.Location = new System.Drawing.Point(407, 378);
+            this.Button_Send.Location = new System.Drawing.Point(523, 382);
             this.Button_Send.Name = "Button_Send";
             this.Button_Send.Size = new System.Drawing.Size(104, 35);
             this.Button_Send.TabIndex = 3;
@@ -115,7 +116,7 @@
             this.List_ClientMsgs.Location = new System.Drawing.Point(258, 36);
             this.List_ClientMsgs.Name = "List_ClientMsgs";
             this.List_ClientMsgs.SelectionMode = System.Windows.Forms.SelectionMode.None;
-            this.List_ClientMsgs.Size = new System.Drawing.Size(253, 329);
+            this.List_ClientMsgs.Size = new System.Drawing.Size(369, 329);
             this.List_ClientMsgs.TabIndex = 0;
             // 
             // label3
@@ -129,7 +130,7 @@
             // 
             // Button_Terminate
             // 
-            this.Button_Terminate.Location = new System.Drawing.Point(535, 36);
+            this.Button_Terminate.Location = new System.Drawing.Point(651, 40);
             this.Button_Terminate.Name = "Button_Terminate";
             this.Button_Terminate.Size = new System.Drawing.Size(130, 50);
             this.Button_Terminate.TabIndex = 3;
@@ -139,7 +140,7 @@
             // 
             // Button_S1
             // 
-            this.Button_S1.Location = new System.Drawing.Point(535, 92);
+            this.Button_S1.Location = new System.Drawing.Point(651, 96);
             this.Button_S1.Name = "Button_S1";
             this.Button_S1.Size = new System.Drawing.Size(130, 50);
             this.Button_S1.TabIndex = 3;
@@ -148,7 +149,7 @@
             // 
             // Button_Exit
             // 
-            this.Button_Exit.Location = new System.Drawing.Point(535, 398);
+            this.Button_Exit.Location = new System.Drawing.Point(651, 402);
             this.Button_Exit.Name = "Button_Exit";
             this.Button_Exit.Size = new System.Drawing.Size(130, 50);
             this.Button_Exit.TabIndex = 3;
@@ -158,7 +159,7 @@
             // 
             // Button_Start
             // 
-            this.Button_Start.Location = new System.Drawing.Point(535, 286);
+            this.Button_Start.Location = new System.Drawing.Point(651, 290);
             this.Button_Start.Name = "Button_Start";
             this.Button_Start.Size = new System.Drawing.Size(130, 50);
             this.Button_Start.TabIndex = 4;
@@ -169,7 +170,7 @@
             // Button_Stop
             // 
             this.Button_Stop.Enabled = false;
-            this.Button_Stop.Location = new System.Drawing.Point(535, 342);
+            this.Button_Stop.Location = new System.Drawing.Point(651, 346);
             this.Button_Stop.Name = "Button_Stop";
             this.Button_Stop.Size = new System.Drawing.Size(130, 50);
             this.Button_Stop.TabIndex = 4;
@@ -179,21 +180,22 @@
             // 
             // Button_S2
             // 
-            this.Button_S2.Location = new System.Drawing.Point(535, 159);
+            this.Button_S2.Location = new System.Drawing.Point(651, 163);
             this.Button_S2.Name = "Button_S2";
             this.Button_S2.Size = new System.Drawing.Size(130, 50);
             this.Button_S2.TabIndex = 3;
             this.Button_S2.Text = "-------";
             this.Button_S2.UseVisualStyleBackColor = true;
             // 
-            // Button_S3
+            // Button_Restar
             // 
-            this.Button_S3.Location = new System.Drawing.Point(535, 230);
-            this.Button_S3.Name = "Button_S3";
-            this.Button_S3.Size = new System.Drawing.Size(130, 50);
-            this.Button_S3.TabIndex = 3;
-            this.Button_S3.Text = "-------";
-            this.Button_S3.UseVisualStyleBackColor = true;
+            this.Button_Restar.Location = new System.Drawing.Point(651, 234);
+            this.Button_Restar.Name = "Button_Restar";
+            this.Button_Restar.Size = new System.Drawing.Size(130, 50);
+            this.Button_Restar.TabIndex = 3;
+            this.Button_Restar.Text = "-------";
+            this.Button_Restar.UseVisualStyleBackColor = true;
+            this.Button_Restar.Click += new System.EventHandler(this.Button_Restart);
             // 
             // List_Connected_name
             // 
@@ -263,21 +265,30 @@
             this.panel1.Controls.Add(this.Insert);
             this.panel1.Controls.Add(this.textBox_Word);
             this.panel1.Controls.Add(this.comboBox_level);
-            this.panel1.Location = new System.Drawing.Point(26, 419);
+            this.panel1.Location = new System.Drawing.Point(142, 423);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(485, 29);
             this.panel1.TabIndex = 10;
+            // 
+            // List_Categories
+            // 
+            this.List_Categories.FormattingEnabled = true;
+            this.List_Categories.Location = new System.Drawing.Point(26, 382);
+            this.List_Categories.Name = "List_Categories";
+            this.List_Categories.Size = new System.Drawing.Size(110, 69);
+            this.List_Categories.TabIndex = 11;
             // 
             // Controller
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(695, 474);
+            this.ClientSize = new System.Drawing.Size(804, 474);
+            this.Controls.Add(this.List_Categories);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.Button_Stop);
             this.Controls.Add(this.Button_Start);
             this.Controls.Add(this.Button_Exit);
-            this.Controls.Add(this.Button_S3);
+            this.Controls.Add(this.Button_Restar);
             this.Controls.Add(this.Button_S2);
             this.Controls.Add(this.Button_S1);
             this.Controls.Add(this.Button_Terminate);
@@ -293,6 +304,7 @@
             this.Controls.Add(this.List_Connected_endpoint);
             this.Name = "Controller";
             this.Text = "Server";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Controller_FormClosing);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.ResumeLayout(false);
@@ -316,7 +328,7 @@
         private System.Windows.Forms.Button Button_Start;
         private System.Windows.Forms.Button Button_Stop;
         private System.Windows.Forms.Button Button_S2;
-        private System.Windows.Forms.Button Button_S3;
+        private System.Windows.Forms.Button Button_Restar;
         private System.Windows.Forms.ListBox List_Connected_name;
         private System.Windows.Forms.ListBox List_Disonnected_name;
         private System.Windows.Forms.ComboBox comboBox_level;
@@ -324,5 +336,6 @@
         private My_TextBox.My_TextBox textBox_Category;
         private My_TextBox.My_TextBox textBox_Word;
         private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.ListBox List_Categories;
     }
 }
