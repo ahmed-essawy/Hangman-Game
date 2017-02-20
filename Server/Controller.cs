@@ -140,11 +140,16 @@ namespace Server
                                 string playersendpress = response[2];
                                 string charpressed = response[3];
                                 if (playersendpress.Contains("Player 1"))
+                                {
                                     clients[rooms[roomsendpress].Player2].bWriter = "Dim Button;" + charpressed;
+                                }
                                 else if (playersendpress.Contains("Player 2"))
+                                {
                                     clients[rooms[roomsendpress].Player1].bWriter = "Dim Button;" + charpressed;
+                                }
                                 foreach (int index in rooms[roomsendpress].Watchers)
                                 {
+                                    for (int i = 0; i < 100000; i++) ;
                                     clients[index].bWriter = "Dim Button;" + charpressed;
                                 }
                                 rooms[roomsendpress].AddPress(charpressed);
@@ -159,11 +164,11 @@ namespace Server
                                 {
                                     rooms[roomsendchange].Current = "Player 2: " + clients[rooms[roomsendchange].Player2].Name;
                                     clients[rooms[roomsendchange].Player1].bWriter = "Play Form Enable;false;Player 2: " + clients[rooms[roomsendchange].Player2].Name + ";" + count;
-                                    for (int i = 0; i < 1000000; i++) ;
+                                    for (int i = 0; i < 100000; i++) ;
                                     clients[rooms[roomsendchange].Player2].bWriter = "Play Form Enable;true;Your Turn;" + count;
-                                    for (int i = 0; i < 1000000; i++) ;
                                     foreach (int index in rooms[roomsendchange].Watchers)
                                     {
+                                        for (int i = 0; i < 100000; i++) ;
                                         clients[index].bWriter = "Play Form Enable;false;Player 2: " + clients[rooms[roomsendchange].Player2].Name + ";" + count;
                                     }
                                 }
@@ -171,11 +176,11 @@ namespace Server
                                 {
                                     rooms[roomsendchange].Current = "Player 1: " + clients[rooms[roomsendchange].Player1].Name;
                                     clients[rooms[roomsendchange].Player1].bWriter = "Play Form Enable;true;Your Turn; " + count;
-                                    for (int i = 0; i < 10000000; i++) ;
+                                    for (int i = 0; i < 100000; i++) ;
                                     clients[rooms[roomsendchange].Player2].bWriter = "Play Form Enable;false;Player 1: " + clients[rooms[roomsendchange].Player1].Name + ";" + count;
-                                    for (int i = 0; i < 1000000; i++) ;
                                     foreach (int index in rooms[roomsendchange].Watchers)
                                     {
+                                        for (int i = 0; i < 100000; i++) ;
                                         clients[index].bWriter = "Play Form Enable;false;Player 1: " + clients[rooms[roomsendchange].Player1].Name + ";" + count;
                                     }
                                 }
@@ -277,18 +282,22 @@ namespace Server
         {
             while (true)
             {
-                foreach (int index in clients.Keys.ToList())
+                try
                 {
-                    if (!clients[index].isConnected())
+                    foreach (int index in clients.Keys.ToList())
                     {
-                        List_Disonnected_endpoint.Items.Add(index);
-                        List_Disonnected_name.Items.Add(clients[index].Name);
-                        List_Connected_name.Items.RemoveAt(List_Connected_endpoint.FindStringExact(index.ToString()));
-                        List_Connected_endpoint.Items.RemoveAt(List_Connected_endpoint.FindStringExact(index.ToString()));
-                        clients[index] = null;
-                        clients.Remove(index);
+                        if (!clients[index].isConnected())
+                        {
+                            List_Disonnected_endpoint.Items.Add(index);
+                            List_Disonnected_name.Items.Add(clients[index].Name);
+                            List_Connected_name.Items.RemoveAt(List_Connected_endpoint.FindStringExact(index.ToString()));
+                            List_Connected_endpoint.Items.RemoveAt(List_Connected_endpoint.FindStringExact(index.ToString()));
+                            clients[index] = null;
+                            clients.Remove(index);
+                        }
                     }
                 }
+                catch (Exception ex) { MessageBox.Show(ex.Message); }
             }
         }
 
@@ -343,8 +352,11 @@ namespace Server
         private void Button_Start_Click(object sender, EventArgs e)
         {
             thread1 = new Thread(ClientCreator);
+            thread1.Priority = ThreadPriority.BelowNormal;
             thread2 = new Thread(DataReader);
+            thread2.Priority = ThreadPriority.Highest;
             thread3 = new Thread(Check_disconnected);
+            thread3.Priority = ThreadPriority.Lowest;
             thread1.Start();
             thread2.Start();
             thread3.Start();

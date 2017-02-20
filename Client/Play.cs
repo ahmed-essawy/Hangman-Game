@@ -26,6 +26,7 @@ namespace Client
         public bool Dimmed { set { panel1.Enabled = value; } }
         public string Change_Label { set { Label_Current.Text = value; } }
         public int Count { set { count = value; } }
+        public string test { get { return word; } }
 
         public Play(string word, int Room_id, int Player_id, string Player_Type, string Pressed, BinaryWriter bWriter)
         {
@@ -103,8 +104,8 @@ namespace Client
             {
                 this.panel1.Enabled = false;
                 bWriter.Write("Win Game;" + room_id + ";" + player_type);
-                //for (int i = 0; i < 1000000; i++) ;
                 Label_Current.Text = "Congratulations !";
+                for (int i = 0; i < 100000; i++) ;
                 DialogResult result = MessageBox.Show("Do you want to play again ?", "Congratulations !",
                     MessageBoxButtons.YesNo, MessageBoxIcon.Information);
                 if (result == DialogResult.Yes)
@@ -114,6 +115,7 @@ namespace Client
                     bWriter.Write("Retry again;" + room_id + ";" + player_type + ";false");
                     this.Close();
                 }
+                for (int i = 0; i < 100000; i++) ;
             }
         }
 
