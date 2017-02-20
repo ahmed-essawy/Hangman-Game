@@ -38,6 +38,7 @@ namespace Client
         public string Change_Label { set { Label_Current.Text = value; } }
         public bool Change_Button { set { Button_Change.Enabled = value; } }
         public bool Remove_Button { set { Button_Change.Visible = value; } }
+
         public string Score
         {
             set
@@ -46,6 +47,7 @@ namespace Client
                 Label_Score2.Text = "P2 Score: " + value.Split('/')[1];
             }
         }
+
         public int Count { set { count = value; } }
 
         public Play(string word, int Room_id, int Player_id, string Player_Type, string Pressed, BinaryWriter bWriter)
@@ -118,7 +120,7 @@ namespace Client
             {
                 panel1.Enabled = false;
                 bWriter.Write("Change Control;" + room_id + ";" + player_type + ";" + count);
-                for (int i = 0; i < 05000; i++) ;
+                for (int i = 0; i < 1000000; i++) ;
             }
              ((Button)sender).Enabled = false;
             bWriter.Write("Button Pressed;" + room_id + ";" + player_type + ";" + button_text);

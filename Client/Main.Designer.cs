@@ -44,6 +44,7 @@
             this.ListBox_Rooms = new System.Windows.Forms.ListBox();
             this.label5 = new System.Windows.Forms.Label();
             this.Button_Exit = new System.Windows.Forms.Button();
+            this.Name = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -54,9 +55,9 @@
             this.Play.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Play.Font = new System.Drawing.Font("Comic Sans MS", 11.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Play.ForeColor = System.Drawing.Color.Maroon;
-            this.Play.Location = new System.Drawing.Point(558, 227);
+            this.Play.Location = new System.Drawing.Point(559, 238);
             this.Play.Name = "Play";
-            this.Play.Size = new System.Drawing.Size(130, 51);
+            this.Play.Size = new System.Drawing.Size(130, 50);
             this.Play.TabIndex = 1;
             this.Play.Text = "Join";
             this.Play.UseVisualStyleBackColor = false;
@@ -69,9 +70,9 @@
             this.Watch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Watch.Font = new System.Drawing.Font("Comic Sans MS", 11.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Watch.ForeColor = System.Drawing.Color.Maroon;
-            this.Watch.Location = new System.Drawing.Point(558, 295);
+            this.Watch.Location = new System.Drawing.Point(559, 304);
             this.Watch.Name = "Watch";
-            this.Watch.Size = new System.Drawing.Size(130, 51);
+            this.Watch.Size = new System.Drawing.Size(130, 50);
             this.Watch.TabIndex = 2;
             this.Watch.Text = "Watch";
             this.Watch.UseVisualStyleBackColor = false;
@@ -84,9 +85,9 @@
             this.New.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.New.Font = new System.Drawing.Font("Comic Sans MS", 11.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.New.ForeColor = System.Drawing.Color.Maroon;
-            this.New.Location = new System.Drawing.Point(558, 155);
+            this.New.Location = new System.Drawing.Point(559, 171);
             this.New.Name = "New";
-            this.New.Size = new System.Drawing.Size(130, 51);
+            this.New.Size = new System.Drawing.Size(130, 50);
             this.New.TabIndex = 3;
             this.New.Text = "New";
             this.New.UseVisualStyleBackColor = false;
@@ -174,7 +175,7 @@
             // 
             // ListBox_Players
             // 
-            this.ListBox_Players.BackColor = System.Drawing.SystemColors.GrayText;
+            this.ListBox_Players.BackColor = System.Drawing.SystemColors.ControlDark;
             this.ListBox_Players.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.ListBox_Players.Font = new System.Drawing.Font("Comic Sans MS", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ListBox_Players.ForeColor = System.Drawing.Color.Maroon;
@@ -189,7 +190,7 @@
             // 
             // ListBox_Levels
             // 
-            this.ListBox_Levels.BackColor = System.Drawing.SystemColors.GrayText;
+            this.ListBox_Levels.BackColor = System.Drawing.SystemColors.ControlDark;
             this.ListBox_Levels.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.ListBox_Levels.Font = new System.Drawing.Font("Comic Sans MS", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ListBox_Levels.ForeColor = System.Drawing.Color.Maroon;
@@ -204,7 +205,7 @@
             // 
             // ListBox_Categories
             // 
-            this.ListBox_Categories.BackColor = System.Drawing.SystemColors.GrayText;
+            this.ListBox_Categories.BackColor = System.Drawing.SystemColors.ControlDark;
             this.ListBox_Categories.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.ListBox_Categories.Font = new System.Drawing.Font("Comic Sans MS", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ListBox_Categories.ForeColor = System.Drawing.Color.Maroon;
@@ -219,7 +220,7 @@
             // 
             // ListBox_ID
             // 
-            this.ListBox_ID.BackColor = System.Drawing.SystemColors.GrayText;
+            this.ListBox_ID.BackColor = System.Drawing.SystemColors.ControlDark;
             this.ListBox_ID.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.ListBox_ID.Font = new System.Drawing.Font("Comic Sans MS", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ListBox_ID.ForeColor = System.Drawing.Color.Maroon;
@@ -234,7 +235,7 @@
             // 
             // ListBox_Rooms
             // 
-            this.ListBox_Rooms.BackColor = System.Drawing.SystemColors.GrayText;
+            this.ListBox_Rooms.BackColor = System.Drawing.SystemColors.ControlDark;
             this.ListBox_Rooms.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.ListBox_Rooms.Font = new System.Drawing.Font("Comic Sans MS", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ListBox_Rooms.ForeColor = System.Drawing.Color.Maroon;
@@ -273,12 +274,24 @@
             this.Button_Exit.UseVisualStyleBackColor = false;
             this.Button_Exit.Click += new System.EventHandler(this.Button_Exit_Click);
             // 
+            // Name
+            // 
+            this.Name.Font = new System.Drawing.Font("Jokerman", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Name.ForeColor = System.Drawing.Color.White;
+            this.Name.Location = new System.Drawing.Point(558, 106);
+            this.Name.Name = "Name";
+            this.Name.Size = new System.Drawing.Size(135, 55);
+            this.Name.TabIndex = 5;
+            this.Name.Text = "Name";
+            this.Name.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.ClientSize = new System.Drawing.Size(701, 430);
+            this.Controls.Add(this.Name);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.Button_Exit);
@@ -286,7 +299,6 @@
             this.Controls.Add(this.Watch);
             this.Controls.Add(this.Play);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Name = "Main";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Main";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Main_FormClosing);
@@ -314,6 +326,7 @@
         private System.Windows.Forms.ListBox ListBox_ID;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button Button_Exit;
+        private System.Windows.Forms.Label Name;
     }
 }
 

@@ -32,6 +32,7 @@ namespace Client
             this.nStream = nStream;
             this.Username = Username;
             this.Text = Username;
+            Name.Text = Username;
             bwriter = new BinaryWriter(nStream);
             breader = new BinaryReader(nStream);
             bwriter.Write(Username);
@@ -44,14 +45,17 @@ namespace Client
 
         private void Watch_Click(object sender, EventArgs e)
         {
-            int room_id = int.Parse(ListBox_ID.SelectedItem.ToString());
-            bwriter.Write("Watch Room;" + endpoint + ";" + room_id);
-            while (temp_str_room_word == null) ;
-            while (temp_str_room_pressed == null) ;
-            game = new Play(temp_str_room_word, room_id, endpoint, "Watcher: " + Username, temp_str_room_pressed, bwriter);
-            temp_str_room_word = temp_str_room_pressed = null;
-            game.Remove_Button = false;
-            game.ShowDialog();
+            if (ListBox_ID.SelectedIndex != -1)
+            {
+                int room_id = int.Parse(ListBox_ID.SelectedItem.ToString());
+                bwriter.Write("Watch Room;" + endpoint + ";" + room_id);
+                while (temp_str_room_word == null) ;
+                while (temp_str_room_pressed == null) ;
+                game = new Play(temp_str_room_word, room_id, endpoint, "Watcher: " + Username, temp_str_room_pressed, bwriter);
+                temp_str_room_word = temp_str_room_pressed = null;
+                game.Remove_Button = false;
+                game.ShowDialog();
+            }
         }
 
         private void ListBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -69,6 +73,11 @@ namespace Client
                     Play.Enabled = false;
                 else
                     Play.Enabled = true;
+            }
+            else
+            {
+                Watch.Enabled = false;
+                Play.Enabled = false;
             }
         }
 
@@ -95,17 +104,20 @@ namespace Client
 
         private void Play_Click(object sender, EventArgs e)
         {
-            bwriter.Write("Join Room Confirm;" + ListBox_ID.SelectedItem.ToString() + ";" + endpoint);
-            while (temp_str_room_word == null) ;
-            while (temp_str_room_pressed == null) ;
-            while (temp_str_room_id == -1) ;
-            game = new Play(temp_str_room_word, temp_str_room_id, endpoint, "Player 2: " + Username, temp_str_room_pressed, bwriter);
-            temp_str_room_word = temp_str_room_pressed = null;
-            temp_str_room_id = -1;
-            game.Change_Button = false;
-            DialogResult DR2 = game.ShowDialog();
-            if (DR2 == DialogResult.Retry)
-                New_Click(sender, e);
+            if (ListBox_ID.SelectedIndex != -1)
+            {
+                bwriter.Write("Join Room Confirm;" + ListBox_ID.SelectedItem.ToString() + ";" + endpoint);
+                while (temp_str_room_word == null) ;
+                while (temp_str_room_pressed == null) ;
+                while (temp_str_room_id == -1) ;
+                game = new Play(temp_str_room_word, temp_str_room_id, endpoint, "Player 2: " + Username, temp_str_room_pressed, bwriter);
+                temp_str_room_word = temp_str_room_pressed = null;
+                temp_str_room_id = -1;
+                game.Change_Button = false;
+                DialogResult DR2 = game.ShowDialog();
+                if (DR2 == DialogResult.Retry)
+                    New_Click(sender, e);
+            }
         }
 
         private void DataReader()

@@ -43,5 +43,10 @@ namespace Client
             level = int.Parse(comboBox_level.SelectedItem.ToString());
             DialogResult = DialogResult.OK;
         }
+
+        private void Button_Cancel_Click(object sender, EventArgs e)
+        {
+            DialogResult = DialogResult.Cancel;
+        }
     }
 }

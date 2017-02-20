@@ -27,6 +27,19 @@ namespace Client
 
         private void Login_Click(object sender, EventArgs e)
         {
+            Connect_Login();
+        }
+
+        private void TextBox_Username_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == Keys.Enter)
+            {
+                Connect_Login();
+            }
+        }
+
+        private void Connect_Login()
+        {
             TcpClient client = new TcpClient();
             try
             {
@@ -44,7 +57,7 @@ namespace Client
                                         MessageBoxButtons.RetryCancel);
                 if (ConfirmResult == DialogResult.Retry)
                 {
-                    Login_Click(sender, e);
+                    Connect_Login();
                 }
                 else
                 {

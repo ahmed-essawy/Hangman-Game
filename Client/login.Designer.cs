@@ -30,8 +30,8 @@
         {
             this.Login_btn = new System.Windows.Forms.Button();
             this.Exit = new System.Windows.Forms.Button();
-            this.TextBox_Username = new My_TextBox.My_TextBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.TextBox_Username = new My_TextBox.My_TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -44,7 +44,7 @@
             this.Login_btn.Font = new System.Drawing.Font("Comic Sans MS", 8.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Login_btn.ForeColor = System.Drawing.Color.Maroon;
             this.Login_btn.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.Login_btn.Location = new System.Drawing.Point(198, 110);
+            this.Login_btn.Location = new System.Drawing.Point(190, 91);
             this.Login_btn.Name = "Login_btn";
             this.Login_btn.Size = new System.Drawing.Size(70, 25);
             this.Login_btn.TabIndex = 2;
@@ -60,7 +60,7 @@
             this.Exit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Exit.Font = new System.Drawing.Font("Comic Sans MS", 8.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Exit.ForeColor = System.Drawing.Color.Maroon;
-            this.Exit.Location = new System.Drawing.Point(274, 110);
+            this.Exit.Location = new System.Drawing.Point(266, 91);
             this.Exit.Name = "Exit";
             this.Exit.Size = new System.Drawing.Size(70, 25);
             this.Exit.TabIndex = 4;
@@ -68,33 +68,34 @@
             this.Exit.UseVisualStyleBackColor = false;
             this.Exit.Click += new System.EventHandler(this.Exit_Click);
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::Client.Properties.Resources.User;
+            this.pictureBox1.Location = new System.Drawing.Point(12, 12);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(126, 129);
+            this.pictureBox1.TabIndex = 5;
+            this.pictureBox1.TabStop = false;
+            // 
             // TextBox_Username
             // 
             this.TextBox_Username.BackColor = System.Drawing.SystemColors.ControlLight;
             this.TextBox_Username.Font = new System.Drawing.Font("Comic Sans MS", 9.75F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TextBox_Username.ForeColor = System.Drawing.Color.Maroon;
-            this.TextBox_Username.Location = new System.Drawing.Point(171, 69);
+            this.TextBox_Username.Location = new System.Drawing.Point(163, 50);
             this.TextBox_Username.Name = "TextBox_Username";
-            this.TextBox_Username.PlaceHolder = "Username";
+            this.TextBox_Username.PlaceHolder = "Nickname";
             this.TextBox_Username.Size = new System.Drawing.Size(200, 26);
             this.TextBox_Username.TabIndex = 3;
-            this.TextBox_Username.Text = "Username";
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = global::Client.Properties.Resources.User;
-            this.pictureBox1.Location = new System.Drawing.Point(23, 12);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(126, 129);
-            this.pictureBox1.TabIndex = 5;
-            this.pictureBox1.TabStop = false;
+            this.TextBox_Username.Text = "Nickname";
+            this.TextBox_Username.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TextBox_Username_KeyDown);
             // 
             // Login
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.AutoValidate = System.Windows.Forms.AutoValidate.Disable;
             this.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.ClientSize = new System.Drawing.Size(389, 166);
+            this.ClientSize = new System.Drawing.Size(389, 154);
             this.ControlBox = false;
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.Exit);

@@ -342,6 +342,7 @@ namespace Server
                 catch (Exception ex) { MessageBox.Show(ex.Message); }
             }
         }
+
         private void Save_scoreFile(string player1, string player2, string score_1, string score_2)
         {
             StreamWriter sw = null;
@@ -666,7 +667,10 @@ namespace Server
             if (Check_Count() < 2)
             {
                 this.player2 = Player2;
-                win_counter.Add(player2, 0);
+                if (win_counter.ContainsKey(player2))
+                    win_counter[player2] = 0;
+                else
+                    win_counter.Add(player2, 0);
             }
         }
 
