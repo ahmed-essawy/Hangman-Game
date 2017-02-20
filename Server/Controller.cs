@@ -159,7 +159,9 @@ namespace Server
                                 {
                                     rooms[roomsendchange].Current = "Player 2: " + clients[rooms[roomsendchange].Player2].Name;
                                     clients[rooms[roomsendchange].Player1].bWriter = "Play Form Enable;false;Player 2: " + clients[rooms[roomsendchange].Player2].Name + ";" + count;
+                                    for (int i = 0; i < 1000000; i++) ;
                                     clients[rooms[roomsendchange].Player2].bWriter = "Play Form Enable;true;Your Turn;" + count;
+                                    for (int i = 0; i < 1000000; i++) ;
                                     foreach (int index in rooms[roomsendchange].Watchers)
                                     {
                                         clients[index].bWriter = "Play Form Enable;false;Player 2: " + clients[rooms[roomsendchange].Player2].Name + ";" + count;
@@ -169,7 +171,9 @@ namespace Server
                                 {
                                     rooms[roomsendchange].Current = "Player 1: " + clients[rooms[roomsendchange].Player1].Name;
                                     clients[rooms[roomsendchange].Player1].bWriter = "Play Form Enable;true;Your Turn; " + count;
+                                    for (int i = 0; i < 10000000; i++) ;
                                     clients[rooms[roomsendchange].Player2].bWriter = "Play Form Enable;false;Player 1: " + clients[rooms[roomsendchange].Player1].Name + ";" + count;
+                                    for (int i = 0; i < 1000000; i++) ;
                                     foreach (int index in rooms[roomsendchange].Watchers)
                                     {
                                         clients[index].bWriter = "Play Form Enable;false;Player 1: " + clients[rooms[roomsendchange].Player1].Name + ";" + count;

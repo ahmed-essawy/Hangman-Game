@@ -168,7 +168,7 @@ namespace Client
                             ListBox_Players.Items[index] = "2/2";
                             break;
 
-                        case "Rebuild Form":
+                        case "Rebuild Form":                           
                             game.Close();
                             game = new Play(response[2], int.Parse(response[1]), endpoint, response[3], "", bwriter);
                             game.Dimmed = bool.Parse(response[4]);

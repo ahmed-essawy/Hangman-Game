@@ -103,6 +103,7 @@ namespace Client
             {
                 this.panel1.Enabled = false;
                 bWriter.Write("Win Game;" + room_id + ";" + player_type);
+                //for (int i = 0; i < 1000000; i++) ;
                 Label_Current.Text = "Congratulations !";
                 DialogResult result = MessageBox.Show("Do you want to play again ?", "Congratulations !",
                     MessageBoxButtons.YesNo, MessageBoxIcon.Information);
