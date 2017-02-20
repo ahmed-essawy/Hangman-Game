@@ -110,17 +110,17 @@ namespace Client
             {
                 panel1.Enabled = false;
                 bWriter.Write("Change Control;" + room_id + ";" + player_type + ";" + count);
-                for (int i = 0; i < 10000; i++) ;
+                for (int i = 0; i < 05000; i++) ;
             }
              ((Button)sender).Enabled = false;
             bWriter.Write("Button Pressed;" + room_id + ";" + player_type + ";" + button_text);
-            for (int j = 0; j < 10000; j++) ;
+            for (int j = 0; j < 05000; j++) ;
             if (count + space_count == word.Length)
             {
                 this.panel1.Enabled = false;
                 bWriter.Write("Win Game;" + room_id + ";" + player_type);
+                for (int i = 0; i < 05000; i++) ;
                 Label_Current.Text = "Congratulations !";
-                for (int i = 0; i < 10000; i++) ;
                 DialogResult result = MessageBox.Show("Do you want to play again ?", "Congratulations !",
                     MessageBoxButtons.YesNo, MessageBoxIcon.Information);
                 if (result == DialogResult.Yes)
@@ -130,7 +130,7 @@ namespace Client
                     bWriter.Write("Retry again;" + room_id + ";" + player_type + ";false");
                     this.Close();
                 }
-                for (int i = 0; i < 10000; i++) ;
+                for (int i = 0; i < 05000; i++) ;
             }
         }
 

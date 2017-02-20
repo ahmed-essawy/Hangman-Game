@@ -70,12 +70,12 @@ namespace Server
                     foreach (string item in Get_Categories())
                     {
                         temp_client.bWriter = "Category;" + item;
-                        for (int i = 0; i < 10000; i++) ;
+                        for (int i = 0; i < 05000; i++) ;
                     }
                     foreach (int index in rooms.Keys.ToList())
                     {
                         temp_client.bWriter = "Room;" + index + ";" + rooms[index].Name + ";" + rooms[index].Category + ";" + rooms[index].Level + ";" + rooms[index].Check_Count();
-                        for (int i = 0; i < 10000; i++) ;
+                        for (int i = 0; i < 05000; i++) ;
                     }
                     //players.Add(temp_client.Endpoint, temp_client.Name);
                 }
@@ -149,7 +149,7 @@ namespace Server
                                 }
                                 foreach (int index in rooms[roomsendpress].Watchers)
                                 {
-                                    for (int i = 0; i < 10000; i++) ;
+                                    for (int i = 0; i < 05000; i++) ;
                                     clients[index].bWriter = "Dim Button;" + charpressed;
                                 }
                                 rooms[roomsendpress].AddPress(charpressed);
@@ -164,11 +164,11 @@ namespace Server
                                 {
                                     rooms[roomsendchange].Current = "Player 2: " + clients[rooms[roomsendchange].Player2].Name;
                                     clients[rooms[roomsendchange].Player1].bWriter = "Play Form Enable;false;Player 2: " + clients[rooms[roomsendchange].Player2].Name + ";" + count;
-                                    for (int i = 0; i < 10000; i++) ;
+                                    for (int i = 0; i < 05000; i++) ;
                                     clients[rooms[roomsendchange].Player2].bWriter = "Play Form Enable;true;Your Turn;" + count;
                                     foreach (int index in rooms[roomsendchange].Watchers)
                                     {
-                                        for (int i = 0; i < 10000; i++) ;
+                                        for (int i = 0; i < 05000; i++) ;
                                         clients[index].bWriter = "Play Form Enable;false;Player 2: " + clients[rooms[roomsendchange].Player2].Name + ";" + count;
                                     }
                                 }
@@ -176,11 +176,11 @@ namespace Server
                                 {
                                     rooms[roomsendchange].Current = "Player 1: " + clients[rooms[roomsendchange].Player1].Name;
                                     clients[rooms[roomsendchange].Player1].bWriter = "Play Form Enable;true;Your Turn; " + count;
-                                    for (int i = 0; i < 10000; i++) ;
+                                    for (int i = 0; i < 05000; i++) ;
                                     clients[rooms[roomsendchange].Player2].bWriter = "Play Form Enable;false;Player 1: " + clients[rooms[roomsendchange].Player1].Name + ";" + count;
                                     foreach (int index in rooms[roomsendchange].Watchers)
                                     {
-                                        for (int i = 0; i < 10000; i++) ;
+                                        for (int i = 0; i < 05000; i++) ;
                                         clients[index].bWriter = "Play Form Enable;false;Player 1: " + clients[rooms[roomsendchange].Player1].Name + ";" + count;
                                     }
                                 }
@@ -231,7 +231,7 @@ namespace Server
                                 {
                                     rooms[retryroomid].Word = Get_Word(rooms[retryroomid].Category, rooms[retryroomid].Level);
                                     clients[rooms[retryroomid].Player1].bWriter = "Rebuild Form;" + retryroomid + ";" + rooms[retryroomid].Word + ";" + "Player 1: " + clients[rooms[retryroomid].Player1].Name + ";" + rooms[retryroomid].Winner.Contains("Player 1");
-                                    for (int i = 0; i < 10000; i++) ;
+                                    for (int i = 0; i < 05000; i++) ;
                                     clients[rooms[retryroomid].Player2].bWriter = "Rebuild Form;" + retryroomid + ";" + rooms[retryroomid].Word + ";" + "Player 2: " + clients[rooms[retryroomid].Player2].Name + ";" + rooms[retryroomid].Winner.Contains("Player 2");
                                     foreach (int index in rooms[retryroomid].Watchers)
                                     {
@@ -477,6 +477,7 @@ namespace Server
                     new SqlParameter("@lvl",lvl),
                     new SqlParameter("@word",word)
                 };
+            com.Parameters.Clear();
             com.Parameters.AddRange(par);
             com.Connection = con;
             con.Open();
