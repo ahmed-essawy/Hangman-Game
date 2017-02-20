@@ -43,6 +43,7 @@
             this.ListBox_ID = new System.Windows.Forms.ListBox();
             this.ListBox_Rooms = new System.Windows.Forms.ListBox();
             this.label5 = new System.Windows.Forms.Label();
+            this.Button_Exit = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -257,6 +258,21 @@
             this.label5.TabIndex = 5;
             this.label5.Text = "HANGMAN GAME";
             // 
+            // Button_Exit
+            // 
+            this.Button_Exit.BackColor = System.Drawing.Color.Orange;
+            this.Button_Exit.FlatAppearance.BorderColor = System.Drawing.Color.Orange;
+            this.Button_Exit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Button_Exit.Font = new System.Drawing.Font("Comic Sans MS", 11.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Button_Exit.ForeColor = System.Drawing.Color.Maroon;
+            this.Button_Exit.Location = new System.Drawing.Point(661, 8);
+            this.Button_Exit.Name = "Button_Exit";
+            this.Button_Exit.Size = new System.Drawing.Size(32, 32);
+            this.Button_Exit.TabIndex = 3;
+            this.Button_Exit.Text = "X";
+            this.Button_Exit.UseVisualStyleBackColor = false;
+            this.Button_Exit.Click += new System.EventHandler(this.Button_Exit_Click);
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -265,6 +281,7 @@
             this.ClientSize = new System.Drawing.Size(701, 430);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.panel1);
+            this.Controls.Add(this.Button_Exit);
             this.Controls.Add(this.New);
             this.Controls.Add(this.Watch);
             this.Controls.Add(this.Play);
@@ -296,6 +313,7 @@
         private System.Windows.Forms.Label ID;
         private System.Windows.Forms.ListBox ListBox_ID;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Button Button_Exit;
     }
 }
 

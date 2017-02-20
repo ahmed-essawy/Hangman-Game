@@ -73,7 +73,8 @@ namespace Client
 
         private void New_Click(object sender, EventArgs e)
         {
-            cats = cats.Substring(0, cats.Length - 1); // Remove last ;
+            if (cats.EndsWith(";"))
+                cats = cats.Substring(0, cats.Length - 1); // Remove last ;
             Rules NewRules = new Rules(cats);
             NewRules.ShowDialog();
             if (NewRules.DialogResult == DialogResult.OK)
@@ -86,6 +87,8 @@ namespace Client
                 temp_str_room_word = temp_str_room_pressed = null;
                 temp_str_room_id = -1;
                 game.ShowDialog();
+                if (game.DialogResult == DialogResult.Retry)
+                    New_Click(sender, e);
             }
         }
 
@@ -98,7 +101,10 @@ namespace Client
             game = new Play(temp_str_room_word, temp_str_room_id, endpoint, "Player 2: " + Username, temp_str_room_pressed, bwriter);
             temp_str_room_word = temp_str_room_pressed = null;
             temp_str_room_id = -1;
+            game.Change_Button = false;
             game.ShowDialog();
+            if (game.DialogResult == DialogResult.Retry)
+                New_Click(sender, e);
         }
 
         private void DataReader()
@@ -170,6 +176,20 @@ namespace Client
                             ListBox_Players.Items[index] = "2/2";
                             break;
 
+                        case "Change Room Capacity Half":
+                            int hliindex = ListBox_ID.FindStringExact(response[1]);
+                            ListBox_Players.Items[hliindex] = "1/2";
+                            break;
+
+                        case "Remove Room":
+                            int listindex = ListBox_ID.FindStringExact(response[1]);
+                            ListBox_ID.Items.RemoveAt(listindex);
+                            ListBox_Categories.Items.RemoveAt(listindex);
+                            ListBox_Levels.Items.RemoveAt(listindex);
+                            ListBox_Rooms.Items.RemoveAt(listindex);
+                            ListBox_Players.Items.RemoveAt(listindex);
+                            break;
+
                         case "Rebuild Form":
                             game.Close();
                             game = null;
@@ -179,6 +199,8 @@ namespace Client
                                 game.Dimmed = bool.Parse(response[4]);
                                 game.Change_Label = bool.Parse(response[4]) ? "Your Turn" : "Waiting for other player...";
                                 game.ShowDialog();
+                                if (game.DialogResult == DialogResult.Retry)
+                                    New_Click(new object(), new EventArgs());
                             });
                             break;
 
@@ -215,6 +237,11 @@ namespace Client
             bwriter.Close();
             nStream.Close();
             Application.ExitThread();
+        }
+
+        private void Button_Exit_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

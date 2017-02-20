@@ -36,6 +36,7 @@ namespace Client
         }
 
         public string Change_Label { set { Label_Current.Text = value; } }
+        public bool Change_Button { set { Button_Change.Enabled = value; } }
         public int Count { set { count = value; } }
 
         public Play(string word, int Room_id, int Player_id, string Player_Type, string Pressed, BinaryWriter bWriter)
@@ -159,7 +160,13 @@ namespace Client
 
         private void Button_Exit_Click(object sender, EventArgs e)
         {
+            bWriter.Write("Quit Room;" + room_id + ";" + player_id);
             Close();
+        }
+
+        private void Button_Change_Click(object sender, EventArgs e)
+        {
+            DialogResult = DialogResult.Retry;
         }
     }
 }

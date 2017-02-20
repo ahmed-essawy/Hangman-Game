@@ -764,6 +764,7 @@
             this.Button_Change.TabIndex = 30;
             this.Button_Change.Text = "Change rules";
             this.Button_Change.UseVisualStyleBackColor = false;
+            this.Button_Change.Click += new System.EventHandler(this.Button_Change_Click);
             // 
             // label1
             // 

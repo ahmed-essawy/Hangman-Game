@@ -261,6 +261,20 @@ namespace Server
                                 }
                                 break;
 
+                            case "Quit Room":
+                                int quitroomid = int.Parse(response[1]);
+                                int quitplayerid = int.Parse(response[2]);
+                                if (rooms[quitroomid].Check_Count() == 1)
+                                {
+                                    foreach (int index in clients.Keys.ToList())
+                                        clients[index].bWriter = "Remove Room;" + quitroomid;
+                                    //rooms.Remove(quitroomid);
+                                }
+                                else if (rooms[quitroomid].Check_Count() == 2)
+                                    foreach (int index in clients.Keys.ToList())
+                                        clients[index].bWriter = "Change Room Capacity Half;" + quitroomid;
+                                break;
+
                             default:
                                 MessageBox.Show(response[0]);
                                 break;
