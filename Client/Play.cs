@@ -37,6 +37,7 @@ namespace Client
 
         public string Change_Label { set { Label_Current.Text = value; } }
         public bool Change_Button { set { Button_Change.Enabled = value; } }
+        public bool Remove_Button { set { Button_Change.Visible = value; } }
         public int Count { set { count = value; } }
 
         public Play(string word, int Room_id, int Player_id, string Player_Type, string Pressed, BinaryWriter bWriter)
@@ -109,17 +110,17 @@ namespace Client
             {
                 panel1.Enabled = false;
                 bWriter.Write("Change Control;" + room_id + ";" + player_type + ";" + count);
-                for (int i = 0; i < 1000000; i++) ;
+                for (int i = 0; i < 10000; i++) ;
             }
              ((Button)sender).Enabled = false;
             bWriter.Write("Button Pressed;" + room_id + ";" + player_type + ";" + button_text);
-            for (int j = 0; j < 1000000; j++) ;
+            for (int j = 0; j < 10000; j++) ;
             if (count + space_count == word.Length)
             {
                 this.panel1.Enabled = false;
                 bWriter.Write("Win Game;" + room_id + ";" + player_type);
                 Label_Current.Text = "Congratulations !";
-                for (int i = 0; i < 100000; i++) ;
+                for (int i = 0; i < 10000; i++) ;
                 DialogResult result = MessageBox.Show("Do you want to play again ?", "Congratulations !",
                     MessageBoxButtons.YesNo, MessageBoxIcon.Information);
                 if (result == DialogResult.Yes)
@@ -129,7 +130,7 @@ namespace Client
                     bWriter.Write("Retry again;" + room_id + ";" + player_type + ";false");
                     this.Close();
                 }
-                for (int i = 0; i < 100000; i++) ;
+                for (int i = 0; i < 10000; i++) ;
             }
         }
 
@@ -160,13 +161,15 @@ namespace Client
 
         private void Button_Exit_Click(object sender, EventArgs e)
         {
-            bWriter.Write("Quit Room;" + room_id + ";" + player_id);
+            if (!player_type.ToLower().Contains("watcher"))
+                bWriter.Write("Quit Room;" + room_id + ";" + player_id);
             Close();
         }
 
         private void Button_Change_Click(object sender, EventArgs e)
         {
             DialogResult = DialogResult.Retry;
+            bWriter.Write("Quit Room;" + room_id + ";" + player_id);
         }
     }
 }

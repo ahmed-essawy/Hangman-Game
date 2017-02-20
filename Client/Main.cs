@@ -50,6 +50,7 @@ namespace Client
             while (temp_str_room_pressed == null) ;
             game = new Play(temp_str_room_word, room_id, endpoint, "Watcher: " + Username, temp_str_room_pressed, bwriter);
             temp_str_room_word = temp_str_room_pressed = null;
+            game.Remove_Button = false;
             game.ShowDialog();
         }
 
@@ -86,8 +87,8 @@ namespace Client
                 game = new Play(temp_str_room_word, temp_str_room_id, endpoint, "Player 1: " + Username, temp_str_room_pressed, bwriter);
                 temp_str_room_word = temp_str_room_pressed = null;
                 temp_str_room_id = -1;
-                game.ShowDialog();
-                if (game.DialogResult == DialogResult.Retry)
+                DialogResult DR1 = game.ShowDialog();
+                if (DR1 == DialogResult.Retry)
                     New_Click(sender, e);
             }
         }
@@ -102,8 +103,8 @@ namespace Client
             temp_str_room_word = temp_str_room_pressed = null;
             temp_str_room_id = -1;
             game.Change_Button = false;
-            game.ShowDialog();
-            if (game.DialogResult == DialogResult.Retry)
+            DialogResult DR2 = game.ShowDialog();
+            if (DR2 == DialogResult.Retry)
                 New_Click(sender, e);
         }
 
@@ -135,6 +136,7 @@ namespace Client
                             if (result == DialogResult.OK)
                             {
                                 bwriter.Write("Join Room Reply;" + response[1] + ";" + response[2]);
+                                game.Change_Button = false;
                             }
                             break;
 
@@ -198,8 +200,9 @@ namespace Client
                                 game = new Play(response[2], int.Parse(response[1]), endpoint, response[3], "", bwriter);
                                 game.Dimmed = bool.Parse(response[4]);
                                 game.Change_Label = bool.Parse(response[4]) ? "Your Turn" : "Waiting for other player...";
-                                game.ShowDialog();
-                                if (game.DialogResult == DialogResult.Retry)
+                                game.Change_Button = false;
+                                DialogResult DR3 = game.ShowDialog();
+                                if (DR3 == DialogResult.Retry)
                                     New_Click(new object(), new EventArgs());
                             });
                             break;
