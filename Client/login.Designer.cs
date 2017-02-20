@@ -44,7 +44,7 @@
             this.Login_btn.Font = new System.Drawing.Font("Comic Sans MS", 8.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Login_btn.ForeColor = System.Drawing.Color.Maroon;
             this.Login_btn.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.Login_btn.Location = new System.Drawing.Point(198, 117);
+            this.Login_btn.Location = new System.Drawing.Point(198, 110);
             this.Login_btn.Name = "Login_btn";
             this.Login_btn.Size = new System.Drawing.Size(70, 25);
             this.Login_btn.TabIndex = 2;
@@ -60,7 +60,7 @@
             this.Exit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Exit.Font = new System.Drawing.Font("Comic Sans MS", 8.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Exit.ForeColor = System.Drawing.Color.Maroon;
-            this.Exit.Location = new System.Drawing.Point(274, 117);
+            this.Exit.Location = new System.Drawing.Point(274, 110);
             this.Exit.Name = "Exit";
             this.Exit.Size = new System.Drawing.Size(70, 25);
             this.Exit.TabIndex = 4;
@@ -73,7 +73,7 @@
             this.TextBox_Username.BackColor = System.Drawing.SystemColors.ControlLight;
             this.TextBox_Username.Font = new System.Drawing.Font("Comic Sans MS", 9.75F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TextBox_Username.ForeColor = System.Drawing.Color.Maroon;
-            this.TextBox_Username.Location = new System.Drawing.Point(171, 76);
+            this.TextBox_Username.Location = new System.Drawing.Point(171, 69);
             this.TextBox_Username.Name = "TextBox_Username";
             this.TextBox_Username.PlaceHolder = "Username";
             this.TextBox_Username.Size = new System.Drawing.Size(200, 26);

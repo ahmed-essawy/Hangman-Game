@@ -66,6 +66,9 @@
             this._2 = new System.Windows.Forms.Button();
             this._3 = new System.Windows.Forms.Button();
             this.Label_Current = new System.Windows.Forms.Label();
+            this.Button_Exit = new System.Windows.Forms.Button();
+            this.Button_Again = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -549,6 +552,7 @@
             this.panel1.Controls.Add(this._3);
             this.panel1.Controls.Add(this._M);
             this.panel1.Controls.Add(this._N);
+            this.panel1.Cursor = System.Windows.Forms.Cursors.Hand;
             this.panel1.Enabled = false;
             this.panel1.Location = new System.Drawing.Point(22, 126);
             this.panel1.Name = "panel1";
@@ -730,22 +734,61 @@
             this.Label_Current.AutoSize = true;
             this.Label_Current.Location = new System.Drawing.Point(20, 250);
             this.Label_Current.Name = "Label_Current";
-            this.Label_Current.Size = new System.Drawing.Size(126, 17);
+            this.Label_Current.Size = new System.Drawing.Size(154, 20);
             this.Label_Current.TabIndex = 28;
             this.Label_Current.Text = "Waiting for player 2...";
             // 
+            // Button_Exit
+            // 
+            this.Button_Exit.BackColor = System.Drawing.Color.Orange;
+            this.Button_Exit.FlatAppearance.BorderColor = System.Drawing.Color.Orange;
+            this.Button_Exit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Button_Exit.Font = new System.Drawing.Font("Comic Sans MS", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Button_Exit.Location = new System.Drawing.Point(292, 241);
+            this.Button_Exit.Name = "Button_Exit";
+            this.Button_Exit.Size = new System.Drawing.Size(100, 30);
+            this.Button_Exit.TabIndex = 29;
+            this.Button_Exit.Text = "Exit";
+            this.Button_Exit.UseVisualStyleBackColor = false;
+            // 
+            // Button_Again
+            // 
+            this.Button_Again.BackColor = System.Drawing.Color.Orange;
+            this.Button_Again.FlatAppearance.BorderColor = System.Drawing.Color.Orange;
+            this.Button_Again.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Button_Again.Font = new System.Drawing.Font("Comic Sans MS", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Button_Again.Location = new System.Drawing.Point(180, 241);
+            this.Button_Again.Name = "Button_Again";
+            this.Button_Again.Size = new System.Drawing.Size(100, 30);
+            this.Button_Again.TabIndex = 30;
+            this.Button_Again.Text = "Play again";
+            this.Button_Again.UseVisualStyleBackColor = false;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(322, 9);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(48, 20);
+            this.label1.TabIndex = 31;
+            this.label1.Text = "Score:";
+            // 
             // Play
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.ClientSize = new System.Drawing.Size(413, 277);
+            this.ControlBox = false;
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.Button_Again);
+            this.Controls.Add(this.Button_Exit);
             this.Controls.Add(this.Label_Current);
             this.Controls.Add(this.panel1);
-            this.Font = new System.Drawing.Font("Tempus Sans ITC", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Font = new System.Drawing.Font("Tempus Sans ITC", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ForeColor = System.Drawing.Color.Maroon;
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "Play";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Player";
@@ -794,5 +837,8 @@
         private System.Windows.Forms.Button _9;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label Label_Current;
+        private System.Windows.Forms.Button Button_Exit;
+        private System.Windows.Forms.Button Button_Again;
+        private System.Windows.Forms.Label label1;
     }
 }
