@@ -145,6 +145,7 @@ namespace Client
                             break;
 
                         case "Play Form Enable":
+                            while (game == null) ;
                             game.Dimmed = bool.Parse(response[1]);
                             game.Change_Label = response[2];
                             game.Count = int.Parse(response[3]);
@@ -153,6 +154,7 @@ namespace Client
                             break;
 
                         case "Dim Button":
+                            while (game == null) ;
                             game.Pressed_Button(response[1]);
                             break;
 
@@ -170,9 +172,13 @@ namespace Client
 
                         case "Rebuild Form":
                             game.Close();
-                            game = new Play(response[2], int.Parse(response[1]), endpoint, response[3], "", bwriter);
-                            game.Dimmed = bool.Parse(response[4]);
-                            game.ShowDialog();
+                            game = null;
+                            InvokeUI(() =>
+                            {
+                                game = new Play(response[2], int.Parse(response[1]), endpoint, response[3], "", bwriter);
+                                game.Dimmed = bool.Parse(response[4]);
+                                game.ShowDialog();
+                            });
                             break;
 
                         case "Terminated":
@@ -194,6 +200,11 @@ namespace Client
                     this.Close();
                 }
             }
+        }
+
+        private void InvokeUI(Action a)
+        {
+            this.BeginInvoke(new MethodInvoker(a));
         }
 
         private void Main_FormClosing(object sender, FormClosingEventArgs e)
