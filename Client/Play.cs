@@ -23,10 +23,20 @@ namespace Client
         private int count = 0;
         private int space_count = 0;
 
-        public bool Dimmed { set { panel1.Enabled = value; } }
+        public bool Dimmed
+        {
+            set
+            {
+                panel1.Enabled = value;
+                if (value)
+                    panel1.Cursor = Cursors.Hand;
+                else
+                    panel1.Cursor = Cursors.Default;
+            }
+        }
+
         public string Change_Label { set { Label_Current.Text = value; } }
         public int Count { set { count = value; } }
-        public string test { get { return word; } }
 
         public Play(string word, int Room_id, int Player_id, string Player_Type, string Pressed, BinaryWriter bWriter)
         {
@@ -50,7 +60,7 @@ namespace Client
             len = word.Length;
             labels = new Label[len];
             space_count = count = 0;
-            int x = 50;
+            int x = 25;
             int y = 75;
             for (int i = 0; i < len; i++)
             {
@@ -60,7 +70,7 @@ namespace Client
                 labels[i].ForeColor = System.Drawing.Color.White;
                 labels[i].Size = new System.Drawing.Size(36, 35);
                 labels[i].Text = " ";
-                if (x < this.Width - 50)
+                if (x < this.Width - 50 - 35)
                 {
                     labels[i].Location = new Point(x, y);
                     x += 35;
@@ -68,7 +78,7 @@ namespace Client
                 else
                 {
                     y += 35;
-                    x = 50;
+                    x = 25;
                     labels[i].Location = new Point(x, y);
                 }
                 if (word[i].ToString() == " ")

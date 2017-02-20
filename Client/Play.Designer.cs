@@ -554,7 +554,7 @@
             this.panel1.Controls.Add(this._N);
             this.panel1.Cursor = System.Windows.Forms.Cursors.Hand;
             this.panel1.Enabled = false;
-            this.panel1.Location = new System.Drawing.Point(33, 185);
+            this.panel1.Location = new System.Drawing.Point(103, 182);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(374, 104);
             this.panel1.TabIndex = 27;
@@ -732,7 +732,7 @@
             // Label_Current
             // 
             this.Label_Current.AutoSize = true;
-            this.Label_Current.Location = new System.Drawing.Point(249, 319);
+            this.Label_Current.Location = new System.Drawing.Point(385, 319);
             this.Label_Current.Name = "Label_Current";
             this.Label_Current.Size = new System.Drawing.Size(181, 20);
             this.Label_Current.TabIndex = 28;
@@ -768,7 +768,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(342, 9);
+            this.label1.Location = new System.Drawing.Point(431, 9);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(48, 20);
             this.label1.TabIndex = 31;
@@ -778,19 +778,22 @@
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.ClientSize = new System.Drawing.Size(442, 369);
+            this.ClientSize = new System.Drawing.Size(578, 357);
             this.ControlBox = false;
             this.Controls.Add(this.label1);
             this.Controls.Add(this.Button_Change);
             this.Controls.Add(this.Button_Exit);
             this.Controls.Add(this.Label_Current);
             this.Controls.Add(this.panel1);
+            this.Cursor = System.Windows.Forms.Cursors.Default;
             this.Font = new System.Drawing.Font("Tempus Sans ITC", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ForeColor = System.Drawing.Color.Maroon;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "Play";
+            this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Player";
             this.panel1.ResumeLayout(false);
