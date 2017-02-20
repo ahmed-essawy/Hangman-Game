@@ -67,7 +67,7 @@
             this._3 = new System.Windows.Forms.Button();
             this.Label_Current = new System.Windows.Forms.Label();
             this.Button_Exit = new System.Windows.Forms.Button();
-            this.Button_Again = new System.Windows.Forms.Button();
+            this.Button_Change = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -554,7 +554,7 @@
             this.panel1.Controls.Add(this._N);
             this.panel1.Cursor = System.Windows.Forms.Cursors.Hand;
             this.panel1.Enabled = false;
-            this.panel1.Location = new System.Drawing.Point(22, 126);
+            this.panel1.Location = new System.Drawing.Point(33, 185);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(374, 104);
             this.panel1.TabIndex = 27;
@@ -732,11 +732,11 @@
             // Label_Current
             // 
             this.Label_Current.AutoSize = true;
-            this.Label_Current.Location = new System.Drawing.Point(20, 250);
+            this.Label_Current.Location = new System.Drawing.Point(249, 319);
             this.Label_Current.Name = "Label_Current";
-            this.Label_Current.Size = new System.Drawing.Size(154, 20);
+            this.Label_Current.Size = new System.Drawing.Size(181, 20);
             this.Label_Current.TabIndex = 28;
-            this.Label_Current.Text = "Waiting for player 2...";
+            this.Label_Current.Text = "Waiting for other player...";
             // 
             // Button_Exit
             // 
@@ -744,30 +744,31 @@
             this.Button_Exit.FlatAppearance.BorderColor = System.Drawing.Color.Orange;
             this.Button_Exit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Button_Exit.Font = new System.Drawing.Font("Comic Sans MS", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Button_Exit.Location = new System.Drawing.Point(292, 241);
+            this.Button_Exit.Location = new System.Drawing.Point(12, 313);
             this.Button_Exit.Name = "Button_Exit";
             this.Button_Exit.Size = new System.Drawing.Size(100, 30);
             this.Button_Exit.TabIndex = 29;
             this.Button_Exit.Text = "Exit";
             this.Button_Exit.UseVisualStyleBackColor = false;
+            this.Button_Exit.Click += new System.EventHandler(this.Button_Exit_Click);
             // 
-            // Button_Again
+            // Button_Change
             // 
-            this.Button_Again.BackColor = System.Drawing.Color.Orange;
-            this.Button_Again.FlatAppearance.BorderColor = System.Drawing.Color.Orange;
-            this.Button_Again.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.Button_Again.Font = new System.Drawing.Font("Comic Sans MS", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Button_Again.Location = new System.Drawing.Point(180, 241);
-            this.Button_Again.Name = "Button_Again";
-            this.Button_Again.Size = new System.Drawing.Size(100, 30);
-            this.Button_Again.TabIndex = 30;
-            this.Button_Again.Text = "Play again";
-            this.Button_Again.UseVisualStyleBackColor = false;
+            this.Button_Change.BackColor = System.Drawing.Color.Orange;
+            this.Button_Change.FlatAppearance.BorderColor = System.Drawing.Color.Orange;
+            this.Button_Change.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Button_Change.Font = new System.Drawing.Font("Comic Sans MS", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Button_Change.Location = new System.Drawing.Point(118, 313);
+            this.Button_Change.Name = "Button_Change";
+            this.Button_Change.Size = new System.Drawing.Size(100, 30);
+            this.Button_Change.TabIndex = 30;
+            this.Button_Change.Text = "Change rules";
+            this.Button_Change.UseVisualStyleBackColor = false;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(322, 9);
+            this.label1.Location = new System.Drawing.Point(342, 9);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(48, 20);
             this.label1.TabIndex = 31;
@@ -777,10 +778,10 @@
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.ClientSize = new System.Drawing.Size(413, 277);
+            this.ClientSize = new System.Drawing.Size(442, 369);
             this.ControlBox = false;
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.Button_Again);
+            this.Controls.Add(this.Button_Change);
             this.Controls.Add(this.Button_Exit);
             this.Controls.Add(this.Label_Current);
             this.Controls.Add(this.panel1);
@@ -790,7 +791,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "Play";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Player";
             this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -838,7 +839,7 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label Label_Current;
         private System.Windows.Forms.Button Button_Exit;
-        private System.Windows.Forms.Button Button_Again;
+        private System.Windows.Forms.Button Button_Change;
         private System.Windows.Forms.Label label1;
     }
 }

@@ -177,6 +177,7 @@ namespace Client
                             {
                                 game = new Play(response[2], int.Parse(response[1]), endpoint, response[3], "", bwriter);
                                 game.Dimmed = bool.Parse(response[4]);
+                                game.Change_Label = bool.Parse(response[4]) ? "Your Turn" : "Waiting for other player...";
                                 game.ShowDialog();
                             });
                             break;

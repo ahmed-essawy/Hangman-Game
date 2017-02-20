@@ -51,26 +51,29 @@ namespace Client
             labels = new Label[len];
             space_count = count = 0;
             int x = 50;
-            int y = 50;
+            int y = 75;
             for (int i = 0; i < len; i++)
             {
                 labels[i] = new Label();
-                labels[i].Text = "_";
-                labels[i].Size = new Size(20, 16);
+                labels[i].AutoSize = true;
+                labels[i].Font = new System.Drawing.Font("Tempus Sans ITC", 20.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+                labels[i].ForeColor = System.Drawing.Color.White;
+                labels[i].Size = new System.Drawing.Size(36, 35);
+                labels[i].Text = " ";
                 if (x < this.Width - 50)
                 {
                     labels[i].Location = new Point(x, y);
-                    x += 25;
+                    x += 35;
                 }
                 else
                 {
-                    y += 25;
+                    y += 35;
                     x = 50;
                     labels[i].Location = new Point(x, y);
                 }
                 if (word[i].ToString() == " ")
                 {
-                    labels[i].Text = " ";
+                    labels[i].Font = new System.Drawing.Font("Tempus Sans ITC", 20.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
                     ++space_count;
                 }
                 this.Controls.Add(labels[i]);
@@ -142,6 +145,11 @@ namespace Client
                     labels[i].Text = word[i].ToString().ToUpper();
                 }
             }
+        }
+
+        private void Button_Exit_Click(object sender, EventArgs e)
+        {
+            Close();
         }
     }
 }
