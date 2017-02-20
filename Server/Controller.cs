@@ -243,25 +243,27 @@ namespace Server
                                 {
                                     MessageBox.Show("Refused by Player 1 & 2");
                                     rooms[retryroomid].Player1_ret = rooms[retryroomid].Player2_ret = null;
-                                    Save_score(clients[rooms[retryroomid].Player1].Name, clients[rooms[retryroomid].Player2].Name, clients[rooms[retryroomid].Player1].Endpoint.ToString(), clients[rooms[retryroomid].Player2].Endpoint.ToString());
-                                    rooms[retryroomid].GetScore(1);// return int score for player 1
-                                    rooms[retryroomid].GetScore(2);// return int score for player 2
+                                    string score_1 = rooms[retryroomid].GetScore(1).ToString();// return int score for player 1
+                                    string score_2 = rooms[retryroomid].GetScore(2).ToString();// return int score for player 2
+                                    Save_scoreFile(clients[rooms[retryroomid].Player1].Name, clients[rooms[retryroomid].Player2].Name, score_1, score_2);
                                 }
                                 else if (rooms[retryroomid].Player1_ret == false && rooms[retryroomid].Player2_ret == true)
                                 {
                                     MessageBox.Show("Refused by Player 1");
                                     rooms[retryroomid].Player1_ret = rooms[retryroomid].Player2_ret = null;
-                                    Save_score(clients[rooms[retryroomid].Player1].Name, clients[rooms[retryroomid].Player2].Name, clients[rooms[retryroomid].Player1].Endpoint.ToString(), clients[rooms[retryroomid].Player2].Endpoint.ToString());
-                                    rooms[retryroomid].GetScore(1);// return int score for player 1
-                                    rooms[retryroomid].GetScore(2);// return int score for player 2
+                                    string score_1 = rooms[retryroomid].GetScore(1).ToString();// return int score for player 1
+                                    string score_2 = rooms[retryroomid].GetScore(2).ToString();// return int score for player 2
+                                    Save_scoreFile(clients[rooms[retryroomid].Player1].Name, clients[rooms[retryroomid].Player2].Name, score_1, score_2);
+
                                 }
                                 else if (rooms[retryroomid].Player1_ret == true && rooms[retryroomid].Player2_ret == false)
                                 {
                                     MessageBox.Show("Refused by Player 2");
                                     rooms[retryroomid].Player1_ret = rooms[retryroomid].Player2_ret = null;
-                                    Save_score(clients[rooms[retryroomid].Player1].Name, clients[rooms[retryroomid].Player2].Name, clients[rooms[retryroomid].Player1].Endpoint.ToString(), clients[rooms[retryroomid].Player2].Endpoint.ToString());
-                                    rooms[retryroomid].GetScore(1);// return int score for player 1
-                                    rooms[retryroomid].GetScore(2);// return int score for player 2
+                                    string score_1 = rooms[retryroomid].GetScore(1).ToString();// return int score for player 1
+                                    string score_2 = rooms[retryroomid].GetScore(2).ToString();// return int score for player 2
+                                    Save_scoreFile(clients[rooms[retryroomid].Player1].Name, clients[rooms[retryroomid].Player2].Name, score_1, score_2);
+
                                 }
                                 break;
 
@@ -333,7 +335,7 @@ namespace Server
 
         private void Save_score(string player1, string player2, string endpoint1, string endpoint2)
         {
-            StreamWriter sw=null;
+            StreamWriter sw;
             string startupPath = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName;
             string path = Path.Combine(startupPath, player1 + "_" + player2 + "_" + endpoint1 + "_" + endpoint2 + ".txt");
             if (!File.Exists(path))
@@ -353,6 +355,27 @@ namespace Server
             }
             string msg = text;
             File.WriteAllText(path, msg);
+            
+        }
+
+        private void Save_scoreFile(string player1, string player2, string score_1, string score_2)
+        {
+            StreamWriter sw = null;
+            string startupPath = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName;
+            string path = Path.Combine(startupPath, "Logs\\Scores.txt");
+            string text = "Player 1: " + player1 + " Score :" + score_1 + " ,Player 2: " + player2 + " Score :" + score_2;
+            if (!File.Exists(path))
+            {
+                // Create a file to write to. 
+                sw = File.CreateText(path);
+                sw.Write(text);
+            }
+            else
+            {
+                sw = File.AppendText(path);
+                sw.Write(Environment.NewLine + text);
+            }
+            sw.Close();
         }
 
         public static ReaderInfo Strings
