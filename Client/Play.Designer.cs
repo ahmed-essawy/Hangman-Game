@@ -68,7 +68,8 @@
             this.Label_Current = new System.Windows.Forms.Label();
             this.Button_Exit = new System.Windows.Forms.Button();
             this.Button_Change = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
+            this.Label_Score1 = new System.Windows.Forms.Label();
+            this.Label_Score2 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -766,14 +767,23 @@
             this.Button_Change.UseVisualStyleBackColor = false;
             this.Button_Change.Click += new System.EventHandler(this.Button_Change_Click);
             // 
-            // label1
+            // Label_Score1
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(431, 9);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(48, 20);
-            this.label1.TabIndex = 31;
-            this.label1.Text = "Score:";
+            this.Label_Score1.AutoSize = true;
+            this.Label_Score1.Location = new System.Drawing.Point(12, 9);
+            this.Label_Score1.Name = "Label_Score1";
+            this.Label_Score1.Size = new System.Drawing.Size(82, 20);
+            this.Label_Score1.TabIndex = 31;
+            this.Label_Score1.Text = "P1 Score: 0";
+            // 
+            // Label_Score2
+            // 
+            this.Label_Score2.AutoSize = true;
+            this.Label_Score2.Location = new System.Drawing.Point(443, 9);
+            this.Label_Score2.Name = "Label_Score2";
+            this.Label_Score2.Size = new System.Drawing.Size(85, 20);
+            this.Label_Score2.TabIndex = 31;
+            this.Label_Score2.Text = "P2 Score: 0";
             // 
             // Play
             // 
@@ -781,7 +791,8 @@
             this.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.ClientSize = new System.Drawing.Size(578, 357);
             this.ControlBox = false;
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.Label_Score2);
+            this.Controls.Add(this.Label_Score1);
             this.Controls.Add(this.Button_Change);
             this.Controls.Add(this.Button_Exit);
             this.Controls.Add(this.Label_Current);
@@ -844,6 +855,7 @@
         private System.Windows.Forms.Label Label_Current;
         private System.Windows.Forms.Button Button_Exit;
         private System.Windows.Forms.Button Button_Change;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label Label_Score1;
+        private System.Windows.Forms.Label Label_Score2;
     }
 }

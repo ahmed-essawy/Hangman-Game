@@ -38,6 +38,14 @@ namespace Client
         public string Change_Label { set { Label_Current.Text = value; } }
         public bool Change_Button { set { Button_Change.Enabled = value; } }
         public bool Remove_Button { set { Button_Change.Visible = value; } }
+        public string Score
+        {
+            set
+            {
+                Label_Score1.Text = "P1 Score: " + value.Split('/')[0];
+                Label_Score2.Text = "P2 Score: " + value.Split('/')[1];
+            }
+        }
         public int Count { set { count = value; } }
 
         public Play(string word, int Room_id, int Player_id, string Player_Type, string Pressed, BinaryWriter bWriter)
@@ -161,9 +169,13 @@ namespace Client
 
         private void Button_Exit_Click(object sender, EventArgs e)
         {
-            if (!player_type.ToLower().Contains("watcher"))
-                bWriter.Write("Quit Room;" + room_id + ";" + player_id);
-            Close();
+            DialogResult result = MessageBox.Show("Are you sure you want to leave room?", "Exit Confirmation!", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            if (result == DialogResult.Yes)
+            {
+                if (!player_type.ToLower().Contains("watcher"))
+                    bWriter.Write("Quit Room;" + room_id + ";" + player_id);
+                Close();
+            }
         }
 
         private void Button_Change_Click(object sender, EventArgs e)

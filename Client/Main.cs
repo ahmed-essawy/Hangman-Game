@@ -199,8 +199,9 @@ namespace Client
                             {
                                 game = new Play(response[2], int.Parse(response[1]), endpoint, response[3], "", bwriter);
                                 game.Dimmed = bool.Parse(response[4]);
+                                game.Score = response[5];
                                 game.Change_Label = bool.Parse(response[4]) ? "Your Turn" : "Waiting for other player...";
-                                game.Change_Button = false;
+                                game.Change_Button = bool.Parse(response[6]);
                                 DialogResult DR3 = game.ShowDialog();
                                 if (DR3 == DialogResult.Retry)
                                     New_Click(new object(), new EventArgs());

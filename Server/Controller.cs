@@ -204,7 +204,7 @@ namespace Server
                                     clients[rooms[winroomid].Player2].bWriter = "Play Form Enable;false;Winner: Player 1: " + clients[rooms[winroomid].Player1].Name + ";0";
                                     foreach (int index in rooms[winroomid].Watchers)
                                     {
-                                        clients[index].bWriter = "Play Form Enable;false;Winner: Player 1: " + clients[rooms[winroomid].Player1].Name + ";0";
+                                        clients[index].bWriter = "Play Form Enable;false;Watcher;0";
                                     }
                                 }
                                 else if (winplayer.Contains("Player 2"))
@@ -214,7 +214,7 @@ namespace Server
                                     clients[rooms[winroomid].Player1].bWriter = "Play Form Enable;false;Winner: Player 2: " + clients[rooms[winroomid].Player2].Name + ";0";
                                     foreach (int index in rooms[winroomid].Watchers)
                                     {
-                                        clients[index].bWriter = "Play Form Enable;false;Winner: Player 2: " + clients[rooms[winroomid].Player2].Name + ";0";
+                                        clients[index].bWriter = "Play Form Enable;false;Watcher;0";
                                     }
                                 }
                                 break;
@@ -227,41 +227,55 @@ namespace Server
                                     rooms[retryroomid].Player1_ret = retryopinion;
                                 else if (retryplayer.Contains("Player 2"))
                                     rooms[retryroomid].Player2_ret = retryopinion;
+                                string score = "" + rooms[retryroomid].GetScore(1) + "/" + rooms[retryroomid].GetScore(2);
                                 if (rooms[retryroomid].Player1_ret == true && rooms[retryroomid].Player2_ret == true)
-                                {
+                                {// Accepted By Player 1 & 2
                                     rooms[retryroomid].Word = Get_Word(rooms[retryroomid].Category, rooms[retryroomid].Level);
-                                    clients[rooms[retryroomid].Player1].bWriter = "Rebuild Form;" + retryroomid + ";" + rooms[retryroomid].Word + ";" + "Player 1: " + clients[rooms[retryroomid].Player1].Name + ";" + rooms[retryroomid].Winner.Contains("Player 1");
+                                    clients[rooms[retryroomid].Player1].bWriter = "Rebuild Form;" + retryroomid + ";" + rooms[retryroomid].Word + ";" + "Player 1: " + clients[rooms[retryroomid].Player1].Name + ";" + rooms[retryroomid].Winner.Contains("Player 1") + ";" + score + ";false";
                                     for (int i = 0; i < 05000; i++) ;
-                                    clients[rooms[retryroomid].Player2].bWriter = "Rebuild Form;" + retryroomid + ";" + rooms[retryroomid].Word + ";" + "Player 2: " + clients[rooms[retryroomid].Player2].Name + ";" + rooms[retryroomid].Winner.Contains("Player 2");
+                                    clients[rooms[retryroomid].Player2].bWriter = "Rebuild Form;" + retryroomid + ";" + rooms[retryroomid].Word + ";" + "Player 2: " + clients[rooms[retryroomid].Player2].Name + ";" + rooms[retryroomid].Winner.Contains("Player 2") + ";" + score + ";false";
                                     foreach (int index in rooms[retryroomid].Watchers)
                                     {
-                                        clients[index].bWriter = "Rebuild Form;" + retryroomid + ";" + rooms[retryroomid].Word + ";" + rooms[retryroomid].Winner + ";false";
+                                        clients[index].bWriter = "Rebuild Form;" + retryroomid + ";" + rooms[retryroomid].Word + ";" + rooms[retryroomid].Winner + ";false" + ";" + score + ";false";
                                     }
                                     rooms[retryroomid].Player1_ret = rooms[retryroomid].Player2_ret = null;
                                 }
                                 else if (rooms[retryroomid].Player1_ret == false && rooms[retryroomid].Player2_ret == false)
-                                {
-                                    MessageBox.Show("Refused by Player 1 & 2");
+                                {// Refused By Player 1 & 2
                                     rooms[retryroomid].Player1_ret = rooms[retryroomid].Player2_ret = null;
                                     Save_score(clients[rooms[retryroomid].Player1].Name, clients[rooms[retryroomid].Player2].Name, clients[rooms[retryroomid].Player1].Endpoint.ToString(), clients[rooms[retryroomid].Player2].Endpoint.ToString());
                                     rooms[retryroomid].GetScore(1);// return int score for player 1
                                     rooms[retryroomid].GetScore(2);// return int score for player 2
+                                    foreach (int index in clients.Keys.ToList())
+                                        clients[index].bWriter = "Remove Room;" + retryroomid;
                                 }
                                 else if (rooms[retryroomid].Player1_ret == false && rooms[retryroomid].Player2_ret == true)
-                                {
-                                    MessageBox.Show("Refused by Player 1");
+                                {// Refused By Player 1
                                     rooms[retryroomid].Player1_ret = rooms[retryroomid].Player2_ret = null;
                                     Save_score(clients[rooms[retryroomid].Player1].Name, clients[rooms[retryroomid].Player2].Name, clients[rooms[retryroomid].Player1].Endpoint.ToString(), clients[rooms[retryroomid].Player2].Endpoint.ToString());
                                     rooms[retryroomid].GetScore(1);// return int score for player 1
                                     rooms[retryroomid].GetScore(2);// return int score for player 2
+                                    foreach (int index in clients.Keys.ToList())
+                                        clients[index].bWriter = "Change Room Capacity Half;" + retryroomid;
+                                    rooms[retryroomid].Player1 = rooms[retryroomid].Player2;
+                                    rooms[retryroomid].Owner = rooms[retryroomid].Player2;
+                                    rooms[retryroomid].Player2 = 0;
+                                    rooms[retryroomid].Word = Get_Word(rooms[retryroomid].Category, rooms[retryroomid].Level);
+                                    clients[rooms[retryroomid].Player1].bWriter = "Rebuild Form;" + retryroomid + ";" + rooms[retryroomid].Word + ";" + "Player 1: " + clients[rooms[retryroomid].Player1].Name + ";false;" + score + ";true";
+                                    for (int i = 0; i < 05000; i++) ;
                                 }
                                 else if (rooms[retryroomid].Player1_ret == true && rooms[retryroomid].Player2_ret == false)
-                                {
-                                    MessageBox.Show("Refused by Player 2");
+                                {// Refused By Player 2
                                     rooms[retryroomid].Player1_ret = rooms[retryroomid].Player2_ret = null;
                                     Save_score(clients[rooms[retryroomid].Player1].Name, clients[rooms[retryroomid].Player2].Name, clients[rooms[retryroomid].Player1].Endpoint.ToString(), clients[rooms[retryroomid].Player2].Endpoint.ToString());
                                     rooms[retryroomid].GetScore(1);// return int score for player 1
                                     rooms[retryroomid].GetScore(2);// return int score for player 2
+                                    foreach (int index in clients.Keys.ToList())
+                                        clients[index].bWriter = "Change Room Capacity Half;" + retryroomid;
+                                    rooms[retryroomid].Player2 = 0;
+                                    rooms[retryroomid].Word = Get_Word(rooms[retryroomid].Category, rooms[retryroomid].Level);
+                                    clients[rooms[retryroomid].Player1].bWriter = "Rebuild Form;" + retryroomid + ";" + rooms[retryroomid].Word + ";" + "Player 1: " + clients[rooms[retryroomid].Player1].Name + ";false; " + score + ";true";
+                                    for (int i = 0; i < 05000; i++) ;
                                 }
                                 break;
 
@@ -300,7 +314,6 @@ namespace Server
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.ToString());
                     MessageBox.Show("There is error happened while reading data.\n" + ex.Message, "Error msg!",
                         MessageBoxButtons.OK, MessageBoxIcon.Error);
                     Application.ExitThread();
@@ -333,12 +346,12 @@ namespace Server
 
         private void Save_score(string player1, string player2, string endpoint1, string endpoint2)
         {
-            StreamWriter sw=null;
+            StreamWriter sw = null;
             string startupPath = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName;
             string path = Path.Combine(startupPath, player1 + "_" + player2 + "_" + endpoint1 + "_" + endpoint2 + ".txt");
             if (!File.Exists(path))
             {
-                // Create a file to write to. 
+                // Create a file to write to.
                 sw = File.CreateText(path);
                 sw.Close();
             }
@@ -349,7 +362,7 @@ namespace Server
             string text = "";
             foreach (var item in List_ClientMsgs.Items)
             {
-                text += item.ToString() + "/n"; // /n to print each item on new line or you omit /n to print text on same line 
+                text += item.ToString() + "/n"; // /n to print each item on new line or you omit /n to print text on same line
             }
             string msg = text;
             File.WriteAllText(path, msg);
@@ -621,8 +634,8 @@ namespace Server
         }
 
         public int Owner { get { return owner; } set { owner = value; } }
-        public int Player1 { get { return player1; } set { player1 = value; } }
-        public int Player2 { get { return player2; } set { player2 = value; } }
+        public int Player1 { get { return player1; } set { win_counter[player1] = 0; player1 = value; } }
+        public int Player2 { get { return player2; } set { win_counter[player1] = 0; player2 = value; } }
         public string Name { get { return name; } }
         public string Category { get { return category; } }
         public int Level { get { return level; } }
