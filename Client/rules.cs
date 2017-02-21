@@ -59,5 +59,24 @@ namespace Client
                 DialogResult = DialogResult.OK;
             }
         }
+
+        private void Cat_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (room_name == String.Empty)
+                textBox1.Text = "Default " + comboBox_cat.SelectedItem.ToString() + " " + int.Parse(comboBox_level.SelectedItem.ToString());
+        }
+
+        private void Level_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (room_name == String.Empty)
+                textBox1.Text = "Default " + comboBox_cat.SelectedItem.ToString() + " " + int.Parse(comboBox_level.SelectedItem.ToString());
+        }
+
+        private void Name_TextChanged(object sender, EventArgs e)
+        {
+            room_name = textBox1.Text;
+            if (room_name == String.Empty)
+                textBox1.Text = "Default";
+        }
     }
 }

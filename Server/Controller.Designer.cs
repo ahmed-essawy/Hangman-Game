@@ -40,7 +40,6 @@
             this.Button_Log = new System.Windows.Forms.Button();
             this.Button_Exit = new System.Windows.Forms.Button();
             this.Button_Start = new System.Windows.Forms.Button();
-            this.Button_Stop = new System.Windows.Forms.Button();
             this.List_Connected_name = new System.Windows.Forms.ListBox();
             this.List_Disonnected_name = new System.Windows.Forms.ListBox();
             this.Insert = new System.Windows.Forms.Button();
@@ -48,6 +47,7 @@
             this.textBox_Category = new My_TextBox.My_TextBox();
             this.textBox_Word = new My_TextBox.My_TextBox();
             this.List_Categories = new System.Windows.Forms.ListBox();
+            this.IpAddress = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -193,30 +193,14 @@
             this.Button_Start.FlatAppearance.BorderColor = System.Drawing.Color.Orange;
             this.Button_Start.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Button_Start.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Button_Start.Location = new System.Drawing.Point(341, 561);
+            this.Button_Start.Location = new System.Drawing.Point(341, 591);
             this.Button_Start.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Button_Start.Name = "Button_Start";
-            this.Button_Start.Size = new System.Drawing.Size(152, 62);
+            this.Button_Start.Size = new System.Drawing.Size(310, 32);
             this.Button_Start.TabIndex = 4;
             this.Button_Start.Text = "Start";
             this.Button_Start.UseVisualStyleBackColor = false;
             this.Button_Start.Click += new System.EventHandler(this.Button_Start_Click);
-            // 
-            // Button_Stop
-            // 
-            this.Button_Stop.BackColor = System.Drawing.Color.Orange;
-            this.Button_Stop.Enabled = false;
-            this.Button_Stop.FlatAppearance.BorderColor = System.Drawing.Color.Orange;
-            this.Button_Stop.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.Button_Stop.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Button_Stop.Location = new System.Drawing.Point(499, 561);
-            this.Button_Stop.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.Button_Stop.Name = "Button_Stop";
-            this.Button_Stop.Size = new System.Drawing.Size(152, 62);
-            this.Button_Stop.TabIndex = 4;
-            this.Button_Stop.Text = "Stop";
-            this.Button_Stop.UseVisualStyleBackColor = false;
-            this.Button_Stop.Click += new System.EventHandler(this.Button_Stop_Click);
             // 
             // List_Connected_name
             // 
@@ -307,6 +291,19 @@
             this.List_Categories.Size = new System.Drawing.Size(128, 84);
             this.List_Categories.TabIndex = 11;
             // 
+            // IpAddress
+            // 
+            this.IpAddress.BackColor = System.Drawing.SystemColors.ButtonShadow;
+            this.IpAddress.Location = new System.Drawing.Point(341, 561);
+            this.IpAddress.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.IpAddress.Name = "IpAddress";
+            this.IpAddress.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.IpAddress.Size = new System.Drawing.Size(310, 23);
+            this.IpAddress.TabIndex = 2;
+            this.IpAddress.Text = "127.0.0.1";
+            this.IpAddress.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.IpAddress.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Send_KeyDown);
+            // 
             // Controller
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
@@ -316,12 +313,12 @@
             this.ControlBox = false;
             this.Controls.Add(this.List_Categories);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.Button_Stop);
             this.Controls.Add(this.Button_Start);
             this.Controls.Add(this.Button_Exit);
             this.Controls.Add(this.Button_Log);
             this.Controls.Add(this.Button_Terminate);
             this.Controls.Add(this.Button_Send);
+            this.Controls.Add(this.IpAddress);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
@@ -361,7 +358,6 @@
         private System.Windows.Forms.Button Button_Log;
         private System.Windows.Forms.Button Button_Exit;
         private System.Windows.Forms.Button Button_Start;
-        private System.Windows.Forms.Button Button_Stop;
         private System.Windows.Forms.ListBox List_Connected_name;
         private System.Windows.Forms.ListBox List_Disonnected_name;
         private System.Windows.Forms.Button Insert;
@@ -369,5 +365,6 @@
         private My_TextBox.My_TextBox textBox_Word;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.ListBox List_Categories;
+        private System.Windows.Forms.TextBox IpAddress;
     }
 }

@@ -48,6 +48,7 @@
             this.comboBox_cat.Name = "comboBox_cat";
             this.comboBox_cat.Size = new System.Drawing.Size(158, 25);
             this.comboBox_cat.TabIndex = 2;
+            this.comboBox_cat.SelectedIndexChanged += new System.EventHandler(this.Cat_SelectedIndexChanged);
             this.comboBox_cat.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Enter_KeyDown);
             // 
             // comboBox_level
@@ -60,6 +61,7 @@
             this.comboBox_level.Name = "comboBox_level";
             this.comboBox_level.Size = new System.Drawing.Size(158, 25);
             this.comboBox_level.TabIndex = 3;
+            this.comboBox_level.SelectedIndexChanged += new System.EventHandler(this.Level_SelectedIndexChanged);
             this.comboBox_level.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Enter_KeyDown);
             // 
             // Button_Create
@@ -121,6 +123,7 @@
             this.textBox1.Size = new System.Drawing.Size(158, 24);
             this.textBox1.TabIndex = 1;
             this.textBox1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Enter_KeyDown);
+            this.textBox1.Leave += new System.EventHandler(this.Name_TextChanged);
             // 
             // Button_Cancel
             // 

@@ -32,6 +32,7 @@
             this.Exit = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.TextBox_Username = new My_TextBox.My_TextBox();
+            this.IpAddress = new My_TextBox.My_TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -44,7 +45,7 @@
             this.Login_btn.Font = new System.Drawing.Font("Comic Sans MS", 8.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Login_btn.ForeColor = System.Drawing.Color.Maroon;
             this.Login_btn.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.Login_btn.Location = new System.Drawing.Point(190, 91);
+            this.Login_btn.Location = new System.Drawing.Point(245, 83);
             this.Login_btn.Name = "Login_btn";
             this.Login_btn.Size = new System.Drawing.Size(70, 25);
             this.Login_btn.TabIndex = 2;
@@ -60,7 +61,7 @@
             this.Exit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Exit.Font = new System.Drawing.Font("Comic Sans MS", 8.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Exit.ForeColor = System.Drawing.Color.Maroon;
-            this.Exit.Location = new System.Drawing.Point(266, 91);
+            this.Exit.Location = new System.Drawing.Point(321, 83);
             this.Exit.Name = "Exit";
             this.Exit.Size = new System.Drawing.Size(70, 25);
             this.Exit.TabIndex = 4;
@@ -82,21 +83,34 @@
             this.TextBox_Username.BackColor = System.Drawing.SystemColors.ControlLight;
             this.TextBox_Username.Font = new System.Drawing.Font("Comic Sans MS", 9.75F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TextBox_Username.ForeColor = System.Drawing.Color.Maroon;
-            this.TextBox_Username.Location = new System.Drawing.Point(163, 50);
+            this.TextBox_Username.Location = new System.Drawing.Point(178, 50);
             this.TextBox_Username.Name = "TextBox_Username";
             this.TextBox_Username.PlaceHolder = "Nickname";
-            this.TextBox_Username.Size = new System.Drawing.Size(200, 26);
+            this.TextBox_Username.Size = new System.Drawing.Size(213, 26);
             this.TextBox_Username.TabIndex = 3;
             this.TextBox_Username.Text = "Nickname";
             this.TextBox_Username.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TextBox_Username_KeyDown);
+            // 
+            // IpAddress
+            // 
+            this.IpAddress.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.IpAddress.Font = new System.Drawing.Font("Comic Sans MS", 9.75F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.IpAddress.ForeColor = System.Drawing.Color.Maroon;
+            this.IpAddress.Location = new System.Drawing.Point(178, 82);
+            this.IpAddress.Name = "IpAddress";
+            this.IpAddress.PlaceHolder = "127.0.0.1";
+            this.IpAddress.Size = new System.Drawing.Size(61, 26);
+            this.IpAddress.TabIndex = 6;
+            this.IpAddress.Text = "127.0.0.1";
             // 
             // Login
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.AutoValidate = System.Windows.Forms.AutoValidate.Disable;
             this.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.ClientSize = new System.Drawing.Size(389, 154);
+            this.ClientSize = new System.Drawing.Size(439, 154);
             this.ControlBox = false;
+            this.Controls.Add(this.IpAddress);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.Exit);
             this.Controls.Add(this.TextBox_Username);
@@ -121,5 +135,6 @@
         private My_TextBox.My_TextBox TextBox_Username;
         private System.Windows.Forms.Button Exit;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private My_TextBox.My_TextBox IpAddress;
     }
 }

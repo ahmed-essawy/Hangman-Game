@@ -43,7 +43,7 @@ namespace Client
             TcpClient client = new TcpClient();
             try
             {
-                client.Connect(new IPAddress(new byte[] { 127, 0, 0, 1 }), 5000);
+                client.Connect(IPAddress.Parse(IpAddress.Text), 5000);
                 if (client.Connected)
                 {
                     nstream = client.GetStream();

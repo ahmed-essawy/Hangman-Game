@@ -51,7 +51,7 @@ namespace Server
 
         private void ClientCreator()
         {
-            TcpListener listener = new TcpListener(new IPAddress(new byte[] { 127, 0, 0, 1 }), 5000);
+            TcpListener listener = new TcpListener(IPAddress.Parse(IpAddress.Text), 5000);
             listener.Start();
             while (true)
             {
@@ -409,23 +409,26 @@ namespace Server
 
         private void Button_Start_Click(object sender, EventArgs e)
         {
-            thread1 = new Thread(ClientCreator);
-            thread1.Priority = ThreadPriority.BelowNormal;
-            thread2 = new Thread(DataReader);
-            thread2.Priority = ThreadPriority.Highest;
-            thread3 = new Thread(Check_disconnected);
-            thread3.Priority = ThreadPriority.Lowest;
-            thread1.Start();
-            thread2.Start();
-            thread3.Start();
-            Button_Start.Enabled = false;
-            Button_Stop.Enabled = true;
+            if (((Button)sender).Text == "Start")
+            {
+                thread1 = new Thread(ClientCreator);
+                thread1.Priority = ThreadPriority.BelowNormal;
+                thread2 = new Thread(DataReader);
+                thread2.Priority = ThreadPriority.Highest;
+                thread3 = new Thread(Check_disconnected);
+                thread3.Priority = ThreadPriority.Lowest;
+                thread1.Start();
+                thread2.Start();
+                thread3.Start();
+                IpAddress.Enabled = false;
+                ((Button)sender).Text = "Stop";
+            }
+            else
+                ((Button)sender).Text = "Start";
         }
 
         private void Button_Stop_Click(object sender, EventArgs e)
         {
-            Button_Start.Enabled = true;
-            Button_Stop.Enabled = false;
         }
 
         private List<string> Get_Categories()
