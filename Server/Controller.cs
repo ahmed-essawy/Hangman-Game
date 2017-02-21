@@ -281,13 +281,14 @@ namespace Server
                             case "Quit Room":
                                 int quitroomid = int.Parse(response[1]);
                                 int quitplayerid = int.Parse(response[2]);
-                                if (rooms[quitroomid].Check_Count() == 1)
+                                int watchercount = rooms[quitroomid].IsWatcher(quitplayerid, true);
+                                if (rooms[quitroomid].Check_Count() == 1 && watchercount == 0)
                                 {
                                     foreach (int index in clients.Keys.ToList())
                                         clients[index].bWriter = "Remove Room;" + quitroomid;
                                     rooms.Remove(quitroomid);
                                 }
-                                else if (rooms[quitroomid].Check_Count() == 2)
+                                else if (rooms[quitroomid].Check_Count() == 2 && watchercount == 0)
                                 {
                                     foreach (int index in clients.Keys.ToList())
                                         clients[index].bWriter = "Change Room Capacity Half;" + quitroomid;
@@ -714,6 +715,19 @@ namespace Server
                 ++count;
             if (player2 != 0)
                 ++count;
+            return count;
+        }
+
+        public int IsWatcher(int endpoint, bool remove = false)
+        {
+            int count = 0;
+            foreach (int watch in watchers)
+            {
+                if (watch == endpoint)
+                    ++count;
+                if (remove)
+                    watchers.Remove(watch);
+            }
             return count;
         }
     }
