@@ -48,5 +48,16 @@ namespace Client
         {
             DialogResult = DialogResult.Cancel;
         }
+
+        private void Enter_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == Keys.Enter)
+            {
+                room_name = textBox1.Text;
+                category = comboBox_cat.SelectedItem.ToString();
+                level = int.Parse(comboBox_level.SelectedItem.ToString());
+                DialogResult = DialogResult.OK;
+            }
+        }
     }
 }

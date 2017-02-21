@@ -72,24 +72,25 @@ namespace Client
             len = word.Length;
             labels = new Label[len];
             space_count = count = 0;
-            int x = 25;
-            int y = 75;
+            int x = 50;
+            int y = 100;
             for (int i = 0; i < len; i++)
             {
                 labels[i] = new Label();
                 labels[i].AutoSize = true;
                 labels[i].Font = new System.Drawing.Font("Tempus Sans ITC", 20.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-                labels[i].ForeColor = System.Drawing.Color.White;
-                labels[i].Size = new System.Drawing.Size(36, 35);
+                labels[i].BackColor = Color.Transparent;
+                labels[i].ForeColor = Color.White;
+                labels[i].Size = new System.Drawing.Size(40, 40);
                 labels[i].Text = " ";
-                if (x < this.Width - 50 - 35)
+                if (x < this.Width - 50 - 40)
                 {
                     labels[i].Location = new Point(x, y);
-                    x += 35;
+                    x += 40;
                 }
                 else
                 {
-                    y += 35;
+                    y += 40;
                     x = 25;
                     labels[i].Location = new Point(x, y);
                 }
@@ -104,6 +105,7 @@ namespace Client
 
         private void Button_Click(object sender, EventArgs e)
         {
+            bool test = false;
             string button_text = ((Button)sender).Text;
             if (word.ToUpper().Contains(button_text))
             {
@@ -119,17 +121,16 @@ namespace Client
             else
             {
                 panel1.Enabled = false;
-                bWriter.Write("Change Control;" + room_id + ";" + player_type + ";" + count);
-                for (int i = 0; i < 1000000; i++) ;
+                test = true;
             }
              ((Button)sender).Enabled = false;
-            bWriter.Write("Button Pressed;" + room_id + ";" + player_type + ";" + button_text);
-            for (int j = 0; j < 05000; j++) ;
+            bWriter.Write("Button Pressed;" + room_id + ";" + player_type + ";" + button_text + ";" + count + ";" + test);
             if (count + space_count == word.Length)
             {
+                Thread.Sleep(500);
                 this.panel1.Enabled = false;
                 bWriter.Write("Win Game;" + room_id + ";" + player_type);
-                for (int i = 0; i < 05000; i++) ;
+                Thread.Sleep(100);
                 Label_Current.Text = "Congratulations !";
                 DialogResult result = MessageBox.Show("Do you want to play again ?", "Congratulations !",
                     MessageBoxButtons.YesNo, MessageBoxIcon.Information);
@@ -140,7 +141,7 @@ namespace Client
                     bWriter.Write("Retry again;" + room_id + ";" + player_type + ";false");
                     this.Close();
                 }
-                for (int i = 0; i < 05000; i++) ;
+                Thread.Sleep(100);
             }
         }
 

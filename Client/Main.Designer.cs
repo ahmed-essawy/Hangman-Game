@@ -55,10 +55,10 @@
             this.Play.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Play.Font = new System.Drawing.Font("Comic Sans MS", 11.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Play.ForeColor = System.Drawing.Color.Maroon;
-            this.Play.Location = new System.Drawing.Point(559, 238);
+            this.Play.Location = new System.Drawing.Point(683, 295);
             this.Play.Name = "Play";
             this.Play.Size = new System.Drawing.Size(130, 50);
-            this.Play.TabIndex = 1;
+            this.Play.TabIndex = 2;
             this.Play.Text = "Join";
             this.Play.UseVisualStyleBackColor = false;
             this.Play.Click += new System.EventHandler(this.Play_Click);
@@ -70,7 +70,7 @@
             this.Watch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Watch.Font = new System.Drawing.Font("Comic Sans MS", 11.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Watch.ForeColor = System.Drawing.Color.Maroon;
-            this.Watch.Location = new System.Drawing.Point(559, 304);
+            this.Watch.Location = new System.Drawing.Point(683, 368);
             this.Watch.Name = "Watch";
             this.Watch.Size = new System.Drawing.Size(130, 50);
             this.Watch.TabIndex = 2;
@@ -85,17 +85,17 @@
             this.New.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.New.Font = new System.Drawing.Font("Comic Sans MS", 11.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.New.ForeColor = System.Drawing.Color.Maroon;
-            this.New.Location = new System.Drawing.Point(559, 171);
+            this.New.Location = new System.Drawing.Point(683, 222);
             this.New.Name = "New";
             this.New.Size = new System.Drawing.Size(130, 50);
-            this.New.TabIndex = 3;
+            this.New.TabIndex = 1;
             this.New.Text = "New";
             this.New.UseVisualStyleBackColor = false;
             this.New.Click += new System.EventHandler(this.New_Click);
             // 
             // panel1
             // 
-            this.panel1.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(105)))), ((int)(((byte)(105)))), ((int)(((byte)(105)))));
             this.panel1.Controls.Add(this.label4);
             this.panel1.Controls.Add(this.label3);
             this.panel1.Controls.Add(this.label2);
@@ -106,10 +106,10 @@
             this.panel1.Controls.Add(this.ListBox_Categories);
             this.panel1.Controls.Add(this.ListBox_ID);
             this.panel1.Controls.Add(this.ListBox_Rooms);
-            this.panel1.Location = new System.Drawing.Point(16, 106);
+            this.panel1.Location = new System.Drawing.Point(142, 111);
             this.panel1.Margin = new System.Windows.Forms.Padding(2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(526, 313);
+            this.panel1.Size = new System.Drawing.Size(526, 380);
             this.panel1.TabIndex = 4;
             // 
             // label4
@@ -175,89 +175,90 @@
             // 
             // ListBox_Players
             // 
-            this.ListBox_Players.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.ListBox_Players.BackColor = System.Drawing.Color.LemonChiffon;
             this.ListBox_Players.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.ListBox_Players.Font = new System.Drawing.Font("Comic Sans MS", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ListBox_Players.Font = new System.Drawing.Font("Comic Sans MS", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ListBox_Players.ForeColor = System.Drawing.Color.Maroon;
             this.ListBox_Players.FormattingEnabled = true;
-            this.ListBox_Players.ItemHeight = 15;
+            this.ListBox_Players.ItemHeight = 18;
             this.ListBox_Players.Location = new System.Drawing.Point(423, 30);
             this.ListBox_Players.Margin = new System.Windows.Forms.Padding(2);
             this.ListBox_Players.Name = "ListBox_Players";
-            this.ListBox_Players.Size = new System.Drawing.Size(99, 270);
+            this.ListBox_Players.Size = new System.Drawing.Size(99, 342);
             this.ListBox_Players.TabIndex = 3;
             this.ListBox_Players.SelectedIndexChanged += new System.EventHandler(this.ListBox_SelectedIndexChanged);
             // 
             // ListBox_Levels
             // 
-            this.ListBox_Levels.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.ListBox_Levels.BackColor = System.Drawing.Color.LemonChiffon;
             this.ListBox_Levels.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.ListBox_Levels.Font = new System.Drawing.Font("Comic Sans MS", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ListBox_Levels.Font = new System.Drawing.Font("Comic Sans MS", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ListBox_Levels.ForeColor = System.Drawing.Color.Maroon;
             this.ListBox_Levels.FormattingEnabled = true;
-            this.ListBox_Levels.ItemHeight = 15;
+            this.ListBox_Levels.ItemHeight = 18;
             this.ListBox_Levels.Location = new System.Drawing.Point(322, 30);
             this.ListBox_Levels.Margin = new System.Windows.Forms.Padding(2);
             this.ListBox_Levels.Name = "ListBox_Levels";
-            this.ListBox_Levels.Size = new System.Drawing.Size(99, 270);
+            this.ListBox_Levels.Size = new System.Drawing.Size(99, 342);
             this.ListBox_Levels.TabIndex = 2;
             this.ListBox_Levels.SelectedIndexChanged += new System.EventHandler(this.ListBox_SelectedIndexChanged);
             // 
             // ListBox_Categories
             // 
-            this.ListBox_Categories.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.ListBox_Categories.BackColor = System.Drawing.Color.LemonChiffon;
             this.ListBox_Categories.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.ListBox_Categories.Font = new System.Drawing.Font("Comic Sans MS", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ListBox_Categories.Font = new System.Drawing.Font("Comic Sans MS", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ListBox_Categories.ForeColor = System.Drawing.Color.Maroon;
             this.ListBox_Categories.FormattingEnabled = true;
-            this.ListBox_Categories.ItemHeight = 15;
+            this.ListBox_Categories.ItemHeight = 18;
             this.ListBox_Categories.Location = new System.Drawing.Point(210, 30);
             this.ListBox_Categories.Margin = new System.Windows.Forms.Padding(2);
             this.ListBox_Categories.Name = "ListBox_Categories";
-            this.ListBox_Categories.Size = new System.Drawing.Size(110, 270);
+            this.ListBox_Categories.Size = new System.Drawing.Size(110, 342);
             this.ListBox_Categories.TabIndex = 1;
             this.ListBox_Categories.SelectedIndexChanged += new System.EventHandler(this.ListBox_SelectedIndexChanged);
             // 
             // ListBox_ID
             // 
-            this.ListBox_ID.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.ListBox_ID.BackColor = System.Drawing.Color.LemonChiffon;
             this.ListBox_ID.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.ListBox_ID.Font = new System.Drawing.Font("Comic Sans MS", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ListBox_ID.Font = new System.Drawing.Font("Comic Sans MS", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ListBox_ID.ForeColor = System.Drawing.Color.Maroon;
             this.ListBox_ID.FormattingEnabled = true;
-            this.ListBox_ID.ItemHeight = 15;
+            this.ListBox_ID.ItemHeight = 18;
             this.ListBox_ID.Location = new System.Drawing.Point(8, 30);
             this.ListBox_ID.Margin = new System.Windows.Forms.Padding(2);
             this.ListBox_ID.Name = "ListBox_ID";
-            this.ListBox_ID.Size = new System.Drawing.Size(99, 270);
+            this.ListBox_ID.Size = new System.Drawing.Size(99, 342);
             this.ListBox_ID.TabIndex = 0;
             this.ListBox_ID.SelectedIndexChanged += new System.EventHandler(this.ListBox_SelectedIndexChanged);
             // 
             // ListBox_Rooms
             // 
-            this.ListBox_Rooms.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.ListBox_Rooms.BackColor = System.Drawing.Color.LemonChiffon;
             this.ListBox_Rooms.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.ListBox_Rooms.Font = new System.Drawing.Font("Comic Sans MS", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ListBox_Rooms.Font = new System.Drawing.Font("Comic Sans MS", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ListBox_Rooms.ForeColor = System.Drawing.Color.Maroon;
             this.ListBox_Rooms.FormattingEnabled = true;
-            this.ListBox_Rooms.ItemHeight = 15;
+            this.ListBox_Rooms.ItemHeight = 18;
             this.ListBox_Rooms.Location = new System.Drawing.Point(109, 30);
             this.ListBox_Rooms.Margin = new System.Windows.Forms.Padding(2);
             this.ListBox_Rooms.Name = "ListBox_Rooms";
-            this.ListBox_Rooms.Size = new System.Drawing.Size(99, 270);
+            this.ListBox_Rooms.Size = new System.Drawing.Size(99, 342);
             this.ListBox_Rooms.TabIndex = 0;
             this.ListBox_Rooms.SelectedIndexChanged += new System.EventHandler(this.ListBox_SelectedIndexChanged);
             // 
             // label5
             // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Jokerman", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.ForeColor = System.Drawing.Color.Maroon;
-            this.label5.Location = new System.Drawing.Point(149, 21);
+            this.label5.BackColor = System.Drawing.Color.Transparent;
+            this.label5.Font = new System.Drawing.Font("Jokerman", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.ForeColor = System.Drawing.Color.White;
+            this.label5.Location = new System.Drawing.Point(0, 18);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(369, 55);
+            this.label5.Size = new System.Drawing.Size(832, 55);
             this.label5.TabIndex = 5;
             this.label5.Text = "HANGMAN GAME";
+            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // Button_Exit
             // 
@@ -266,7 +267,7 @@
             this.Button_Exit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Button_Exit.Font = new System.Drawing.Font("Comic Sans MS", 11.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Button_Exit.ForeColor = System.Drawing.Color.Maroon;
-            this.Button_Exit.Location = new System.Drawing.Point(661, 8);
+            this.Button_Exit.Location = new System.Drawing.Point(788, 12);
             this.Button_Exit.Name = "Button_Exit";
             this.Button_Exit.Size = new System.Drawing.Size(32, 32);
             this.Button_Exit.TabIndex = 3;
@@ -276,9 +277,10 @@
             // 
             // Name
             // 
+            this.Name.BackColor = System.Drawing.Color.Transparent;
             this.Name.Font = new System.Drawing.Font("Jokerman", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name.ForeColor = System.Drawing.Color.White;
-            this.Name.Location = new System.Drawing.Point(558, 106);
+            this.Name.Location = new System.Drawing.Point(677, 141);
             this.Name.Name = "Name";
             this.Name.Size = new System.Drawing.Size(135, 55);
             this.Name.TabIndex = 5;
@@ -290,22 +292,24 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.ClientSize = new System.Drawing.Size(701, 430);
+            this.BackgroundImage = global::Client.Properties.Resources.Background;
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.ClientSize = new System.Drawing.Size(832, 514);
+            this.Controls.Add(this.Button_Exit);
             this.Controls.Add(this.Name);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.Button_Exit);
             this.Controls.Add(this.New);
             this.Controls.Add(this.Watch);
             this.Controls.Add(this.Play);
+            this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "Main";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Main_FormClosing);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 

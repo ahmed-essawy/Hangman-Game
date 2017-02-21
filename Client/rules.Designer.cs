@@ -41,24 +41,26 @@
             // comboBox_cat
             // 
             this.comboBox_cat.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.comboBox_cat.Font = new System.Drawing.Font("Tempus Sans ITC", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.comboBox_cat.ForeColor = System.Drawing.Color.Orange;
+            this.comboBox_cat.Font = new System.Drawing.Font("Tempus Sans ITC", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.comboBox_cat.ForeColor = System.Drawing.Color.Maroon;
             this.comboBox_cat.FormattingEnabled = true;
             this.comboBox_cat.Location = new System.Drawing.Point(105, 60);
             this.comboBox_cat.Name = "comboBox_cat";
-            this.comboBox_cat.Size = new System.Drawing.Size(158, 23);
+            this.comboBox_cat.Size = new System.Drawing.Size(158, 25);
             this.comboBox_cat.TabIndex = 2;
+            this.comboBox_cat.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Enter_KeyDown);
             // 
             // comboBox_level
             // 
             this.comboBox_level.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.comboBox_level.Font = new System.Drawing.Font("Tempus Sans ITC", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.comboBox_level.ForeColor = System.Drawing.Color.Orange;
+            this.comboBox_level.Font = new System.Drawing.Font("Tempus Sans ITC", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.comboBox_level.ForeColor = System.Drawing.Color.Maroon;
             this.comboBox_level.FormattingEnabled = true;
             this.comboBox_level.Location = new System.Drawing.Point(105, 94);
             this.comboBox_level.Name = "comboBox_level";
-            this.comboBox_level.Size = new System.Drawing.Size(158, 23);
+            this.comboBox_level.Size = new System.Drawing.Size(158, 25);
             this.comboBox_level.TabIndex = 3;
+            this.comboBox_level.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Enter_KeyDown);
             // 
             // Button_Create
             // 
@@ -112,12 +114,13 @@
             // textBox1
             // 
             this.textBox1.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.textBox1.Font = new System.Drawing.Font("Tempus Sans ITC", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox1.ForeColor = System.Drawing.Color.Orange;
+            this.textBox1.Font = new System.Drawing.Font("Tempus Sans ITC", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox1.ForeColor = System.Drawing.Color.Maroon;
             this.textBox1.Location = new System.Drawing.Point(105, 28);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(158, 22);
+            this.textBox1.Size = new System.Drawing.Size(158, 24);
             this.textBox1.TabIndex = 1;
+            this.textBox1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Enter_KeyDown);
             // 
             // Button_Cancel
             // 
