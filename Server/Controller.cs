@@ -37,13 +37,8 @@ namespace Server
             com.Connection = con;
             foreach (string Cat in Get_Categories())
             {
-                List_Categories.Items.Add(Cat);
+                List_Categories.Items.Add(Cat + Cat_Count(Cat));
             }
-            for (int i = 1; i <= 3; i++)
-            {
-                comboBox_level.Items.Add(i);
-            }
-            comboBox_level.SelectedIndex = 0;
             // Bring data from database
             /*Room r1 = new Room(1, "Room 1", "Sports", 1, "Test");
             Room r2 = new Room(3, "Room 2", "Movies", 2, "Test");
@@ -433,9 +428,60 @@ namespace Server
             Button_Stop.Enabled = false;
         }
 
+        private List<string> Get_Categories()
+        {
+            DataTable table = new DataTable();
+            com.CommandType = CommandType.Text;
+            com.CommandText = "SELECT * FROM [Categories]";
+            List<string> cats = new List<string>();
+            con.Open();
+            SqlDataReader rdr = com.ExecuteReader();
+            while (rdr.Read())
+                cats.Add(rdr[0].ToString());
+            rdr.Close();
+            con.Close();
+            return cats;
+        }
+
+        private void Button_Restart(object sender, EventArgs e)
+        {
+            Application.Restart();
+        }
+
+        private void Controller_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            foreach (int index in clients.Keys.ToList())
+            {
+                clients[index].Disconnect();
+            }
+            Application.ExitThread();
+        }
+
+        private void Insert_Click(object sender, EventArgs e)
+        {
+            String cat = textBox_Category.Text;
+            com.CommandType = CommandType.StoredProcedure;
+            com.CommandText = "Add_Word";
+            SqlParameter[] par =
+                {
+                    new SqlParameter("@cat",cat),
+                    new SqlParameter("@word",textBox_Word.Text)
+                };
+            com.Parameters.Clear();
+            com.Parameters.AddRange(par);
+            con.Open();
+            com.ExecuteNonQuery();
+            con.Close();
+
+            textBox_Word.Text = String.Empty;
+            for (int i = 0; i < List_Categories.Items.Count; i++)
+                if (List_Categories.Items[i].ToString().Contains(cat))
+                    List_Categories.Items[i] = cat + Cat_Count(cat);
+        }
+
         private string Get_Word(string newroomcat, int newroomlvl)
         {
-            string affected = "Test";
+            string affected = "Random Word";
             try
             {
                 com.CommandType = CommandType.StoredProcedure;
@@ -458,47 +504,29 @@ namespace Server
             return affected;
         }
 
-        private List<string> Get_Categories()
+        private void Send_KeyDown(object sender, KeyEventArgs e)
         {
-            DataTable table = new DataTable();
-            com.CommandType = CommandType.Text;
-            com.CommandText = "select * from Categories";
-            com.Connection = con;
-            List<string> cats = new List<string>();
+            foreach (int index in List_Connected_endpoint.SelectedItems)
+            {
+                clients[index].bWriter = textBox1.Text;
+            }
+            textBox1.Text = String.Empty;
+        }
+
+        private string Cat_Count(string cat)
+        {
+            com.CommandType = CommandType.StoredProcedure;
+            com.CommandText = "Cat_Count";
+            SqlParameter[] par =
+                {
+                    new SqlParameter("@cat",cat),
+                };
+            com.Parameters.Clear();
+            com.Parameters.AddRange(par);
             con.Open();
-            SqlDataReader rdr = com.ExecuteReader();
-            while (rdr.Read())
-            {
-                cats.Add(Convert.ToString(rdr[0]));
-            }
-            rdr.Close();
+            string count = com.ExecuteScalar().ToString();
             con.Close();
-            return cats;
-        }
-
-        private void Button_Restart(object sender, EventArgs e)
-        {
-            Application.Restart();
-        }
-
-        private void Controller_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            foreach (int index in clients.Keys.ToList())
-            {
-                clients[index].Disconnect();
-            }
-            Application.ExitThread();
-        }
-
-        private void Insert_Click(object sender, EventArgs e)
-        {
-            string word = textBox_Word.Text;
-            string cat = textBox_Category.Text;
-            int lvl = int.Parse(comboBox_level.Text);
-            Insert_word(cat, lvl, word);
-            textBox_Word.Text = String.Empty;
-            textBox_Category.Text = String.Empty;
-            comboBox_level.SelectedIndex = 0;
+            return " (" + count + ")";
         }
 
         private void Button_Log_Click(object sender, EventArgs e)
@@ -513,24 +541,6 @@ namespace Server
                 text += item.ToString() + Environment.NewLine;
             }
             File.AppendAllText(path, text);
-        }
-
-        private void Insert_word(string cat, int lvl, string word)
-        {
-            com.CommandType = CommandType.StoredProcedure;
-            com.CommandText = "ADD_word";
-            SqlParameter[] par =
-                {
-                    new SqlParameter("@cat",cat),
-                    new SqlParameter("@lvl",lvl),
-                    new SqlParameter("@word",word)
-                };
-            com.Parameters.Clear();
-            com.Parameters.AddRange(par);
-            com.Connection = con;
-            con.Open();
-            com.ExecuteNonQuery();
-            con.Close();
         }
     }
 

@@ -43,7 +43,6 @@
             this.Button_Stop = new System.Windows.Forms.Button();
             this.List_Connected_name = new System.Windows.Forms.ListBox();
             this.List_Disonnected_name = new System.Windows.Forms.ListBox();
-            this.comboBox_level = new System.Windows.Forms.ComboBox();
             this.Insert = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.textBox_Category = new My_TextBox.My_TextBox();
@@ -99,12 +98,13 @@
             // textBox1
             // 
             this.textBox1.BackColor = System.Drawing.SystemColors.ButtonShadow;
-            this.textBox1.Location = new System.Drawing.Point(161, 458);
+            this.textBox1.Location = new System.Drawing.Point(161, 456);
             this.textBox1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(521, 42);
+            this.textBox1.Size = new System.Drawing.Size(521, 43);
             this.textBox1.TabIndex = 2;
+            this.textBox1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Send_KeyDown);
             // 
             // Button_Send
             // 
@@ -244,16 +244,6 @@
             this.List_Disonnected_name.TabIndex = 0;
             this.List_Disonnected_name.SelectedIndexChanged += new System.EventHandler(this.List_Disonnected_SelectedIndexChanged);
             // 
-            // comboBox_level
-            // 
-            this.comboBox_level.BackColor = System.Drawing.SystemColors.ButtonShadow;
-            this.comboBox_level.FormattingEnabled = true;
-            this.comboBox_level.Location = new System.Drawing.Point(194, 7);
-            this.comboBox_level.Margin = new System.Windows.Forms.Padding(2);
-            this.comboBox_level.Name = "comboBox_level";
-            this.comboBox_level.Size = new System.Drawing.Size(56, 24);
-            this.comboBox_level.TabIndex = 5;
-            // 
             // Insert
             // 
             this.Insert.BackColor = System.Drawing.Color.Orange;
@@ -274,7 +264,6 @@
             this.panel1.Controls.Add(this.textBox_Category);
             this.panel1.Controls.Add(this.Insert);
             this.panel1.Controls.Add(this.textBox_Word);
-            this.panel1.Controls.Add(this.comboBox_level);
             this.panel1.Location = new System.Drawing.Point(161, 509);
             this.panel1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.panel1.Name = "panel1";
@@ -299,11 +288,11 @@
             this.textBox_Word.BackColor = System.Drawing.SystemColors.ButtonShadow;
             this.textBox_Word.Font = new System.Drawing.Font("Tahoma", 10F, System.Drawing.FontStyle.Italic);
             this.textBox_Word.ForeColor = System.Drawing.SystemColors.GrayText;
-            this.textBox_Word.Location = new System.Drawing.Point(255, 7);
+            this.textBox_Word.Location = new System.Drawing.Point(195, 7);
             this.textBox_Word.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.textBox_Word.Name = "textBox_Word";
             this.textBox_Word.PlaceHolder = "Word";
-            this.textBox_Word.Size = new System.Drawing.Size(266, 24);
+            this.textBox_Word.Size = new System.Drawing.Size(326, 24);
             this.textBox_Word.TabIndex = 9;
             this.textBox_Word.Text = "Word";
             // 
@@ -375,7 +364,6 @@
         private System.Windows.Forms.Button Button_Stop;
         private System.Windows.Forms.ListBox List_Connected_name;
         private System.Windows.Forms.ListBox List_Disonnected_name;
-        private System.Windows.Forms.ComboBox comboBox_level;
         private System.Windows.Forms.Button Insert;
         private My_TextBox.My_TextBox textBox_Category;
         private My_TextBox.My_TextBox textBox_Word;
