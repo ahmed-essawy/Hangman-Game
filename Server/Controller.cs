@@ -15,7 +15,6 @@ namespace Server
     {
         private Dictionary<int, Clients> clients;
         private Thread thread1, thread2, thread3;
-        private Dictionary<int, string> players;
         private Dictionary<int, Room> rooms;
         private List<string> cats;
         private int rooms_count = 0;
@@ -27,7 +26,6 @@ namespace Server
             CheckForIllegalCrossThreadCalls = false;
             InitializeComponent();
             clients = new Dictionary<int, Clients>();
-            players = new Dictionary<int, string>();
             rooms = new Dictionary<int, Room>();
             cats = new List<string>();
             con = new SqlConnection("Data Source =.; Initial Catalog = Hangman-Game; Integrated Security = True");
@@ -324,7 +322,7 @@ namespace Server
                 {
                     foreach (int index in clients.Keys.ToList())
                     {
-                        if (!clients[index].isConnected())
+                        if (!clients[index].IsConnected())
                         {
                             List_Disonnected_endpoint.Items.Add(index);
                             List_Disonnected_name.Items.Add(clients[index].Name);
@@ -588,7 +586,7 @@ namespace Server
             msgs.Remove(msg);
         }
 
-        public bool isConnected()
+        public bool IsConnected()
         {
             bool connected = true;
             if (socket.Poll(0, SelectMode.SelectRead) && socket.Available == 0)
