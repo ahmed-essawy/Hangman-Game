@@ -533,12 +533,6 @@ namespace Server
         }
     }
 
-    public struct ReaderInfo
-    {
-        public int port;
-        public string reader;
-    }
-
     public class Clients
     {
         private Socket socket;
