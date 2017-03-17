@@ -127,10 +127,8 @@ namespace Client
             bWriter.Write("Button Pressed;" + room_id + ";" + player_type + ";" + button_text + ";" + count + ";" + test);
             if (count + space_count == word.Length)
             {
-                Thread.Sleep(500);
                 this.panel1.Enabled = false;
                 bWriter.Write("Win Game;" + room_id + ";" + player_type);
-                Thread.Sleep(100);
                 Label_Current.Text = "Congratulations !";
                 DialogResult result = MessageBox.Show("Do you want to play again ?", "Congratulations !",
                     MessageBoxButtons.YesNo, MessageBoxIcon.Information);
@@ -141,7 +139,6 @@ namespace Client
                     bWriter.Write("Retry again;" + room_id + ";" + player_type + ";false");
                     this.Close();
                 }
-                Thread.Sleep(100);
             }
         }
 
